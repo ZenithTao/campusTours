@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CampusTours</string>
+    <string name="branch_name">yiweiBranch</string>
+
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

@@ -1,5 +1,5 @@
 # campusTours
-Mobile application for self-guided campus tours.  
+Mobile application for self-guided virtual campus tours.  
 
 ## Languages/Framework:  
 - Java/XML  

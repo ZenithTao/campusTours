@@ -6,20 +6,17 @@ Mobile application for self-guided campus tours.
 - MongoDB
   
 ## Project Management:  
-- Trello (private board, so please contact for access)  
+- Trello (private board, please contact for access)  
 
 ## Team:  
 **Adam**  
 - Mockups  
 
 **Eugene**  
-- Android dev
+- Android dev  
 
 **Melissa**  
-- Mockups
+- Mockups  
 
 **Yiwei**  
-- Android dev
-
-
-
+- Android dev  

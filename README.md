@@ -9,16 +9,16 @@ Mobile application for self-guided campus tours.
 - Trello (private board, so please contact for access)  
 
 ## Team:  
-### Adam
+**Adam**  
 - Mockups  
 
-### Eugene
+**Eugene**  
 - Android dev
 
-### Melissa
+**Melissa**  
 - Mockups
 
-### Yiwei
+**Yiwei**  
 - Android dev
 
 

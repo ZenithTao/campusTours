@@ -5,13 +5,37 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
 
 public class MainActivity extends ActionBarActivity {
+
+    static final LatLng YiweiPos = new LatLng(40, -79);
+
+    private GoogleMap googleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try {
+            if (googleMap == null) {
+                googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+            }
+
+            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            googleMap.setBuildingsEnabled(true);
+            googleMap.getUiSettings().setZoomControlsEnabled(true);
+            googleMap.setMyLocationEnabled(true);
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

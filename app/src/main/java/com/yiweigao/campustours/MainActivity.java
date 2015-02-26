@@ -1,7 +1,6 @@
 package com.yiweigao.campustours;
 
 import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.Geofence;
-import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -28,12 +26,12 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 
     private static final String ASBURY_CIRCLE_NAME = "Asbury Circle";
     private static final LatLng ASBURY_CIRCLE = new LatLng(33.792731, -84.324075);
-    private static final float ASBURY_CIRCLE_RADIUS = 3.0f;
+    private static final float ASBURY_CIRCLE_RADIUS = 20.0f;
     private static final int ASBURY_CIRCLE_LIFETIME = 100000;
 
     private static final String HOUSE_TEXT = "Fraternity house";
     private static final LatLng HOUSE = new LatLng(33.793766, -84.327198);
-    private static final float HOUSE_RADIUS = 3.0f;
+    private static final float HOUSE_RADIUS = 20.0f;
     private static final int HOUSE_LIFETIME = 100000;
 
     private GoogleMap mGoogleMap;
@@ -60,8 +58,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
     @Override
     protected void onResume() {
         super.onResume();
-        
-        
     }
 
     @Override
@@ -91,33 +87,15 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 
         mGoogleApiClient.connect();
         Log.d("onCreate", "just finished called connect()");
-        
+
     }
 
-    public void buildGoogleApiClient() {
+    protected void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-    }
-
-    /**
-     * Gets a PendingIntent to send with the request to add or remove Geofences. Location Services
-     * issues the Intent inside this PendingIntent whenever a geofence transition occurs for the
-     * current list of geofences.
-     *
-     * @return A PendingIntent for the IntentService that handles geofence transitions.
-     */
-    private PendingIntent getGeofencePendingIntent() {
-        // Reuse the PendingIntent if we already have it.
-        if (mGeofencePendingIntent != null) {
-            return mGeofencePendingIntent;
-        }
-        Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
-        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
-        // addGeofences() and removeGeofences().
-        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @Override
@@ -144,40 +122,39 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle bundle) {
-        Log.d("onConnected", "api is now connected");
-        Geofence asburyFence = new Geofence.Builder()
-                .setRequestId(ASBURY_CIRCLE_NAME)
-                .setCircularRegion(ASBURY_CIRCLE.latitude, ASBURY_CIRCLE.longitude, ASBURY_CIRCLE_RADIUS)
-                .setExpirationDuration(ASBURY_CIRCLE_LIFETIME)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
-                        | Geofence.GEOFENCE_TRANSITION_EXIT
-                        | Geofence.GEOFENCE_TRANSITION_DWELL)
-                .setLoiteringDelay(5000)
-                .build();
-
-        Geofence houseFence = new Geofence.Builder()
-                .setRequestId(HOUSE_TEXT)
-                .setCircularRegion(HOUSE.latitude, HOUSE.longitude, HOUSE_RADIUS)
-                .setExpirationDuration(HOUSE_LIFETIME)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
-                        | Geofence.GEOFENCE_TRANSITION_EXIT
-                        | Geofence.GEOFENCE_TRANSITION_DWELL)
-                .setLoiteringDelay(5000)
-                .build();
-
-        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
-                .addGeofence(asburyFence)
-                .addGeofence(houseFence)
-                .build();
-
-        Log.d("onResume", "about to call api");
-
-        LocationServices.GeofencingApi.addGeofences(mGoogleApiClient, geofencingRequest, getGeofencePendingIntent());
+//        Log.d("onConnected", "api is now connected");
+//        Geofence asburyFence = new Geofence.Builder()
+//                .setRequestId(ASBURY_CIRCLE_NAME)
+//                .setCircularRegion(ASBURY_CIRCLE.latitude, ASBURY_CIRCLE.longitude, ASBURY_CIRCLE_RADIUS)
+//                .setExpirationDuration(ASBURY_CIRCLE_LIFETIME)
+//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
+//                        | Geofence.GEOFENCE_TRANSITION_EXIT
+//                        | Geofence.GEOFENCE_TRANSITION_DWELL)
+//                .setLoiteringDelay(5000)
+//                .build();
+//
+//        Geofence houseFence = new Geofence.Builder()
+//                .setRequestId(HOUSE_TEXT)
+//                .setCircularRegion(HOUSE.latitude, HOUSE.longitude, HOUSE_RADIUS)
+//                .setExpirationDuration(HOUSE_LIFETIME)
+//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
+//                        | Geofence.GEOFENCE_TRANSITION_EXIT
+//                        | Geofence.GEOFENCE_TRANSITION_DWELL)
+//                .setLoiteringDelay(5000)
+//                .build();
+//
+//        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
+//                .addGeofence(asburyFence)
+//                .addGeofence(houseFence)
+//                .build();
+//
+//        Log.d("onResume", "about to call api");
+//
+//        LocationServices.GeofencingApi.addGeofences(mGoogleApiClient, geofencingRequest, getGeofencePendingIntent());
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        mGoogleApiClient.connect();
     }
 
     @Override

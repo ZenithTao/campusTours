@@ -10,13 +10,13 @@ Mobile application for self-guided virtual campus tours.
 
 ## Team:  
 **Adam**  
-- Mockups  
+- Mockups/UI/UX  
 
 **Eugene**  
-- Android dev  
+- Database/Backend  
 
 **Melissa**  
-- Mockups  
+- Mockups/UI/UX  
 
 **Yiwei**  
 - Android dev  

@@ -3,7 +3,7 @@ Mobile application for self-guided virtual campus tours.
 
 ## Languages/Framework:  
 - Java/XML  
-- MongoDB
+- MySQL
   
 ## Project Management:  
 - Trello (private board, please contact for access)  

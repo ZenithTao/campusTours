@@ -110,7 +110,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
                 .build();
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);

@@ -92,8 +92,6 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
 
         buildGoogleApiClient();
 

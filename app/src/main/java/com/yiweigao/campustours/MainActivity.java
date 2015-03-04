@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity implements
 
     private static final String HOUSE_TEXT = "Fraternity house";
     private static final LatLng HOUSE = new LatLng(33.793766, -84.327198);
-    private static final float HOUSE_RADIUS = 9.0f;     // current minimum = 9, but not reliable
+    private static final float HOUSE_RADIUS = 15.0f;     // current minimum = 15 (9), reliable (unreliable)
     private static final int HOUSE_LIFETIME = 100000;
 
     private static final String TOUR_START_NAME = "Tour Start";

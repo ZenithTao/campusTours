@@ -1,6 +1,10 @@
 package com.yiweigao.campustours;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.PendingIntent;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,10 +12,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,7 +33,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback {
+public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback, ResultCallback<Status> {
 
     private static final LatLng YIWEI_POS = new LatLng(40, -79);
 
@@ -36,7 +44,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 
     private static final String HOUSE_TEXT = "Fraternity house";
     private static final LatLng HOUSE = new LatLng(33.793766, -84.327198);
-    private static final float HOUSE_RADIUS = 20.0f;
+    private static final float HOUSE_RADIUS = 100000.0f;
     private static final int HOUSE_LIFETIME = 100000;
 
     private static final String TOUR_START_NAME = "Tour Start";
@@ -52,28 +60,19 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
     private PendingIntent mGeofencePendingIntent;
     private SharedPreferences mSharedPreferences;
 
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mGoogleApiClient.disconnect();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_content);
+
+        if (fragment == null) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.fragment_content, new ControlPanelFragment());
+            fragmentTransaction.commit();
+        }
 
         mGeofenceList = new ArrayList<>();
         mGeofencePendingIntent = null;
@@ -83,9 +82,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
                 mMapFragment= (MapFragment) getFragmentManager().findFragmentById(R.id.map);
                 mMapFragment.getMapAsync(this);
             }
-            if (mControlPanelFragment == null) {
-                mControlPanelFragment = ((ControlPanelFragment) getFragmentManager().findFragmentById(R.id.control_panel));
-            }
+            
 
 
 
@@ -93,10 +90,16 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
             e.printStackTrace();
         }
 
-        buildGoogleApiClient();
 
-        mGoogleApiClient.connect();
-        Log.d("onCreate", "just finished called connect()");
+
+//        Button nextButton = (Button) fragment.getView().findViewById(R.id.control_panel_next_button);
+
+//        nextButton.setEnabled(false);
+
+        populateGeofenceList();
+        
+        buildGoogleApiClient();
+//        Log.d("onCreate", "just finished called connect()");
 
     }
 
@@ -106,6 +109,18 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mGoogleApiClient.disconnect();
     }
 
     @Override
@@ -134,6 +149,11 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
                 .title("Tour Start")
                 .snippet("Start Here!")
                 .position(TOUR_START));
+
+        googleMap.addMarker(new MarkerOptions()
+                .title("Chi Phi")
+                .snippet("22 Eagle Row")
+                .position(HOUSE));
 
         // tour route, assuming usual tour route, current count = 38
         List<LatLng> routeCoordinates = new ArrayList<>();
@@ -210,7 +230,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle bundle) {
-//        Log.d("onConnected", "api is now connected");
+        Log.d("onConnected", "api is now connected");
 //        Geofence asburyFence = new Geofence.Builder()
 //                .setRequestId(ASBURY_CIRCLE_NAME)
 //                .setCircularRegion(ASBURY_CIRCLE.latitude, ASBURY_CIRCLE.longitude, ASBURY_CIRCLE_RADIUS)
@@ -218,7 +238,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 //                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
 //                        | Geofence.GEOFENCE_TRANSITION_EXIT
 //                        | Geofence.GEOFENCE_TRANSITION_DWELL)
-//                .setLoiteringDelay(5000)
+//                .setLoiteringDelay(1000)
 //                .build();
 //
 //        Geofence houseFence = new Geofence.Builder()
@@ -228,25 +248,108 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 //                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
 //                        | Geofence.GEOFENCE_TRANSITION_EXIT
 //                        | Geofence.GEOFENCE_TRANSITION_DWELL)
-//                .setLoiteringDelay(5000)
+//                .setLoiteringDelay(1000)
 //                .build();
 //
 //        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
+//                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
 //                .addGeofence(asburyFence)
 //                .addGeofence(houseFence)
 //                .build();
+        
 //
 //        Log.d("onResume", "about to call api");
 //
-//        LocationServices.GeofencingApi.addGeofences(mGoogleApiClient, geofencingRequest, getGeofencePendingIntent());
+        LocationServices.GeofencingApi.addGeofences(
+                mGoogleApiClient, 
+                getGeofencingRequest(), 
+                getGeofencePendingIntent()).setResultCallback(this);
+    }
+
+    /**
+     * Gets a PendingIntent to send with the request to add or remove Geofences. Location Services
+     * issues the Intent inside this PendingIntent whenever a geofence transition occurs for the
+     * current list of geofences.
+     *
+     * @return A PendingIntent for the IntentService that handles geofence transitions.
+     */
+    private PendingIntent getGeofencePendingIntent() {
+        // Reuse the PendingIntent if we already have it.
+        if (mGeofencePendingIntent != null) {
+            return mGeofencePendingIntent;
+        }
+        Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
+        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
+        // addGeofences() and removeGeofences().
+        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    /**
+     * Builds and returns a GeofencingRequest. Specifies the list of geofences to be monitored.
+     * Also specifies how the geofence notifications are initially triggered.
+     */
+    private GeofencingRequest getGeofencingRequest() {
+        GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
+
+        // The INITIAL_TRIGGER_ENTER flag indicates that geofencing service should trigger a
+        // GEOFENCE_TRANSITION_ENTER notification when the geofence is added and if the device
+        // is already inside that geofence.
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
+
+        // Add the geofences to be monitored by geofencing service.
+        builder.addGeofences(mGeofenceList);
+
+        // Return a GeofencingRequest.
+        return builder.build();
+    }
+    
+    public void populateGeofenceList() {
+        mGeofenceList.add(new Geofence.Builder()
+                .setRequestId(HOUSE_TEXT)
+                .setCircularRegion(
+                        HOUSE.latitude,
+                        HOUSE.longitude,
+                        HOUSE_RADIUS
+                )
+                .setExpirationDuration(HOUSE_LIFETIME)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+                        Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build());
     }
 
     @Override
     public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
+    }
+
+    /**
+     * Runs when the result of calling addGeofences() and removeGeofences() becomes available.
+     * Either method can complete successfully or with an error.
+     *
+     * Since this activity implements the {@link ResultCallback} interface, we are required to
+     * define this method.
+     *
+     * @param status The Status returned through a PendingIntent when addGeofences() or
+     *               removeGeofences() get called.
+     */
+    public void onResult(Status status) {
+        if (status.isSuccess()) {
+            // Update state and save in shared preferences.
+            mGeofencesAdded = !mGeofencesAdded;
+
+            Toast.makeText(
+                    this,
+                    mGeofencesAdded ? "Geofence added" :
+                            "Geofence removed" ,
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else {
+            // Get the status code for the error and log it using a user-friendly message.
+        }
     }
 }

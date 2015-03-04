@@ -40,9 +40,8 @@ public class ControlPanelFragment extends Fragment {
             public void onClick(View v) {
 
                 if (mMediaPlayer.isPlaying()) {
-                    int currentPosition = mMediaPlayer.getCurrentPosition();
-                    mMediaPlayer.seekTo(currentPosition - 10000);
-//                    mMediaPlayer.start();
+                    // skips backwards 10s, need to set this as a constant
+                    mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() - 10000); 
                 }
 
             }

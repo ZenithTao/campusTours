@@ -4,12 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <fragment
+    <!--<fragment-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/control_panel"-->
+        <!--android:name="com.yiweigao.campustours.ControlPanelFragment"-->
+        <!--android:layout_gravity="center"/>-->
+    
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/control_panel"
-        android:name="com.yiweigao.campustours.ControlPanelFragment"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:id="@+id/fragment_content"/>
     
     <fragment
         android:layout_width="match_parent"

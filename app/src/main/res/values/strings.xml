@@ -8,5 +8,17 @@
     <string name="control_panel_pause_button_text">PAUSE</string>
     <string name="control_panel_next_button_text">SKIP</string>
     <string name="control_panel_prev_button_text">REWIND</string>
+
+    <!--Copied from Geofencing sample-->
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+    </string>
+    
+    <string name="geofence_transition_notification_text">Click notification to return to app</string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
     
 </resources>

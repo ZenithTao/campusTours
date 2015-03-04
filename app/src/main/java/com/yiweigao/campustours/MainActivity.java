@@ -33,7 +33,11 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback, ResultCallback<Status> {
+public class MainActivity extends ActionBarActivity implements 
+        GoogleApiClient.ConnectionCallbacks, 
+        GoogleApiClient.OnConnectionFailedListener, 
+        OnMapReadyCallback, 
+        ResultCallback<Status> {
 
     private static final LatLng YIWEI_POS = new LatLng(40, -79);
 
@@ -114,7 +118,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
     @Override
     protected void onStart() {
         super.onStart();
-//        mGoogleApiClient.connect();
+        mGoogleApiClient.connect();
     }
 
     @Override
@@ -230,7 +234,7 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle bundle) {
-        Log.d("onConnected", "api is now connected");
+        Log.d("onConnected", "### api is now connected ###");
 //        Geofence asburyFence = new Geofence.Builder()
 //                .setRequestId(ASBURY_CIRCLE_NAME)
 //                .setCircularRegion(ASBURY_CIRCLE.latitude, ASBURY_CIRCLE.longitude, ASBURY_CIRCLE_RADIUS)
@@ -264,6 +268,8 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
                 mGoogleApiClient, 
                 getGeofencingRequest(), 
                 getGeofencePendingIntent()).setResultCallback(this);
+
+        Log.d("onConnected", "### LocationServicesAPI called");
     }
 
     /**

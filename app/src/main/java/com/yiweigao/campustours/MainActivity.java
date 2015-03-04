@@ -26,6 +26,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -48,7 +49,7 @@ public class MainActivity extends ActionBarActivity implements
 
     private static final String HOUSE_TEXT = "Fraternity house";
     private static final LatLng HOUSE = new LatLng(33.793766, -84.327198);
-    private static final float HOUSE_RADIUS = 100000.0f;
+    private static final float HOUSE_RADIUS = 9.0f;     // current minimum = 9, but not reliable
     private static final int HOUSE_LIFETIME = 100000;
 
     private static final String TOUR_START_NAME = "Tour Start";
@@ -86,10 +87,6 @@ public class MainActivity extends ActionBarActivity implements
                 mMapFragment= (MapFragment) getFragmentManager().findFragmentById(R.id.map);
                 mMapFragment.getMapAsync(this);
             }
-            
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -208,6 +205,11 @@ public class MainActivity extends ActionBarActivity implements
                         .geodesic(true)
                         .addAll(routeCoordinates)
         );
+
+        googleMap.addCircle(new CircleOptions()
+                .center(HOUSE)
+                .radius(HOUSE_RADIUS)
+                .visible(true));
     }
 
     @Override
@@ -268,8 +270,6 @@ public class MainActivity extends ActionBarActivity implements
                 mGoogleApiClient, 
                 getGeofencingRequest(), 
                 getGeofencePendingIntent()).setResultCallback(this);
-
-        Log.d("onConnected", "### LocationServicesAPI called");
     }
 
     /**

@@ -96,8 +96,6 @@ public class MainActivity extends ActionBarActivity implements
             e.printStackTrace();
         }
 
-
-
 //        Button nextButton = (Button) fragment.getView().findViewById(R.id.control_panel_next_button);
 
 //        nextButton.setEnabled(false);

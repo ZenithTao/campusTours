@@ -1,6 +1,11 @@
 # campusTours
 Mobile application for self-guided virtual campus tours.  
 
+## Repository structure:  
+\- campusTours/  
+   \- CampusTours  
+   \- design
+
 ## Languages/Framework:  
 - Java/XML  
 - MySQL

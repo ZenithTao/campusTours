@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/pre-dexed/debug/classes-ab82b947aa0b813a4db73e3ab01f633dfd8a1c67.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-300034c18ac88b55986bd7779df744dfe7aeac9b.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/pre-dexed/debug/classes-06e2c15542247d0114c02795ca9c6f0116a579e2.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-58b8e6c35fcc9506b014843b3bf5a85404293d91.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/CampusTours/app/build/intermediates/pre-dexed/debug/classes-3912a78a41edb8e39cf2c1a4aca6ad1b349ef48b.jar" />
+    </item>
+
+</items>

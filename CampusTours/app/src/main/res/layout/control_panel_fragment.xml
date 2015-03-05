@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|top"
+    android:id="@+id/control_panel_fragment">
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/control_panel_prev_button"
+        android:text="@string/control_panel_prev_button_text"/>
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/control_panel_play_button"
+        android:text="@string/control_panel_play_button_text"/>
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/control_panel_next_button"
+        android:text="@string/control_panel_next_button_text"/>
+
+</LinearLayout>

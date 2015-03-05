@@ -3,8 +3,8 @@ Mobile application for self-guided virtual campus tours.
 
 ## Repository structure:  
 \- campusTours/  
-    \- CampusTours/         <-- Android app
-    \- design/              <-- UI and mockup assets
+        \- CampusTours/         <-- Android app  
+        \- design/              <-- UI and mockup assets  
 
 ## Languages/Framework:  
 - Java/XML  

@@ -6,8 +6,9 @@ Mobile application for self-guided virtual campus tours.
 ..**/design/**              <-- UI, mockup, and other design assets  
 
 ## Languages/Framework:  
-- Java/XML  
-- MySQL
+- _Java/XML_ for Android app  
+- _MySQL_ for database  
+- _sandman_ for making database RESTful  
   
 ## Project Management:  
 - Trello (private board, please contact for access)  

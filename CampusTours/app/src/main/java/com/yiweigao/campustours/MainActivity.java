@@ -60,6 +60,12 @@ public class MainActivity extends ActionBarActivity implements
     private static final float TEST_RADIUS = 15.0f;
     private static final int TEST_LIFETIME = 100000;
 
+    private static final String HOME_NAME = "Home";
+    private static final LatLng HOME = new LatLng(33.910265, -84.303489);
+    private static final float HOME_RADIUS = 15.0f;
+    private static final int HOME_LIFETIME = 100000;
+    
+
     private GoogleMap mGoogleMap;
     private MapFragment mMapFragment;
     private ControlPanelFragment mControlPanelFragment;
@@ -136,7 +142,8 @@ public class MainActivity extends ActionBarActivity implements
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(TOUR_START, 18.0f));
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(TOUR_START)
+//                .target(TOUR_START)
+                .target(HOME)
                 .zoom(18.0f)    // 18.0f seems to show buildings...anything higher will not
                 .bearing(55)    // 55 degrees makes us face the b jones center directly
                 .tilt(15)       // 15 degrees seems ideal
@@ -218,6 +225,12 @@ public class MainActivity extends ActionBarActivity implements
                 .center(TEST)
                 .radius(TEST_RADIUS)
                 .visible(true));
+        
+        googleMap.addCircle(new CircleOptions()
+                .center(HOME)
+                .radius(HOME_RADIUS)
+                .visible(true));
+        
     }
 
     @Override
@@ -329,13 +342,24 @@ public class MainActivity extends ActionBarActivity implements
 //                        Geofence.GEOFENCE_TRANSITION_EXIT)
 //                .build());
 
+//        mGeofenceList.add(new Geofence.Builder()
+//                .setRequestId(TEST_NAME)
+//                .setCircularRegion(
+//                        TEST.latitude,
+//                        TEST.longitude,
+//                        TEST_RADIUS)
+//                .setExpirationDuration(TEST_LIFETIME)
+//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+//                        Geofence.GEOFENCE_TRANSITION_EXIT)
+//                .build());
+        
         mGeofenceList.add(new Geofence.Builder()
-                .setRequestId(TEST_NAME)
+                .setRequestId(HOME_NAME)
                 .setCircularRegion(
-                        TEST.latitude,
-                        TEST.longitude,
-                        TEST_RADIUS)
-                .setExpirationDuration(TEST_LIFETIME)
+                        HOME.latitude,
+                        HOME.longitude,
+                        HOME_RADIUS)
+                .setExpirationDuration(HOME_LIFETIME)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
                         Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build());

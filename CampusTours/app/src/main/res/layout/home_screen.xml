@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"                                                      
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"                                          
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"                                
+    android:paddingRight="@dimen/activity_horizontal_margin"                                                                    
+    android:paddingTop="@dimen/activity_vertical_margin"                                                                        
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">                                      
+                                                                                                                                
+    <FrameLayout                                                                                                                
+        android:layout_width="fill_parent"                                                                                      
+        android:layout_height="fill_parent"                                                                                     
+        android:layout_alignParentRight="true"                                                                                  
+        android:layout_alignParentEnd="true"                                                                                    
+        android:layout_marginRight="197dp"                                                                                      
+        android:layout_marginEnd="197dp"                                                                                        
+        android:layout_marginTop="48dp"                                                                                         
+        android:layout_color="#e9e9e9"                                                                                          
+        android:id="@+id/frameLayout"></FrameLayout>                                                                            
+                                                                                                                                
+    <TextView                                                                                                                   
+        android:layout_width="wrap_content"                                                                                     
+        android:layout_height="wrap_content"                                                                                    
+        android:textSize="30sp"                                                                                                 
+        android:text="Welcome, "                                                                                                
+        android:id="@+id/Welcome"                                                                                               
+        android:textColor="#0a5290"                                                                                             
+        android:layout_alignParentTop="true"                                                                                    
+        android:layout_centerHorizontal="true" />                                                                               
+                                                                                                                                
+    <TextView                                                                                                                   
+        android:layout_width="wrap_content"                                                                                     
+        android:layout_height="wrap_content"                                                                                    
+        android:textSize="30sp"                                                                                                 
+        android:text="start your tour:"                                                                                         
+        android:textColor="#0a5290"                                                                                             
+        android:id="@+id/WelcomeContd"                                                                                          
+        android:layout_below="@+id/Welcome"                                                                                     
+        android:layout_centerHorizontal="true" />                                                                               
+                                                                                                                                
+    <TextView                                                                                                                   
+        android:layout_width="wrap_content"                                                                                     
+        android:layout_height="wrap_content"                                                                                    
+        android:textSize="30sp"                                                                                                 
+        android:text="Choose a Campus:"                                                                                         
+        android:textColor="#7d7d7d"                                                                                             
+        android:id="@+id/CampusText"                                                                                            
+        android:layout_marginTop="84dp"                                                                                         
+        android:layout_below="@+id/WelcomeContd"                                                                                
+        android:layout_centerHorizontal="true" />                                                                               
+                                                                                                                                
+    <Spinner                                                                                                                    
+        android:id="@+id/spinner1"                                                                                              
+        android:layout_width="250dp"                                                                                            
+        android:layout_height="60dp"                                                                                            
+        android:background="@android:drawable/btn_dropdown"                                                                     
+        android:spinnerMode="dropdown"                                                                                          
+        android:layout_marginTop="35dp"                                                                                         
+        android:focusable="false"                                                                                               
+        android:layout_below="@+id/CampusText"                                                                                  
+        android:layout_centerHorizontal="true"                                                                                  
+        android:textAlignment="center"                                                                                          
+        android:text="select"                                                                                                   
+        android:textColor= "#FFFFFF"                                                                                            
+        android:touchscreenBlocksFocus="false"                                                                                  
+        android:backgroundTint="@color/material_blue_grey_800" />                                                               
+                                                                                                                                
+    <Button                                                                                                                     
+        style="?android:attr/borderlessButtonStyle"                                                                             
+        android:layout_width="180dp"                                                                                            
+        android:layout_height="wrap_content"                                                                                    
+        android:text="Start Tour"                                                                                               
+        android:textColor="#FFFFFF"                                                                                             
+        android:textSize="20sp"                                                                                                 
+        android:background="#0a5290"                                                                                            
+        android:id="@+id/StartButton"                                                                                           
+        android:layout_marginBottom="64dp"                                                                                      
+        android:layout_alignBottom="@+id/frameLayout"                                                                           
+        android:layout_centerHorizontal="true"/>                                                                                
+                                                                                                                                
+                                                                                                                                
+</RelativeLayout>                                                                                                               
+                                                                                                                                

@@ -50,18 +50,16 @@
     <Spinner                                                                                                                    
         android:id="@+id/spinner1"                                                                                              
         android:layout_width="250dp"                                                                                            
-        android:layout_height="60dp"                                                                                            
+        android:layout_height="40dp"                                                                                            
         android:background="@android:drawable/btn_dropdown"                                                                     
         android:spinnerMode="dropdown"                                                                                          
-        android:layout_marginTop="35dp"                                                                                         
         android:focusable="false"                                                                                               
-        android:layout_below="@+id/CampusText"                                                                                  
-        android:layout_centerHorizontal="true"                                                                                  
         android:textAlignment="center"                                                                                          
-        android:text="select"                                                                                                   
-        android:textColor= "#FFFFFF"                                                                                            
-        android:touchscreenBlocksFocus="false"                                                                                  
-        android:backgroundTint="@color/material_blue_grey_800" />                                                               
+        android:touchscreenBlocksFocus="false"
+        android:backgroundTint="#FFFFFF"            
+        android:layout_below="@+id/CampusText"      
+        android:layout_alignRight="@+id/CampusText" 
+        android:layout_alignEnd="@+id/CampusText" />                                                            
                                                                                                                                 
     <Button                                                                                                                     
         style="?android:attr/borderlessButtonStyle"                                                                             

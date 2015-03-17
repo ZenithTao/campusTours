@@ -1,45 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout
+    android:id="@+id/control_panel_fragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center|top"
-    android:id="@+id/control_panel_fragment">
-    
-    <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:background="@mipmap/rewind_icon"/>
+    android:layout_gravity="center"
+    android:orientation="horizontal">
 
     <ImageButton
+        android:id="@+id/control_panel_rewind_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:background="@mipmap/play_icon"/>
+        android:background="@mipmap/rewind_icon" />
 
     <ImageButton
+        android:id="@+id/control_panel_play_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:background="@mipmap/next_icon"/>
-    
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/control_panel_prev_button"-->
-        <!--android:text="@string/control_panel_prev_button_text"/>-->
-    <!---->
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/control_panel_play_button"-->
-        <!--android:text="@string/control_panel_play_button_text"/>-->
-    <!---->
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/control_panel_next_button"-->
-        <!--android:text="@string/control_panel_next_button_text"/>-->
+        android:background="@mipmap/play_icon" />
+
+    <ImageButton
+        android:id="@+id/control_panel_next_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@mipmap/next_icon" />
 
 </LinearLayout>

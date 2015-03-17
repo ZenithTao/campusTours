@@ -7,19 +7,21 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * Created by yiweigao on 2/26/15.
  */
 public class ControlPanelFragment extends Fragment {
 
-    View mInflatedView;
-    MediaPlayer mMediaPlayer = null;
-    Button mPrevButton;
-    Button mPlayButton;
-    Button mNextButton;
+    private static int POSITION_OFFSET;
+    private View mInflatedView;
+    private MediaPlayer mMediaPlayer = null;
+    private ImageButton mPrevButton;
+    private ImageButton mPlayButton;
+    private ImageButton mNextButton;
     boolean mIsPlaying = false;
+    
     
     @Nullable
     @Override
@@ -30,9 +32,9 @@ public class ControlPanelFragment extends Fragment {
 
         mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
 
-        mPrevButton = (Button) mInflatedView.findViewById(R.id.control_panel_prev_button);
-        mPlayButton = (Button) mInflatedView.findViewById(R.id.control_panel_play_button);
-        mNextButton = (Button) mInflatedView.findViewById(R.id.control_panel_next_button);
+        mPrevButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_rewind_button);
+        mPlayButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_play_button);
+        mNextButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_next_button);
         
         
         mPrevButton.setOnClickListener(new View.OnClickListener() {
@@ -40,8 +42,8 @@ public class ControlPanelFragment extends Fragment {
             public void onClick(View v) {
 
                 if (mMediaPlayer.isPlaying()) {
-                    // skips backwards 10s, need to set this as a constant
-                    mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() - 10000); 
+                    // skips backwards 
+                    mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() - POSITION_OFFSET); 
                 }
 
             }
@@ -53,10 +55,10 @@ public class ControlPanelFragment extends Fragment {
 
                 if (!mMediaPlayer.isPlaying()) {
                     mMediaPlayer.start();
-                    mPlayButton.setText(R.string.control_panel_pause_button_text);
+                    mPlayButton.setImageResource(R.mipmap.pause_icon);
                 } else if (mMediaPlayer.isPlaying()) {
                     mMediaPlayer.pause();
-                    mPlayButton.setText(R.string.control_panel_play_button_text);
+                    mPlayButton.setImageResource(R.mipmap.play_icon);
                 }
 
             }
@@ -65,6 +67,11 @@ public class ControlPanelFragment extends Fragment {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (mMediaPlayer.isPlaying()) {
+                    // skips forwards
+                    mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() + POSITION_OFFSET);
+                }
                 
             }
         });

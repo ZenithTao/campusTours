@@ -20,5 +20,8 @@
     <string name="geofence_transition_entered">Entered</string>
     <string name="geofence_transition_exited">Exited</string>
     <string name="unknown_geofence_transition">Unknown Transition</string>
-    
+    <string name="rewind_button_description">Rewind</string>
+    <string name="play_button_description">Play/Pause</string>
+    <string name="next_button_description">Next</string>
+
 </resources>

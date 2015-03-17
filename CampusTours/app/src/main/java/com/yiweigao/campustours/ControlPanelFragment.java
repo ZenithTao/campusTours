@@ -14,11 +14,11 @@ import android.widget.ImageButton;
  */
 public class ControlPanelFragment extends Fragment {
 
-    private static int POSITION_OFFSET;
+    private static int POSITION_OFFSET = 10000;
     boolean mIsPlaying = false;
     private View mInflatedView;
     private MediaPlayer mMediaPlayer = null;
-    private ImageButton mPrevButton;
+    private ImageButton mRwndButton;
     private ImageButton mPlayButton;
     private ImageButton mNextButton;
 
@@ -31,12 +31,16 @@ public class ControlPanelFragment extends Fragment {
 
         mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
 
-        mPrevButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_rewind_button);
+        mRwndButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_rewind_button);
         mPlayButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_play_button);
         mNextButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_next_button);
+        
+        mRwndButton.setAlpha(0.75f);
+        mPlayButton.setAlpha(0.75f);
+        mNextButton.setAlpha(0.75f);
 
 
-        mPrevButton.setOnClickListener(new View.OnClickListener() {
+        mRwndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

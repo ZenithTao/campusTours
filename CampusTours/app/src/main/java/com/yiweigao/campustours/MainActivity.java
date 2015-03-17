@@ -82,11 +82,11 @@ public class MainActivity extends ActionBarActivity implements
         setContentView(R.layout.activity_main);
 
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_content);
+        Fragment fragment = fragmentManager.findFragmentById(R.id.control_panel_fragment);
 
         if (fragment == null) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.fragment_content, new ControlPanelFragment());
+            fragmentTransaction.add(R.id.control_panel_fragment, new ControlPanelFragment());
             fragmentTransaction.commit();
         }
 
@@ -142,8 +142,8 @@ public class MainActivity extends ActionBarActivity implements
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(TOUR_START, 18.0f));
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
-//                .target(TOUR_START)
-                .target(HOME)
+                .target(TOUR_START)
+//                .target(HOME)
                 .zoom(18.0f)    // 18.0f seems to show buildings...anything higher will not
                 .bearing(55)    // 55 degrees makes us face the b jones center directly
                 .tilt(15)       // 15 degrees seems ideal
@@ -216,10 +216,10 @@ public class MainActivity extends ActionBarActivity implements
                         .addAll(routeCoordinates)
         );
 
-//        googleMap.addCircle(new CircleOptions()
-//                .center(HOUSE)
-//                .radius(HOUSE_RADIUS)
-//                .visible(true));
+        googleMap.addCircle(new CircleOptions()
+                .center(HOUSE)
+                .radius(HOUSE_RADIUS)
+                .visible(true));
 
         googleMap.addCircle(new CircleOptions()
                 .center(TEST)

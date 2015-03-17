@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 public class ControlPanelFragment extends Fragment {
 
     private static int POSITION_OFFSET = 10000;
-    boolean mIsPlaying = false;
+    private static float BUTTON_ALPHA = 0.80f;
     private View mInflatedView;
     private MediaPlayer mMediaPlayer = null;
     private ImageButton mRwndButton;
@@ -35,9 +35,9 @@ public class ControlPanelFragment extends Fragment {
         mPlayButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_play_button);
         mNextButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_next_button);
         
-        mRwndButton.setAlpha(0.75f);
-        mPlayButton.setAlpha(0.75f);
-        mNextButton.setAlpha(0.75f);
+        mRwndButton.setAlpha(BUTTON_ALPHA);
+        mPlayButton.setAlpha(BUTTON_ALPHA);
+        mNextButton.setAlpha(BUTTON_ALPHA);
 
 
         mRwndButton.setOnClickListener(new View.OnClickListener() {

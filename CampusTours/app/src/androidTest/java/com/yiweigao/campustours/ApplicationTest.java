@@ -9,5 +9,8 @@ import android.test.ApplicationTestCase;
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
+        final int one = 1;
+        final int two = 2;
+        assertEquals(one, two);
     }
 }

@@ -94,6 +94,12 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
         return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
     }
+    
+    private void alertMediaPlayer() {
+        
+        
+        
+    }
 
     /**
      * Posts a notification in the notification bar when a transition is detected.

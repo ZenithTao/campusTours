@@ -34,10 +34,10 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity implements 
-        GoogleApiClient.ConnectionCallbacks, 
-        GoogleApiClient.OnConnectionFailedListener, 
-        OnMapReadyCallback, 
+public class MainActivity extends ActionBarActivity implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        OnMapReadyCallback,
         ResultCallback<Status> {
 
     private static final LatLng YIWEI_POS = new LatLng(40, -79);
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity implements
     private static final LatLng HOME = new LatLng(33.910265, -84.303489);
     private static final float HOME_RADIUS = 15.0f;
     private static final int HOME_LIFETIME = 100000;
-    
+
 
     private GoogleMap mGoogleMap;
     private MapFragment mMapFragment;
@@ -80,7 +80,7 @@ public class MainActivity extends ActionBarActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_content);
 
@@ -95,7 +95,7 @@ public class MainActivity extends ActionBarActivity implements
 
         try {
             if (mMapFragment == null) {
-                mMapFragment= (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+                mMapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
                 mMapFragment.getMapAsync(this);
             }
         } catch (Exception e) {
@@ -107,7 +107,7 @@ public class MainActivity extends ActionBarActivity implements
 //        nextButton.setEnabled(false);
 
         populateGeofenceList();
-        
+
         buildGoogleApiClient();
 //        Log.d("onCreate", "just finished called connect()");
 
@@ -225,12 +225,12 @@ public class MainActivity extends ActionBarActivity implements
                 .center(TEST)
                 .radius(TEST_RADIUS)
                 .visible(true));
-        
+
         googleMap.addCircle(new CircleOptions()
                 .center(HOME)
                 .radius(HOME_RADIUS)
                 .visible(true));
-        
+
     }
 
     @Override
@@ -283,13 +283,13 @@ public class MainActivity extends ActionBarActivity implements
 //                .addGeofence(asburyFence)
 //                .addGeofence(houseFence)
 //                .build();
-        
+
 //
 //        Log.d("onResume", "about to call api");
 //
         LocationServices.GeofencingApi.addGeofences(
-                mGoogleApiClient, 
-                getGeofencingRequest(), 
+                mGoogleApiClient,
+                getGeofencingRequest(),
                 getGeofencePendingIntent()).setResultCallback(this);
     }
 
@@ -329,7 +329,7 @@ public class MainActivity extends ActionBarActivity implements
         // Return a GeofencingRequest.
         return builder.build();
     }
-    
+
     public void populateGeofenceList() {
 //        mGeofenceList.add(new Geofence.Builder()
 //                .setRequestId(HOUSE_TEXT)
@@ -352,7 +352,7 @@ public class MainActivity extends ActionBarActivity implements
 //                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
 //                        Geofence.GEOFENCE_TRANSITION_EXIT)
 //                .build());
-        
+
         mGeofenceList.add(new Geofence.Builder()
                 .setRequestId(HOME_NAME)
                 .setCircularRegion(
@@ -378,7 +378,7 @@ public class MainActivity extends ActionBarActivity implements
     /**
      * Runs when the result of calling addGeofences() and removeGeofences() becomes available.
      * Either method can complete successfully or with an error.
-     *
+     * <p/>
      * Since this activity implements the {@link ResultCallback} interface, we are required to
      * define this method.
      *
@@ -393,7 +393,7 @@ public class MainActivity extends ActionBarActivity implements
             Toast.makeText(
                     this,
                     mGeofencesAdded ? "Geofence added" :
-                            "Geofence removed" ,
+                            "Geofence removed",
                     Toast.LENGTH_SHORT
             ).show();
         } else {

@@ -15,14 +15,13 @@ import android.widget.ImageButton;
 public class ControlPanelFragment extends Fragment {
 
     private static int POSITION_OFFSET;
+    boolean mIsPlaying = false;
     private View mInflatedView;
     private MediaPlayer mMediaPlayer = null;
     private ImageButton mPrevButton;
     private ImageButton mPlayButton;
     private ImageButton mNextButton;
-    boolean mIsPlaying = false;
-    
-    
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,20 +34,20 @@ public class ControlPanelFragment extends Fragment {
         mPrevButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_rewind_button);
         mPlayButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_play_button);
         mNextButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_next_button);
-        
-        
+
+
         mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (mMediaPlayer.isPlaying()) {
                     // skips backwards 
-                    mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() - POSITION_OFFSET); 
+                    mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() - POSITION_OFFSET);
                 }
 
             }
         });
-        
+
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +62,7 @@ public class ControlPanelFragment extends Fragment {
 
             }
         });
-        
+
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,11 +71,11 @@ public class ControlPanelFragment extends Fragment {
                     // skips forwards
                     mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() + POSITION_OFFSET);
                 }
-                
+
             }
         });
-        
+
         return mInflatedView;
-        
+
     }
 }

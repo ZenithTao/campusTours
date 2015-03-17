@@ -26,7 +26,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
+     * <p/>
      * Used to name the worker thread, important only for debugging.
      */
     public GeofenceTransitionsIntentService() {
@@ -73,10 +73,10 @@ public class GeofenceTransitionsIntentService extends IntentService {
     /**
      * Gets transition details and returns them as a formatted string.
      *
-     * @param context               The app context.
-     * @param geofenceTransition    The ID of the geofence transition.
-     * @param triggeringGeofences   The geofence(s) triggered.
-     * @return                      The transition details formatted as String.
+     * @param context             The app context.
+     * @param geofenceTransition  The ID of the geofence transition.
+     * @param triggeringGeofences The geofence(s) triggered.
+     * @return The transition details formatted as String.
      */
     private String getGeofenceTransitionDetails(
             Context context,
@@ -94,11 +94,10 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
         return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
     }
-    
+
     private void alertMediaPlayer() {
-        
-        
-        
+
+
     }
 
     /**
@@ -150,8 +149,8 @@ public class GeofenceTransitionsIntentService extends IntentService {
     /**
      * Maps geofence transition types to their human-readable equivalents.
      *
-     * @param transitionType    A transition type constant defined in Geofence
-     * @return                  A String indicating the type of transition
+     * @param transitionType A transition type constant defined in Geofence
+     * @return A String indicating the type of transition
      */
     private String getTransitionString(int transitionType) {
         switch (transitionType) {

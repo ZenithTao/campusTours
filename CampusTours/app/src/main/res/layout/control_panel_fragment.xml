@@ -6,22 +6,40 @@
     android:layout_gravity="center|top"
     android:id="@+id/control_panel_fragment">
     
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/control_panel_prev_button"
-        android:text="@string/control_panel_prev_button_text"/>
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@mipmap/rewind_icon"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@mipmap/play_icon"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@mipmap/next_icon"/>
     
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/control_panel_play_button"
-        android:text="@string/control_panel_play_button_text"/>
-    
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/control_panel_next_button"
-        android:text="@string/control_panel_next_button_text"/>
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/control_panel_prev_button"-->
+        <!--android:text="@string/control_panel_prev_button_text"/>-->
+    <!---->
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/control_panel_play_button"-->
+        <!--android:text="@string/control_panel_play_button_text"/>-->
+    <!---->
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/control_panel_next_button"-->
+        <!--android:text="@string/control_panel_next_button_text"/>-->
 
 </LinearLayout>

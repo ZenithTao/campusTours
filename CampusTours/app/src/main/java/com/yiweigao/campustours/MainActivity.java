@@ -55,16 +55,11 @@ public class MainActivity extends ActionBarActivity implements
     private static final String TOUR_START_NAME = "Tour Start";
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
 
+    // ORB
     private static final String TEST_NAME = "Test";
     private static final LatLng TEST = new LatLng(33.789933, -84.326457);
     private static final float TEST_RADIUS = 15.0f;
     private static final int TEST_LIFETIME = 100000;
-
-    private static final String HOME_NAME = "Home";
-    private static final LatLng HOME = new LatLng(33.910265, -84.303489);
-    private static final float HOME_RADIUS = 15.0f;
-    private static final int HOME_LIFETIME = 100000;
-
 
     private GoogleMap mGoogleMap;
     private MapFragment mMapFragment;
@@ -226,11 +221,6 @@ public class MainActivity extends ActionBarActivity implements
                 .radius(TEST_RADIUS)
                 .visible(true));
 
-        googleMap.addCircle(new CircleOptions()
-                .center(HOME)
-                .radius(HOME_RADIUS)
-                .visible(true));
-
     }
 
     @Override
@@ -331,38 +321,29 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     public void populateGeofenceList() {
-//        mGeofenceList.add(new Geofence.Builder()
-//                .setRequestId(HOUSE_TEXT)
-//                .setCircularRegion(
-//                        HOUSE.latitude,
-//                        HOUSE.longitude,
-//                        HOUSE_RADIUS)
-//                .setExpirationDuration(HOUSE_LIFETIME)
-//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
-//                        Geofence.GEOFENCE_TRANSITION_EXIT)
-//                .build());
-
-//        mGeofenceList.add(new Geofence.Builder()
-//                .setRequestId(TEST_NAME)
-//                .setCircularRegion(
-//                        TEST.latitude,
-//                        TEST.longitude,
-//                        TEST_RADIUS)
-//                .setExpirationDuration(TEST_LIFETIME)
-//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
-//                        Geofence.GEOFENCE_TRANSITION_EXIT)
-//                .build());
-
         mGeofenceList.add(new Geofence.Builder()
-                .setRequestId(HOME_NAME)
+                .setRequestId(HOUSE_TEXT)
                 .setCircularRegion(
-                        HOME.latitude,
-                        HOME.longitude,
-                        HOME_RADIUS)
-                .setExpirationDuration(HOME_LIFETIME)
+                        HOUSE.latitude,
+                        HOUSE.longitude,
+                        HOUSE_RADIUS)
+                .setExpirationDuration(HOUSE_LIFETIME)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
                         Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build());
+
+        mGeofenceList.add(new Geofence.Builder()
+                .setRequestId(TEST_NAME)
+                .setCircularRegion(
+                        TEST.latitude,
+                        TEST.longitude,
+                        TEST_RADIUS)
+                .setExpirationDuration(TEST_LIFETIME)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+                        Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build());
+
+
     }
 
     @Override

@@ -26,7 +26,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
-     * <p/>
      * Used to name the worker thread, important only for debugging.
      */
     public GeofenceTransitionsIntentService() {

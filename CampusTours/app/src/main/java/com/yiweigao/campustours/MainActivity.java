@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity implements
             fragmentTransaction.commit();
         }
 
-        mGeofenceList = new ArrayList<>();
+        
         mGeofencePendingIntent = null;
 
         try {
@@ -99,7 +99,6 @@ public class MainActivity extends ActionBarActivity implements
         populateGeofenceList();
 
         buildGoogleApiClient();
-//        Log.d("onCreate", "just finished called connect()");
 
     }
 
@@ -285,6 +284,7 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     public void populateGeofenceList() {
+        mGeofenceList = new ArrayList<>();
         mGeofenceList.add(new Geofence.Builder()
                 .setRequestId(HOUSE_TEXT)
                 .setCircularRegion(
@@ -323,7 +323,6 @@ public class MainActivity extends ActionBarActivity implements
     /**
      * Runs when the result of calling addGeofences() and removeGeofences() becomes available.
      * Either method can complete successfully or with an error.
-     * <p/>
      * Since this activity implements the {@link ResultCallback} interface, we are required to
      * define this method.
      *

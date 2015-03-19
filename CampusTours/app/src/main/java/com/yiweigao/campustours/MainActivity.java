@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -97,10 +96,6 @@ public class MainActivity extends ActionBarActivity implements
             e.printStackTrace();
         }
 
-//        Button nextButton = (Button) fragment.getView().findViewById(R.id.control_panel_next_button);
-
-//        nextButton.setEnabled(false);
-
         populateGeofenceList();
 
         buildGoogleApiClient();
@@ -138,7 +133,6 @@ public class MainActivity extends ActionBarActivity implements
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(TOUR_START)
-//                .target(HOME)
                 .zoom(18.0f)    // 18.0f seems to show buildings...anything higher will not
                 .bearing(55)    // 55 degrees makes us face the b jones center directly
                 .tilt(15)       // 15 degrees seems ideal
@@ -247,36 +241,6 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onConnected(Bundle bundle) {
-        Log.d("onConnected", "### api is now connected ###");
-//        Geofence asburyFence = new Geofence.Builder()
-//                .setRequestId(ASBURY_CIRCLE_NAME)
-//                .setCircularRegion(ASBURY_CIRCLE.latitude, ASBURY_CIRCLE.longitude, ASBURY_CIRCLE_RADIUS)
-//                .setExpirationDuration(ASBURY_CIRCLE_LIFETIME)
-//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
-//                        | Geofence.GEOFENCE_TRANSITION_EXIT
-//                        | Geofence.GEOFENCE_TRANSITION_DWELL)
-//                .setLoiteringDelay(1000)
-//                .build();
-//
-//        Geofence houseFence = new Geofence.Builder()
-//                .setRequestId(HOUSE_TEXT)
-//                .setCircularRegion(HOUSE.latitude, HOUSE.longitude, HOUSE_RADIUS)
-//                .setExpirationDuration(HOUSE_LIFETIME)
-//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
-//                        | Geofence.GEOFENCE_TRANSITION_EXIT
-//                        | Geofence.GEOFENCE_TRANSITION_DWELL)
-//                .setLoiteringDelay(1000)
-//                .build();
-//
-//        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
-//                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-//                .addGeofence(asburyFence)
-//                .addGeofence(houseFence)
-//                .build();
-
-//
-//        Log.d("onResume", "about to call api");
-//
         LocationServices.GeofencingApi.addGeofences(
                 mGoogleApiClient,
                 getGeofencingRequest(),

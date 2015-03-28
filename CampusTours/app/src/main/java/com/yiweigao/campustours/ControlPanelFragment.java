@@ -1,8 +1,10 @@
 package com.yiweigao.campustours;
 
+import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -138,6 +140,7 @@ public class ControlPanelFragment extends Fragment {
 
         mMediaPlayer.seekTo(0);
         mMediaPlayer.start();
+
     }
     
     private void changeTrack(int newTrackNumber) {
@@ -180,4 +183,10 @@ public class ControlPanelFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    public int getCurrentTrackNumber(){
+        return trackNumber;
+    }
+
+
 }

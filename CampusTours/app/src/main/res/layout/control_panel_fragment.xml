@@ -7,6 +7,24 @@
     android:layout_gravity="center"
     android:orientation="horizontal">
 
+    <View
+        android:id="@+id/top_grey_box"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:background="#7d7d7d"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+        
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="Emory"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
     <ImageButton
         android:id="@+id/control_panel_rewind_button"
         android:layout_width="50dp"
@@ -14,7 +32,10 @@
         android:layout_margin="5dp"
         android:background="@mipmap/rewind_icon"
         android:contentDescription="@string/rewind_button_description"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter" 
+        android:layout_below="@+id/top_grey_box"
+        android:layout_toLeftOf="@+id/control_panel_play_button"
+        android:layout_toStartOf="@+id/control_panel_play_button"/>
 
     <ImageButton
         android:id="@+id/control_panel_play_button"
@@ -23,7 +44,9 @@
         android:layout_margin="5dp"
         android:background="@mipmap/play_icon"
         android:contentDescription="@string/play_button_description"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter" 
+        android:layout_below="@+id/top_grey_box"
+        android:layout_centerHorizontal="true"/>
 
     <ImageButton
         android:id="@+id/control_panel_next_button"
@@ -32,6 +55,9 @@
         android:layout_margin="5dp"
         android:background="@mipmap/next_icon"
         android:contentDescription="@string/next_button_description"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter" 
+        android:layout_below="@+id/top_grey_box"
+        android:layout_toRightOf="@+id/control_panel_play_button"
+        android:layout_toEndOf="@+id/control_panel_play_button" />
 
 </LinearLayout>

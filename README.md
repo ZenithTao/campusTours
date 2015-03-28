@@ -17,7 +17,7 @@ Mobile application for self-guided virtual campus tours.
 
 ## Team:  
 **Adam**  
-- Mockups/UI/UX  
+- Absolutely nothing
 
 **Eugene**  
 - Database/Backend  

@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity implements
             fragmentTransaction.commit();
         }
 
-        
+
         mGeofencePendingIntent = null;
 
         try {

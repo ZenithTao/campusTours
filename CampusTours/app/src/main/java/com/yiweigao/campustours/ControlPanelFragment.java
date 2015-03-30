@@ -20,7 +20,6 @@ import java.io.IOException;
 public class ControlPanelFragment extends Fragment {
 
     private static int POSITION_OFFSET = 10000;
-    private static float BUTTON_ALPHA = 0.80f;
     private View mInflatedView;
     private MediaPlayer mMediaPlayer;
     private ImageButton mRwndButton;
@@ -53,10 +52,6 @@ public class ControlPanelFragment extends Fragment {
         mRwndButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_rewind_button);
         mPlayButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_play_button);
         mNextButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_next_button);
-        
-        mRwndButton.setAlpha(BUTTON_ALPHA);
-        mPlayButton.setAlpha(BUTTON_ALPHA);
-        mNextButton.setAlpha(BUTTON_ALPHA);
 
 
         mRwndButton.setOnClickListener(new View.OnClickListener() {
@@ -67,9 +62,12 @@ public class ControlPanelFragment extends Fragment {
                 if (mMediaPlayer.isPlaying()) {
                     
                     int newPosition = mMediaPlayer.getCurrentPosition() - POSITION_OFFSET;
-                    
+
                     if (newPosition > 0) {
                         mMediaPlayer.seekTo(newPosition);
+                    }
+                    else if(newPosition <= 0){
+                        mMediaPlayer.seekTo(0);
                     }
                 }
 
@@ -184,9 +182,14 @@ public class ControlPanelFragment extends Fragment {
         }
     }
 
+    /*
+    The getters below are for testing
+     */
     public int getCurrentTrackNumber(){
         return trackNumber;
     }
 
-
+    public int getCurrentTime() {
+        return mMediaPlayer.getCurrentPosition();
+    }
 }

@@ -1,0 +1,21 @@
+#!/home/eluebke/campustours/bin/python
+
+# -*- coding: utf-8 -*-
+import re
+import sys
+from sandman import auth, app
+from sandman.sandmanctl import run
+
+@auth.get_password
+def get_password(username):
+    """Return the password for *username*."""
+    return 'secret'
+
+@app.before_request
+@auth.login_required
+def before_request():
+    pass
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(run())

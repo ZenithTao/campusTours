@@ -1,0 +1,5 @@
+test:
+	pre:
+		-emulator -avd circleci-android22
+		-circle-android wait-for-boot
+		-./gradlew connectedAndroidTest

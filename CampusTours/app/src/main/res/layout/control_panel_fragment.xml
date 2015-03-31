@@ -13,6 +13,7 @@
         android:layout_height="50dp"
         android:layout_margin="5dp"
         android:background="@mipmap/rewind_icon"
+        android:scaleType="fitCenter"
         android:contentDescription="@string/rewind_button_description" />
 
     <ImageButton
@@ -21,6 +22,7 @@
         android:layout_height="50dp"
         android:layout_margin="5dp"
         android:background="@mipmap/play_icon"
+        android:scaleType="fitCenter"
         android:contentDescription="@string/play_button_description" />
 
     <ImageButton
@@ -29,6 +31,7 @@
         android:layout_height="50dp"
         android:layout_margin="5dp"
         android:background="@mipmap/next_icon"
+        android:scaleType="fitCenter"
         android:contentDescription="@string/next_button_description" />
 
 </LinearLayout>

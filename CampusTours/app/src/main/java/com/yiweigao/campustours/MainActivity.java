@@ -6,12 +6,8 @@ import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -23,28 +19,12 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,97 +97,6 @@ public class MainActivity extends ActionBarActivity implements
 
     }
 
-    class JSONfunctions extends AsyncTask<String, Void, JSONObject> {
-
-        Toast loadingToast;
-
-        @Override
-        protected void onPreExecute() {
-            loadingToast = Toast.makeText(getApplicationContext(), "Loading", Toast.LENGTH_LONG);
-            loadingToast.show();
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... urls) {
-            InputStream is = null;
-            String result = "";
-            JSONObject jsonObject = null;
-
-            // Download JSON data from URL
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-//                HttpPost httppost = new HttpPost(urls[0]);
-                HttpGet httpGet = new HttpGet(urls[0]);
-//                HttpResponse response = httpclient.execute(httppost);
-                String user = "";
-                String pwd = "secret";
-                httpGet.addHeader("Authorization", "Basic " + Base64.encodeToString((user + ":" + pwd).getBytes(), Base64.NO_WRAP));
-
-                HttpResponse response = httpclient.execute(httpGet);
-                HttpEntity entity = response.getEntity();
-                is = entity.getContent();
-
-            } catch (Exception e) {
-                Log.e("log_tag", "Error in http connection " + e.toString());
-            }
-
-            // Convert response to string
-            try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        is, "iso-8859-1"), 8);
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                is.close();
-                result = sb.toString();
-            } catch (Exception e) {
-                Log.e("log_tag", "Error converting result " + e.toString());
-            }
-
-            try {
-
-                jsonObject = new JSONObject(result);
-            } catch (JSONException e) {
-                Log.e("log_tag", "Error parsing data " + e.toString());
-            }
-
-            return jsonObject;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            JSONArray resources = null;
-            try {
-                resources = jsonObject.getJSONArray("resources");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            for (int i = 0; i < resources.length(); i++) {
-                try {
-                    JSONObject point = resources.getJSONObject(i);
-                    String ind = point.getString("ind");
-                    String lat = point.getString("lat");
-                    String lng = point.getString("lng");
-
-                    stringBuilder.append("index: " + ind + " : ");
-                    stringBuilder.append("(" + lat + ", " + lng + ")");
-                    stringBuilder.append("\n");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            loadingToast.cancel();
-            content.setText(stringBuilder.toString());
-
-        }
-    }
-
     protected void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -230,85 +119,87 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.setBuildingsEnabled(true);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
-        googleMap.setMyLocationEnabled(true);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(TOUR_START, 18.0f));
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        googleMap.setBuildingsEnabled(true);
+//        googleMap.getUiSettings().setZoomControlsEnabled(true);
+//        googleMap.setMyLocationEnabled(true);
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(TOUR_START, 18.0f));
+//
+//        CameraPosition cameraPosition = new CameraPosition.Builder()
+//                .target(TOUR_START)
+//                .zoom(18.0f)    // 18.0f seems to show buildings...anything higher will not
+//                .bearing(55)    // 55 degrees makes us face the b jones center directly
+//                .tilt(15)       // 15 degrees seems ideal
+//                .build();
+//
+//        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//
+//        googleMap.addMarker(new MarkerOptions()
+//                .title("Asbury Cicle")
+//                .snippet("Location of WW!")
+//                .position(ASBURY_CIRCLE));
+//
+//        googleMap.addMarker(new MarkerOptions()
+//                .title("Tour Start")
+//                .snippet("Start Here!")
+//                .position(TOUR_START));
+//
+//        googleMap.addMarker(new MarkerOptions()
+//                .title("Chi Phi")
+//                .snippet("22 Eagle Row")
+//                .position(HOUSE));
+//
+//        // tour route, assuming usual tour route, current count = 38
+//        List<LatLng> routeCoordinates = new ArrayList<LatLng>();
+//        routeCoordinates.add(new LatLng(33.789689, -84.326368)); // start
+//        routeCoordinates.add(new LatLng(33.789803, -84.326454)); // curve before stairs
+//        routeCoordinates.add(new LatLng(33.789933, -84.326457)); // between career center and MSC
+//        routeCoordinates.add(new LatLng(33.790457, -84.325608)); // between admin building and white hall
+//        routeCoordinates.add(new LatLng(33.789986, -84.325209)); // south quad corner of admin building
+//        routeCoordinates.add(new LatLng(33.790587, -84.324259)); // front of carlos museum
+//        routeCoordinates.add(new LatLng(33.791010, -84.323635)); // between corner of bowden and candler lib
+//        routeCoordinates.add(new LatLng(33.790951, -84.323530)); // between candler and bowden
+//        routeCoordinates.add(new LatLng(33.790935, -84.323407)); // between woodruff and candler, before bridge
+//        routeCoordinates.add(new LatLng(33.791302, -84.322868)); // between woodruff and hospital, red brick road
+//        routeCoordinates.add(new LatLng(33.791522, -84.323152)); // between candler and hospital
+//        routeCoordinates.add(new LatLng(33.791949, -84.323396)); // corner of cox and hospital
+//        routeCoordinates.add(new LatLng(33.792073, -84.323198)); // right before cox hall entrance
+//        routeCoordinates.add(new LatLng(33.792515, -84.323552)); // right after cox hall exit
+//        routeCoordinates.add(new LatLng(33.792771, -84.323595)); // in front of alabama
+//        routeCoordinates.add(new LatLng(33.793140, -84.323383)); // right before duc entrance
+//        routeCoordinates.add(new LatLng(33.793790, -84.323319)); // right after duc exit, stairs bottom
+//        routeCoordinates.add(new LatLng(33.793788, -84.323130)); // right after duc exit, stairs top
+//        routeCoordinates.add(new LatLng(33.793923, -84.322985)); // turman, right outside rear stairs
+//        routeCoordinates.add(new LatLng(33.793931, -84.322473)); // southeast corner of turman, alongside means drive
+//        routeCoordinates.add(new LatLng(33.794166, -84.322484)); // northeast corner of turman, alongside means drive
+//        routeCoordinates.add(new LatLng(33.794169, -84.323546)); // outside hamilton holmes, before the hill slopes down
+//        routeCoordinates.add(new LatLng(33.793858, -84.323927)); // southeast corner of mctyeire
+//        routeCoordinates.add(new LatLng(33.793857, -84.324195)); // southwest corner of mctyeire
+//        routeCoordinates.add(new LatLng(33.793602, -84.324375)); // north road of 'wpec curve' @ asbury cir
+//        routeCoordinates.add(new LatLng(33.793585, -84.325032)); // north of wpec entrace
+//        routeCoordinates.add(new LatLng(33.793464, -84.325048)); // directly in front of wpec entrance
+//        routeCoordinates.add(new LatLng(33.793305, -84.325016)); // south of wpec entrance
+//        routeCoordinates.add(new LatLng(33.793293, -84.324353)); // south road of 'wpec curve' @ asbury circle
+//        routeCoordinates.add(new LatLng(33.792982, -84.324256)); // directly in front of dobbs
+//        routeCoordinates.add(new LatLng(33.792462, -84.324097)); // dooley!
+//        routeCoordinates.add(new LatLng(33.792251, -84.324132)); // start of bridge south of anthro building
+//        routeCoordinates.add(new LatLng(33.791998, -84.324545)); // tull plaza
+//        routeCoordinates.add(new LatLng(33.791752, -84.324338)); // directly in front of callaway
+//        routeCoordinates.add(new LatLng(33.791479, -84.324823)); // south corner of modern languages
+//        routeCoordinates.add(new LatLng(33.791433, -84.325156)); // under canon chapel
+//        routeCoordinates.add(new LatLng(33.791126, -84.325553)); // between new theology lib, white hall, and canon chapel
+//        routeCoordinates.add(new LatLng(33.790679, -84.325521)); // east corner of white hall
+////        routeCoordinates.add(new LatLng())
+//
+//        googleMap.addPolyline(new PolylineOptions()
+//                        .color(Color.argb(255, 0, 40, 120))     // emory blue, 100% opacity
+////                        .color(Color.argb(255, 210, 176, 0))    // emory "web light gold", 100% opacity
+////                        .color(Color.argb(255, 210, 142, 0))    // emory "web dark gold", 100% opacity
+//                        .geodesic(true)
+//                        .addAll(routeCoordinates)
+//        );
 
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(TOUR_START)
-                .zoom(18.0f)    // 18.0f seems to show buildings...anything higher will not
-                .bearing(55)    // 55 degrees makes us face the b jones center directly
-                .tilt(15)       // 15 degrees seems ideal
-                .build();
-
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-        googleMap.addMarker(new MarkerOptions()
-                .title("Asbury Cicle")
-                .snippet("Location of WW!")
-                .position(ASBURY_CIRCLE));
-
-        googleMap.addMarker(new MarkerOptions()
-                .title("Tour Start")
-                .snippet("Start Here!")
-                .position(TOUR_START));
-
-        googleMap.addMarker(new MarkerOptions()
-                .title("Chi Phi")
-                .snippet("22 Eagle Row")
-                .position(HOUSE));
-
-        // tour route, assuming usual tour route, current count = 38
-        List<LatLng> routeCoordinates = new ArrayList<LatLng>();
-        routeCoordinates.add(new LatLng(33.789689, -84.326368)); // start
-        routeCoordinates.add(new LatLng(33.789803, -84.326454)); // curve before stairs
-        routeCoordinates.add(new LatLng(33.789933, -84.326457)); // between career center and MSC
-        routeCoordinates.add(new LatLng(33.790457, -84.325608)); // between admin building and white hall
-        routeCoordinates.add(new LatLng(33.789986, -84.325209)); // south quad corner of admin building
-        routeCoordinates.add(new LatLng(33.790587, -84.324259)); // front of carlos museum
-        routeCoordinates.add(new LatLng(33.791010, -84.323635)); // between corner of bowden and candler lib
-        routeCoordinates.add(new LatLng(33.790951, -84.323530)); // between candler and bowden
-        routeCoordinates.add(new LatLng(33.790935, -84.323407)); // between woodruff and candler, before bridge
-        routeCoordinates.add(new LatLng(33.791302, -84.322868)); // between woodruff and hospital, red brick road
-        routeCoordinates.add(new LatLng(33.791522, -84.323152)); // between candler and hospital
-        routeCoordinates.add(new LatLng(33.791949, -84.323396)); // corner of cox and hospital
-        routeCoordinates.add(new LatLng(33.792073, -84.323198)); // right before cox hall entrance
-        routeCoordinates.add(new LatLng(33.792515, -84.323552)); // right after cox hall exit
-        routeCoordinates.add(new LatLng(33.792771, -84.323595)); // in front of alabama
-        routeCoordinates.add(new LatLng(33.793140, -84.323383)); // right before duc entrance
-        routeCoordinates.add(new LatLng(33.793790, -84.323319)); // right after duc exit, stairs bottom
-        routeCoordinates.add(new LatLng(33.793788, -84.323130)); // right after duc exit, stairs top
-        routeCoordinates.add(new LatLng(33.793923, -84.322985)); // turman, right outside rear stairs
-        routeCoordinates.add(new LatLng(33.793931, -84.322473)); // southeast corner of turman, alongside means drive
-        routeCoordinates.add(new LatLng(33.794166, -84.322484)); // northeast corner of turman, alongside means drive
-        routeCoordinates.add(new LatLng(33.794169, -84.323546)); // outside hamilton holmes, before the hill slopes down
-        routeCoordinates.add(new LatLng(33.793858, -84.323927)); // southeast corner of mctyeire
-        routeCoordinates.add(new LatLng(33.793857, -84.324195)); // southwest corner of mctyeire
-        routeCoordinates.add(new LatLng(33.793602, -84.324375)); // north road of 'wpec curve' @ asbury cir
-        routeCoordinates.add(new LatLng(33.793585, -84.325032)); // north of wpec entrace
-        routeCoordinates.add(new LatLng(33.793464, -84.325048)); // directly in front of wpec entrance
-        routeCoordinates.add(new LatLng(33.793305, -84.325016)); // south of wpec entrance
-        routeCoordinates.add(new LatLng(33.793293, -84.324353)); // south road of 'wpec curve' @ asbury circle
-        routeCoordinates.add(new LatLng(33.792982, -84.324256)); // directly in front of dobbs
-        routeCoordinates.add(new LatLng(33.792462, -84.324097)); // dooley!
-        routeCoordinates.add(new LatLng(33.792251, -84.324132)); // start of bridge south of anthro building
-        routeCoordinates.add(new LatLng(33.791998, -84.324545)); // tull plaza
-        routeCoordinates.add(new LatLng(33.791752, -84.324338)); // directly in front of callaway
-        routeCoordinates.add(new LatLng(33.791479, -84.324823)); // south corner of modern languages
-        routeCoordinates.add(new LatLng(33.791433, -84.325156)); // under canon chapel
-        routeCoordinates.add(new LatLng(33.791126, -84.325553)); // between new theology lib, white hall, and canon chapel
-        routeCoordinates.add(new LatLng(33.790679, -84.325521)); // east corner of white hall
-//        routeCoordinates.add(new LatLng())
-
-        googleMap.addPolyline(new PolylineOptions()
-                        .color(Color.argb(255, 0, 40, 120))     // emory blue, 100% opacity
-//                        .color(Color.argb(255, 210, 176, 0))    // emory "web light gold", 100% opacity
-//                        .color(Color.argb(255, 210, 142, 0))    // emory "web dark gold", 100% opacity
-                        .geodesic(true)
-                        .addAll(routeCoordinates)
-        );
+        MapManager mapManager = new MapManager(getApplicationContext(), googleMap);
 
         googleMap.addCircle(new CircleOptions()
                 .center(HOUSE)
@@ -319,6 +210,7 @@ public class MainActivity extends ActionBarActivity implements
                 .center(TEST)
                 .radius(TEST_RADIUS)
                 .visible(true));
+
 
     }
 

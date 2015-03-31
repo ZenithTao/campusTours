@@ -7,8 +7,11 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -30,6 +33,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +115,97 @@ public class MainActivity extends ActionBarActivity implements
 
         buildGoogleApiClient();
 
+    }
+
+    class JSONfunctions extends AsyncTask<String, Void, JSONObject> {
+
+        Toast loadingToast;
+
+        @Override
+        protected void onPreExecute() {
+            loadingToast = Toast.makeText(getApplicationContext(), "Loading", Toast.LENGTH_LONG);
+            loadingToast.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... urls) {
+            InputStream is = null;
+            String result = "";
+            JSONObject jsonObject = null;
+
+            // Download JSON data from URL
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+//                HttpPost httppost = new HttpPost(urls[0]);
+                HttpGet httpGet = new HttpGet(urls[0]);
+//                HttpResponse response = httpclient.execute(httppost);
+                String user = "";
+                String pwd = "secret";
+                httpGet.addHeader("Authorization", "Basic " + Base64.encodeToString((user + ":" + pwd).getBytes(), Base64.NO_WRAP));
+
+                HttpResponse response = httpclient.execute(httpGet);
+                HttpEntity entity = response.getEntity();
+                is = entity.getContent();
+
+            } catch (Exception e) {
+                Log.e("log_tag", "Error in http connection " + e.toString());
+            }
+
+            // Convert response to string
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        is, "iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                is.close();
+                result = sb.toString();
+            } catch (Exception e) {
+                Log.e("log_tag", "Error converting result " + e.toString());
+            }
+
+            try {
+
+                jsonObject = new JSONObject(result);
+            } catch (JSONException e) {
+                Log.e("log_tag", "Error parsing data " + e.toString());
+            }
+
+            return jsonObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            JSONArray resources = null;
+            try {
+                resources = jsonObject.getJSONArray("resources");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < resources.length(); i++) {
+                try {
+                    JSONObject point = resources.getJSONObject(i);
+                    String ind = point.getString("ind");
+                    String lat = point.getString("lat");
+                    String lng = point.getString("lng");
+
+                    stringBuilder.append("index: " + ind + " : ");
+                    stringBuilder.append("(" + lat + ", " + lng + ")");
+                    stringBuilder.append("\n");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            loadingToast.cancel();
+            content.setText(stringBuilder.toString());
+
+        }
     }
 
     protected void buildGoogleApiClient() {

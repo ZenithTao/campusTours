@@ -12,26 +12,20 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:background="@mipmap/rewind_icon"
-        android:contentDescription="@string/rewind_button_description"
-        android:scaleType="fitCenter" />
+        android:background="@mipmap/rewind_icon" />
 
     <ImageButton
         android:id="@+id/control_panel_play_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:background="@mipmap/play_icon"
-        android:contentDescription="@string/play_button_description"
-        android:scaleType="fitCenter" />
+        android:background="@mipmap/play_icon" />
 
     <ImageButton
         android:id="@+id/control_panel_next_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:background="@mipmap/next_icon"
-        android:contentDescription="@string/next_button_description"
-        android:scaleType="fitCenter" />
+        android:background="@mipmap/next_icon" />
 
 </LinearLayout>

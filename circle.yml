@@ -1,5 +1,7 @@
 test:
-	pre:
-		-emulator -avd circleci-android22
-		-circle-android wait-for-boot
-		-./gradlew connectedAndroidTest
+ pre:
+  -emulator -avd circleci-android22
+  -circle-android wait-for-boot
+  -./gradlew connectedAndroidTest
+ #adding a comment because git thinks I haven't changed the file
+ #Another line

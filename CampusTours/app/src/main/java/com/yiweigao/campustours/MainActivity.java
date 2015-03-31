@@ -155,7 +155,7 @@ public class MainActivity extends ActionBarActivity implements
                 .position(HOUSE));
 
         // tour route, assuming usual tour route, current count = 38
-        List<LatLng> routeCoordinates = new ArrayList<>();
+        List<LatLng> routeCoordinates = new ArrayList<LatLng>();
         routeCoordinates.add(new LatLng(33.789689, -84.326368)); // start
         routeCoordinates.add(new LatLng(33.789803, -84.326454)); // curve before stairs
         routeCoordinates.add(new LatLng(33.789933, -84.326457)); // between career center and MSC
@@ -284,7 +284,7 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     public void populateGeofenceList() {
-        mGeofenceList = new ArrayList<>();
+        mGeofenceList = new ArrayList<Geofence>();
         mGeofenceList.add(new Geofence.Builder()
                 .setRequestId(HOUSE_TEXT)
                 .setCircularRegion(

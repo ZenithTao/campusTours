@@ -1,5 +1,6 @@
 package com.yiweigao.campustours;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
@@ -20,12 +21,12 @@ import java.util.Map;
 public class ControlPanelFragment extends Fragment {
 
     public static Map<String, Integer> library = new HashMap<>();
+    public static MediaPlayer MEDIA_PLAYER;
     
     private static int POSITION_OFFSET = 10000;
+
     private static float BUTTON_ALPHA = 0.80f;
-    
     private View mInflatedView;
-    private MediaPlayer mMediaPlayer;
     private ImageButton mRwndButton;
     private ImageButton mPlayButton;
     private ImageButton mNextButton;
@@ -42,12 +43,12 @@ public class ControlPanelFragment extends Fragment {
 
 //        AssetFileDescriptor assetFileDescriptor = 
 //                getActivity().getResources().openRawResourceFd(R.raw.emory_university_overview);
-        mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
+        MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
 
 //        try {
-//            mMediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor());
-//            mMediaPlayer.prepare();
-//            duration = mMediaPlayer.getDuration();
+//            MEDIA_PLAYER.setDataSource(assetFileDescriptor.getFileDescriptor());
+//            MEDIA_PLAYER.prepare();
+//            duration = MEDIA_PLAYER.getDuration();
 //            assetFileDescriptor.close();
 //        } catch (IOException e) {
 //            e.printStackTrace();
@@ -70,14 +71,14 @@ public class ControlPanelFragment extends Fragment {
             public void onClick(View v) {
 
                 // skips backwards 
-                if (mMediaPlayer.isPlaying()) {
+                if (MEDIA_PLAYER.isPlaying()) {
 
-                    int newPosition = mMediaPlayer.getCurrentPosition() - POSITION_OFFSET;
+                    int newPosition = MEDIA_PLAYER.getCurrentPosition() - POSITION_OFFSET;
 
                     if (newPosition > 0) {
-                        mMediaPlayer.seekTo(newPosition);
+                        MEDIA_PLAYER.seekTo(newPosition);
                     } else if (newPosition <= 0) {
-                        mMediaPlayer.seekTo(0);
+                        MEDIA_PLAYER.seekTo(0);
                     }
                 }
 
@@ -88,11 +89,11 @@ public class ControlPanelFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (!mMediaPlayer.isPlaying()) {
-                    mMediaPlayer.start();
+                if (!MEDIA_PLAYER.isPlaying()) {
+                    MEDIA_PLAYER.start();
                     mPlayButton.setImageResource(R.mipmap.pause_icon);
-                } else if (mMediaPlayer.isPlaying()) {
-                    mMediaPlayer.pause();
+                } else if (MEDIA_PLAYER.isPlaying()) {
+                    MEDIA_PLAYER.pause();
                     mPlayButton.setImageResource(R.mipmap.play_icon);
                 }
 
@@ -103,7 +104,7 @@ public class ControlPanelFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                int newPosition = mMediaPlayer.getCurrentPosition() + POSITION_OFFSET;
+                int newPosition = MEDIA_PLAYER.getCurrentPosition() + POSITION_OFFSET;
 
                 if (newPosition > duration) {
                     trackNumber++;
@@ -111,8 +112,8 @@ public class ControlPanelFragment extends Fragment {
                 }
 
                 // skips forwards
-                if (mMediaPlayer.isPlaying()) {
-                    mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() + POSITION_OFFSET);
+                if (MEDIA_PLAYER.isPlaying()) {
+                    MEDIA_PLAYER.seekTo(MEDIA_PLAYER.getCurrentPosition() + POSITION_OFFSET);
                 }
 
             }
@@ -122,32 +123,47 @@ public class ControlPanelFragment extends Fragment {
 
     }
 
+    public static void playTrack(int trackNumber) {
+        MEDIA_PLAYER.release();
+        switch (trackNumber) {
+            case 0:
+                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
+                break;
+            case 1:
+                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_02);
+                break;
+            case 2:
+                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_04);
+                break;
+        }
+    }
+
     private void nextTrack(int nextTrackNumber) {
-        mMediaPlayer.release();
+        MEDIA_PLAYER.release();
         if (nextTrackNumber > 4) {
             nextTrackNumber = 0;
             trackNumber = 0;
         }
         switch (nextTrackNumber) {
             case 0:
-                mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
+                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
                 break;
             case 1:
-                mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.undergrad_01);
+                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_01);
                 break;
             case 2:
-                mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.undergrad_02);
+                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_02);
                 break;
             case 3:
-                mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.undergrad_03);
+                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_03);
                 break;
             case 4:
-                mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.undergrad_04);
+                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_04);
                 break;
         }
 
-        mMediaPlayer.seekTo(0);
-        mMediaPlayer.start();
+        MEDIA_PLAYER.seekTo(0);
+        MEDIA_PLAYER.start();
 
     }
 
@@ -181,11 +197,11 @@ public class ControlPanelFragment extends Fragment {
 
         try {
             assert assetFileDescriptor != null;
-//            mMediaPlayer.reset();
-            mMediaPlayer.stop();
-            mMediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor());
-            mMediaPlayer.prepare();
-            mMediaPlayer.start();
+//            MEDIA_PLAYER.reset();
+            MEDIA_PLAYER.stop();
+            MEDIA_PLAYER.setDataSource(assetFileDescriptor.getFileDescriptor());
+            MEDIA_PLAYER.prepare();
+            MEDIA_PLAYER.start();
             assetFileDescriptor.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -200,6 +216,6 @@ public class ControlPanelFragment extends Fragment {
     }
 
     public int getCurrentTime() {
-        return mMediaPlayer.getCurrentPosition();
+        return MEDIA_PLAYER.getCurrentPosition();
     }
 }

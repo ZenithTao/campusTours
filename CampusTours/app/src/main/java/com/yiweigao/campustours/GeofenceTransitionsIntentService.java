@@ -89,10 +89,11 @@ public class GeofenceTransitionsIntentService extends IntentService {
         for (Geofence geofence : triggeringGeofences) {
             String geofenceRequestId = geofence.getRequestId();
             triggeringGeofencesIdsList.add(geofenceRequestId);
-
+            
             switch (geofenceRequestId) {
                 case MainActivity.TEST_ONE:
                     // play music
+                    
                     break;
                 case MainActivity.TEST_TWO:
                     // play different music

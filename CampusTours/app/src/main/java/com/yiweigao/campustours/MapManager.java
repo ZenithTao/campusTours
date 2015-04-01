@@ -27,7 +27,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by yiweigao on 3/31/15.
@@ -49,7 +48,7 @@ public class MapManager {
         this.getRouteCoordinates();
     }
 
-    public void setInitialView() {
+    private void setInitialView() {
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGoogleMap.setBuildingsEnabled(true);
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
@@ -66,35 +65,23 @@ public class MapManager {
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-    public void getRouteCoordinates() {
-//        new JSONfunctions().execute("http://dutch.mathcs.emory.edu:8009/points");
-
-        JSONObject jsonObject;
-
-        try {
-            jsonObject = new JSONfunctions().execute("http://dutch.mathcs.emory.edu:8009/points").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-
+    private void getRouteCoordinates() {
+        // executes a new AsyncTask to fetch coordinates from API
+        new DataFetcher().execute("http://dutch.mathcs.emory.edu:8009/points");
     }
 
-    public void drawRoute() {
+    // draws route using stored coordinates
+    private void drawRoute() {
         mGoogleMap.addPolyline(new PolylineOptions()
-                        .color(Color.argb(255, 0, 40, 120))     // emory blue, 100% opacity
-//                        .color(Color.argb(255, 210, 176, 0))    // emory "web light gold", 100% opacity
-//                        .color(Color.argb(255, 210, 142, 0))    // emory "web dark gold", 100% opacity
-                        .geodesic(true)
-                        .addAll(mRouteCoordinates)
-        );
-        
-        Log.d("---drawRoute()---", "just drew map");
+                .color(Color.argb(255, 0, 40, 120))     // emory blue, 100% opacity
+//                .color(Color.argb(255, 210, 176, 0))    // emory "web light gold", 100% opacity
+//                .color(Color.argb(255, 210, 142, 0))    // emory "web dark gold", 100% opacity
+                .geodesic(true)
+                .addAll(mRouteCoordinates));
     }
 
-    class JSONfunctions extends AsyncTask<String, Void, JSONObject> {
+    // 
+    private class DataFetcher extends AsyncTask<String, Void, JSONObject> {
 
         Toast loadingToast;
 
@@ -113,9 +100,7 @@ public class MapManager {
             // Download JSON data from URL
             try {
                 HttpClient httpclient = new DefaultHttpClient();
-//                HttpPost httppost = new HttpPost(urls[0]);
                 HttpGet httpGet = new HttpGet(urls[0]);
-//                HttpResponse response = httpclient.execute(httppost);
                 String user = "";
                 String pwd = "secret";
                 httpGet.addHeader("Authorization", "Basic " + Base64.encodeToString((user + ":" + pwd).getBytes(), Base64.NO_WRAP));
@@ -170,7 +155,6 @@ public class MapManager {
 
                     LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
                     mRouteCoordinates.add(latLng);
-                    Log.d("---asynctask---", "added to mRouteCoordinates");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

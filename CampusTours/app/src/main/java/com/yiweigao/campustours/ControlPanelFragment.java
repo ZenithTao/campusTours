@@ -11,14 +11,19 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by yiweigao on 2/26/15.
  */
 public class ControlPanelFragment extends Fragment {
 
+    public static Map<String, Integer> library = new HashMap<>();
+    
     private static int POSITION_OFFSET = 10000;
     private static float BUTTON_ALPHA = 0.80f;
+    
     private View mInflatedView;
     private MediaPlayer mMediaPlayer;
     private ImageButton mRwndButton;
@@ -30,7 +35,7 @@ public class ControlPanelFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        
+
 //        return super.onCreateView(inflater, container, savedInstanceState);
 
         mInflatedView = inflater.inflate(R.layout.control_panel_fragment, container, false);
@@ -38,7 +43,7 @@ public class ControlPanelFragment extends Fragment {
 //        AssetFileDescriptor assetFileDescriptor = 
 //                getActivity().getResources().openRawResourceFd(R.raw.emory_university_overview);
         mMediaPlayer = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
-        
+
 //        try {
 //            mMediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor());
 //            mMediaPlayer.prepare();
@@ -51,11 +56,14 @@ public class ControlPanelFragment extends Fragment {
         mRwndButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_rewind_button);
         mPlayButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_play_button);
         mNextButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_next_button);
-        
+
         mRwndButton.setAlpha(BUTTON_ALPHA);
         mPlayButton.setAlpha(BUTTON_ALPHA);
         mNextButton.setAlpha(BUTTON_ALPHA);
 
+        library.put(MainActivity.TEST_ONE, R.raw.emory_university_overview);
+        library.put(MainActivity.TEST_TWO, R.raw.undergrad_02);
+        library.put(MainActivity.TEST_THREE, R.raw.undergrad_04);
 
         mRwndButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +71,12 @@ public class ControlPanelFragment extends Fragment {
 
                 // skips backwards 
                 if (mMediaPlayer.isPlaying()) {
-                    
+
                     int newPosition = mMediaPlayer.getCurrentPosition() - POSITION_OFFSET;
 
                     if (newPosition > 0) {
                         mMediaPlayer.seekTo(newPosition);
-                    }
-                    else if(newPosition <= 0){
+                    } else if (newPosition <= 0) {
                         mMediaPlayer.seekTo(0);
                     }
                 }
@@ -143,7 +150,7 @@ public class ControlPanelFragment extends Fragment {
         mMediaPlayer.start();
 
     }
-    
+
     private void changeTrack(int newTrackNumber) {
 
         if (newTrackNumber > 4) {
@@ -188,7 +195,7 @@ public class ControlPanelFragment extends Fragment {
     /*
     The getters below are for testing
      */
-    public int getCurrentTrackNumber(){
+    public int getCurrentTrackNumber() {
         return trackNumber;
     }
 

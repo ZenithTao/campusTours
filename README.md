@@ -15,6 +15,16 @@ Mobile application for self-guided virtual campus tours.
 ## Project Management:  
 - Trello (private board, please contact for access)  
 
+## Continuous Integration:
+<ul>
+  <li>CircleCI
+    <ul>
+      <li> Automatically runs tests on push
+      <li> Runs tests on multiple branches
+      <li> Sends emails with test results
+    </ul>
+</ul>
+
 ## Team:  
 **Adam**  
 - Absolutely nothing

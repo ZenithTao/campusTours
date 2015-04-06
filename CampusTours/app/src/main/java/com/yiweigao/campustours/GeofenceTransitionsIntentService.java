@@ -87,7 +87,22 @@ public class GeofenceTransitionsIntentService extends IntentService {
         // Get the Ids of each geofence that was triggered.
         ArrayList triggeringGeofencesIdsList = new ArrayList();
         for (Geofence geofence : triggeringGeofences) {
-            triggeringGeofencesIdsList.add(geofence.getRequestId());
+            String geofenceRequestId = geofence.getRequestId();
+            triggeringGeofencesIdsList.add(geofenceRequestId);
+            
+            switch (geofenceRequestId) {
+                case MainActivity.TEST_ONE:
+                    // play music
+                    
+                    break;
+                case MainActivity.TEST_TWO:
+                    // play different music
+                    break;
+                case MainActivity.TEST_THREE:
+                    // play more music
+                    break;
+            }
+            
         }
         String triggeringGeofencesIdsString = TextUtils.join(", ", triggeringGeofencesIdsList);
 

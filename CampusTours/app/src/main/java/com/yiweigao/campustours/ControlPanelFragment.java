@@ -1,6 +1,5 @@
 package com.yiweigao.campustours;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
@@ -123,20 +122,20 @@ public class ControlPanelFragment extends Fragment {
 
     }
 
-    public static void playTrack(int trackNumber) {
-        MEDIA_PLAYER.release();
-        switch (trackNumber) {
-            case 0:
-                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
-                break;
-            case 1:
-                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_02);
-                break;
-            case 2:
-                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_04);
-                break;
-        }
-    }
+//    public static void playTrack(int trackNumber) {
+//        MEDIA_PLAYER.release();
+//        switch (trackNumber) {
+//            case 0:
+//                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
+//                break;
+//            case 1:
+//                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_02);
+//                break;
+//            case 2:
+//                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_04);
+//                break;
+//        }
+//    }
 
     private void nextTrack(int nextTrackNumber) {
         MEDIA_PLAYER.release();

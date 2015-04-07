@@ -15,9 +15,9 @@ public class AudioPlayer {
         mMediaPlayer = new MediaPlayer();
     }
 
-    public void start(Context context) {
+    public void create(Context context) {
         mMediaPlayer = MediaPlayer.create(context, R.raw.emory_university_overview);
-        mMediaPlayer.start();
+//        mMediaPlayer.start();
     }
     
     public void stop() {
@@ -34,18 +34,6 @@ public class AudioPlayer {
             } else {
                 mMediaPlayer.start();
             }
-        }
-    }
-    
-    public void pause() {
-        if (mMediaPlayer.isPlaying()) {
-            mMediaPlayer.pause();
-        }
-    }
-    
-    public void unPause() {
-        if (mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
-            mMediaPlayer.start();
         }
     }
     

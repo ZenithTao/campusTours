@@ -33,6 +33,8 @@ public class ControlPanelFragment extends Fragment {
     private ImageButton mNextButton;
     private int trackNumber = 0;
     private int duration = 0;
+    
+    
 
     @Nullable
     @Override
@@ -64,9 +66,11 @@ public class ControlPanelFragment extends Fragment {
         mPlayButton.setAlpha(BUTTON_ALPHA);
         mNextButton.setAlpha(BUTTON_ALPHA);
 
-        library.put(MainActivity.TEST_ONE, R.raw.emory_university_overview);
-        library.put(MainActivity.TEST_TWO, R.raw.undergrad_02);
-        library.put(MainActivity.TEST_THREE, R.raw.undergrad_04);
+//        library.put(MainActivity.TEST_ONE, R.raw.emory_university_overview);
+//        library.put(MainActivity.TEST_TWO, R.raw.undergrad_02);
+//        library.put(MainActivity.TEST_THREE, R.raw.undergrad_04);
+        
+        mAudioPlayer.create(getActivity());
         
         mRwndButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +87,11 @@ public class ControlPanelFragment extends Fragment {
                     mPlayButton.setImageResource(R.mipmap.pause_icon);
                 } else {
                     mPlayButton.setImageResource(R.mipmap.play_icon);
-                }
+                }   
             }
         });
         
-        mPlayButton.setOnClickListener(new View.OnClickListener() {
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAudioPlayer.next();

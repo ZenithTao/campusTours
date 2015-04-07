@@ -67,57 +67,30 @@ public class ControlPanelFragment extends Fragment {
         library.put(MainActivity.TEST_ONE, R.raw.emory_university_overview);
         library.put(MainActivity.TEST_TWO, R.raw.undergrad_02);
         library.put(MainActivity.TEST_THREE, R.raw.undergrad_04);
-
+        
         mRwndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // skips backwards 
-                if (MEDIA_PLAYER.isPlaying()) {
-
-                    int newPosition = MEDIA_PLAYER.getCurrentPosition() - POSITION_OFFSET;
-
-                    if (newPosition > 0) {
-                        MEDIA_PLAYER.seekTo(newPosition);
-                    } else if (newPosition <= 0) {
-                        MEDIA_PLAYER.seekTo(0);
-                    }
-                }
-
+                mAudioPlayer.rewind();
             }
         });
-
+        
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (!MEDIA_PLAYER.isPlaying()) {
-                    MEDIA_PLAYER.start();
+                mAudioPlayer.togglePlayback();
+                if (mAudioPlayer.isPlaying()) {
                     mPlayButton.setImageResource(R.mipmap.pause_icon);
-                } else if (MEDIA_PLAYER.isPlaying()) {
-                    MEDIA_PLAYER.pause();
+                } else {
                     mPlayButton.setImageResource(R.mipmap.play_icon);
                 }
-
             }
         });
-
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        
+        mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                int newPosition = MEDIA_PLAYER.getCurrentPosition() + POSITION_OFFSET;
-
-                if (newPosition > duration) {
-                    trackNumber++;
-                    nextTrack(trackNumber);
-                }
-
-                // skips forwards
-                if (MEDIA_PLAYER.isPlaying()) {
-                    MEDIA_PLAYER.seekTo(MEDIA_PLAYER.getCurrentPosition() + POSITION_OFFSET);
-                }
-
+                mAudioPlayer.next();
             }
         });
 

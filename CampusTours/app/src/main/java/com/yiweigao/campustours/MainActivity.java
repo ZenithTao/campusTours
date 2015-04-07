@@ -58,19 +58,19 @@ public class MainActivity extends ActionBarActivity implements
     // b/w b.jones and msc
     public static final String TEST_ONE = "One";
     public static final LatLng TEST_ONE_LATLNG = new LatLng(33.789933, -84.326457);
-    public static final float TEST_ONE_RADIUS = 15f;
+    public static final float TEST_ONE_RADIUS = 25f;
     public static final int TEST_ONE_LIFETIME = 100000;
 
     // b/w white and admin
     public static final String TEST_TWO = "Two";
     public static final LatLng TEST_TWO_LATLNG = new LatLng(33.790457, -84.325608);
-    public static final float TEST_TWO_RADIUS = 15f;
+    public static final float TEST_TWO_RADIUS = 25f;
     public static final int TEST_TWO_LIFETIME = 100000;
 
     // in front of carlos
     public static final String TEST_THREE = "Three";
     public static final LatLng TEST_THREE_LATLNG = new LatLng(33.790587, -84.324259);
-    public static final float TEST_THREE_RADIUS = 15f;
+    public static final float TEST_THREE_RADIUS = 25f;
     public static final int TEST_THREE_LIFETIME = 100000;
 
     private GoogleMap mGoogleMap;

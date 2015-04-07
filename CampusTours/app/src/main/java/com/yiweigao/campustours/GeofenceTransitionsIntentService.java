@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
@@ -93,13 +94,15 @@ public class GeofenceTransitionsIntentService extends IntentService {
             switch (geofenceRequestId) {
                 case MainActivity.TEST_ONE:
                     // play music
-                    
+                    Toast.makeText(getApplicationContext(), "BJONES & MSC", Toast.LENGTH_LONG).show();
                     break;
                 case MainActivity.TEST_TWO:
                     // play different music
+                    Toast.makeText(getApplicationContext(), "WHITE & ADMIN", Toast.LENGTH_LONG).show();
                     break;
                 case MainActivity.TEST_THREE:
                     // play more music
+                    Toast.makeText(getApplicationContext(), "CARLOS", Toast.LENGTH_LONG).show();
                     break;
             }
             

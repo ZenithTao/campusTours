@@ -14,6 +14,9 @@
     <!--Used for the media player-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <!--Used for debugging-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
     <permission
         android:name="com.yiweigao.campustours.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />

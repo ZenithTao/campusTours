@@ -2,6 +2,7 @@ package com.yiweigao.campustours;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
@@ -78,6 +79,13 @@ public class MapManager {
 //                .color(Color.argb(255, 210, 142, 0))    // emory "web dark gold", 100% opacity
                 .geodesic(true)
                 .addAll(mRouteCoordinates));
+    }
+
+    public void updateCamera(Location newLocation) {
+        LatLng newLatLng = new LatLng(newLocation.getLatitude(), newLocation.getLongitude());
+
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(newLatLng));
+        
     }
 
     // 

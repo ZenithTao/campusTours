@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.TextUtils;
@@ -85,6 +86,8 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
         String geofenceTransitionString = getTransitionString(geofenceTransition);
 
+        Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+        
         // Get the Ids of each geofence that was triggered.
         ArrayList triggeringGeofencesIdsList = new ArrayList();
         for (Geofence geofence : triggeringGeofences) {
@@ -94,14 +97,17 @@ public class GeofenceTransitionsIntentService extends IntentService {
             switch (geofenceRequestId) {
                 case MainActivity.TEST_ONE:
                     // play music
+                    vibrator.vibrate(2000);
                     Toast.makeText(getApplicationContext(), "BJONES & MSC", Toast.LENGTH_LONG).show();
                     break;
                 case MainActivity.TEST_TWO:
                     // play different music
+                    vibrator.vibrate(2000);
                     Toast.makeText(getApplicationContext(), "WHITE & ADMIN", Toast.LENGTH_LONG).show();
                     break;
                 case MainActivity.TEST_THREE:
                     // play more music
+                    vibrator.vibrate(2000);
                     Toast.makeText(getApplicationContext(), "CARLOS", Toast.LENGTH_LONG).show();
                     break;
             }

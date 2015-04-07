@@ -82,13 +82,10 @@ public class MapManager {
     }
 
     public void updateCamera(Location newLocation) {
-        LatLng newLatLng = new LatLng(newLocation.getLatitude(), newLocation.getLongitude());
-
-        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(newLatLng));
-        
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(
+                new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
     }
 
-    // 
     private class DataFetcher extends AsyncTask<String, Void, JSONObject> {
 
         Toast loadingToast;

@@ -34,7 +34,6 @@ public class ControlPanelFragment extends Fragment {
     private int trackNumber = 0;
     private int duration = 0;
     
-    
 
     @Nullable
     @Override

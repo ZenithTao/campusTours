@@ -21,6 +21,8 @@ public class ControlPanelFragment extends Fragment {
 
     public static Map<String, Integer> library = new HashMap<>();
     public static MediaPlayer MEDIA_PLAYER;
+
+    private AudioPlayer mAudioPlayer = new AudioPlayer();
     
     private static int POSITION_OFFSET = 10000;
 
@@ -39,6 +41,7 @@ public class ControlPanelFragment extends Fragment {
 //        return super.onCreateView(inflater, container, savedInstanceState);
 
         mInflatedView = inflater.inflate(R.layout.control_panel_fragment, container, false);
+        
 
 //        AssetFileDescriptor assetFileDescriptor = 
 //                getActivity().getResources().openRawResourceFd(R.raw.emory_university_overview);

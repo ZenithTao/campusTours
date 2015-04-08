@@ -123,7 +123,7 @@ public class ControlPanelFragment extends Fragment {
 
     }
 
-    public static void playTrack(int trackNumber) {
+    public void playTrack(int trackNumber) {
         MEDIA_PLAYER.release();
         switch (trackNumber) {
             case 0:

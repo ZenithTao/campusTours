@@ -86,7 +86,4 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
         onView(withId(R.id.control_panel_play_button)).perform(click());
     }
 
-    public void testMarkerTextIsVisible() {
-
-    }
 }

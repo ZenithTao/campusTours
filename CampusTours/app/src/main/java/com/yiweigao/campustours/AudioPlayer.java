@@ -9,54 +9,49 @@ import android.media.MediaPlayer;
 
 public class AudioPlayer {
 
-    private static MediaPlayer sMediaPlayer;
+    private static AudioPlayer sAudioPlayer = null;
+    private MediaPlayer mMediaPlayer;
 
-    private AudioPlayer() {}
-    
-    public static MediaPlayer getInstance() {
-        if (sMediaPlayer == null) {
-            sMediaPlayer = new MediaPlayer();
-        }
-        return sMediaPlayer;
+    private AudioPlayer() {
+        mMediaPlayer = new MediaPlayer();
     }
-    
-    
+
+    public static AudioPlayer getInstance() {
+        if (sAudioPlayer == null) {
+            sAudioPlayer = new AudioPlayer();
+        }
+        return sAudioPlayer;
+    }
 
     public void create(Context context) {
-        sMediaPlayer = MediaPlayer.create(context, R.raw.emory_university_overview);
-//        sMediaPlayer.start();
+        mMediaPlayer = MediaPlayer.create(context, R.raw.emory_university_overview);
+//        mMediaPlayer.start();
     }
-    
+
     public void stop() {
-        if (sMediaPlayer != null) {
-            sMediaPlayer.release();
-            sMediaPlayer = null;
-        }
+        mMediaPlayer.release();
+        mMediaPlayer = null;
     }
-    
+
     public void togglePlayback() {
-        if (sMediaPlayer != null) {
-            if (sMediaPlayer.isPlaying()) {
-                sMediaPlayer.pause();
-            } else {
-                sMediaPlayer.start();
-            }
+        if (mMediaPlayer.isPlaying()) {
+            mMediaPlayer.pause();
+        } else {
+            mMediaPlayer.start();
         }
     }
-    
+
     public void next() {
-        
+
     }
-    
+
     // go back 10000ms = 10s
     public void rewind() {
-        if (sMediaPlayer != null) {
-            sMediaPlayer.seekTo(sMediaPlayer.getCurrentPosition() - 10000);
-        }
+        mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() - 10000);
     }
-    
+
     public boolean isPlaying() {
-        return sMediaPlayer.isPlaying();
+        return mMediaPlayer.isPlaying();
     }
 
 }

@@ -49,7 +49,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
 
         List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
-     
+        
         
     }
 

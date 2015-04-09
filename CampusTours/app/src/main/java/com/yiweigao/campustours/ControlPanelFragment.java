@@ -22,7 +22,7 @@ public class ControlPanelFragment extends Fragment {
     public static Map<String, Integer> library = new HashMap<>();
     public static MediaPlayer MEDIA_PLAYER;
 
-    private MediaPlayer mAudioPlayer = AudioPlayer.getInstance();
+    private AudioPlayer mAudioPlayer = AudioPlayer.getInstance();
     
     private static int POSITION_OFFSET = 10000;
 
@@ -74,7 +74,7 @@ public class ControlPanelFragment extends Fragment {
         mRwndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAudioPlayer.rewind();
+                mAudioPlayer.rewind();  
             }
         });
         
@@ -100,6 +100,7 @@ public class ControlPanelFragment extends Fragment {
         return mInflatedView;
 
     }
+    
 
 //    public static void playTrack(int trackNumber) {
 //        MEDIA_PLAYER.release();

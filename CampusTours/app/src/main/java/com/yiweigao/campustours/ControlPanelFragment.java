@@ -22,7 +22,7 @@ public class ControlPanelFragment extends Fragment {
     public static Map<String, Integer> library = new HashMap<>();
     public static MediaPlayer MEDIA_PLAYER;
 
-    private AudioPlayer mAudioPlayer = new AudioPlayer();
+    private MediaPlayer mAudioPlayer = AudioPlayer.getInstance();
     
     private static int POSITION_OFFSET = 10000;
 

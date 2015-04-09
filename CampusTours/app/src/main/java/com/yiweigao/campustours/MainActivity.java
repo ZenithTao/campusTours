@@ -53,6 +53,7 @@ public class MainActivity extends ActionBarActivity implements
     public static final LatLng TEST_THREE_LATLNG = new LatLng(33.790587, -84.324259);
     public static final float TEST_THREE_RADIUS = 25f;
     public static final int TEST_THREE_LIFETIME = 100000;
+    
     private static final LatLng YIWEI_POS = new LatLng(40, -79);
     private static final String ASBURY_CIRCLE_NAME = "Asbury Circle";
     private static final LatLng ASBURY_CIRCLE = new LatLng(33.792731, -84.324075);
@@ -277,7 +278,7 @@ public class MainActivity extends ActionBarActivity implements
                         TEST_TWO_LATLNG.latitude,
                         TEST_TWO_LATLNG.longitude,
                         TEST_TWO_RADIUS)
-                .setExpirationDuration(TEST_ONE_LIFETIME)
+                .setExpirationDuration(TEST_TWO_LIFETIME)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
                 .build());
 
@@ -287,7 +288,7 @@ public class MainActivity extends ActionBarActivity implements
                         TEST_THREE_LATLNG.latitude,
                         TEST_THREE_LATLNG.longitude,
                         TEST_THREE_RADIUS)
-                .setExpirationDuration(TEST_ONE_LIFETIME)
+                .setExpirationDuration(TEST_THREE_LIFETIME)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build());
 

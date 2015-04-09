@@ -9,30 +9,37 @@ import android.media.MediaPlayer;
 
 public class AudioPlayer {
 
-    private MediaPlayer mMediaPlayer;
+    private static MediaPlayer sMediaPlayer;
 
-    public AudioPlayer() {
-        mMediaPlayer = new MediaPlayer();
+    private AudioPlayer() {}
+    
+    public static MediaPlayer getInstance() {
+        if (sMediaPlayer == null) {
+            sMediaPlayer = new MediaPlayer();
+        }
+        return sMediaPlayer;
     }
+    
+    
 
     public void create(Context context) {
-        mMediaPlayer = MediaPlayer.create(context, R.raw.emory_university_overview);
-//        mMediaPlayer.start();
+        sMediaPlayer = MediaPlayer.create(context, R.raw.emory_university_overview);
+//        sMediaPlayer.start();
     }
     
     public void stop() {
-        if (mMediaPlayer != null) {
-            mMediaPlayer.release();
-            mMediaPlayer = null;
+        if (sMediaPlayer != null) {
+            sMediaPlayer.release();
+            sMediaPlayer = null;
         }
     }
     
     public void togglePlayback() {
-        if (mMediaPlayer != null) {
-            if (mMediaPlayer.isPlaying()) {
-                mMediaPlayer.pause();
+        if (sMediaPlayer != null) {
+            if (sMediaPlayer.isPlaying()) {
+                sMediaPlayer.pause();
             } else {
-                mMediaPlayer.start();
+                sMediaPlayer.start();
             }
         }
     }
@@ -43,12 +50,13 @@ public class AudioPlayer {
     
     // go back 10000ms = 10s
     public void rewind() {
-        if (mMediaPlayer != null) {
-            mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() - 10000);
+        if (sMediaPlayer != null) {
+            sMediaPlayer.seekTo(sMediaPlayer.getCurrentPosition() - 10000);
         }
     }
     
     public boolean isPlaying() {
-        return mMediaPlayer.isPlaying();
+        return sMediaPlayer.isPlaying();
     }
+
 }

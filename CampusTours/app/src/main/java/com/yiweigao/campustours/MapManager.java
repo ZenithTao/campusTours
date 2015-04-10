@@ -68,7 +68,7 @@ public class MapManager {
 
     private void getRouteCoordinates() {
         // executes a new AsyncTask to fetch coordinates from API
-        new DataFetcher().execute("http://dutch.mathcs.emory.edu:8009/points");
+        new DownloadRouteTask().execute("http://dutch.mathcs.emory.edu:8009/points");
     }
 
     // draws route using stored coordinates
@@ -86,7 +86,7 @@ public class MapManager {
                 new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
     }
 
-    private class DataFetcher extends AsyncTask<String, Void, JSONObject> {
+    private class DownloadRouteTask extends AsyncTask<String, Void, JSONObject> {
 
         Toast loadingToast;
 

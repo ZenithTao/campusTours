@@ -54,4 +54,7 @@ public class AudioPlayer {
         return mMediaPlayer.isPlaying();
     }
 
+    public void reconfigure(String geofenceRequestId, int geofenceTransition) {
+        // TODO change data source based on geofence and transition
+    }
 }

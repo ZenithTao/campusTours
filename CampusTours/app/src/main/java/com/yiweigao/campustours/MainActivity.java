@@ -26,7 +26,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CircleOptions;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,40 +35,8 @@ public class MainActivity extends ActionBarActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         OnMapReadyCallback,
         LocationListener,
-        ResultCallback<Status> {
-
-    // b/w b.jones and msc
-    public static final String TEST_ONE = "One";
-    public static final LatLng TEST_ONE_LATLNG = new LatLng(33.789933, -84.326457);
-    public static final float TEST_ONE_RADIUS = 25f;
-    public static final int TEST_ONE_LIFETIME = 100000;
-    // b/w white and admin
-    public static final String TEST_TWO = "Two";
-    public static final LatLng TEST_TWO_LATLNG = new LatLng(33.790457, -84.325608);
-    public static final float TEST_TWO_RADIUS = 25f;
-    public static final int TEST_TWO_LIFETIME = 100000;
-    // in front of carlos
-    public static final String TEST_THREE = "Three";
-    public static final LatLng TEST_THREE_LATLNG = new LatLng(33.790587, -84.324259);
-    public static final float TEST_THREE_RADIUS = 25f;
-    public static final int TEST_THREE_LIFETIME = 100000;
+        ResultCallback<Status> {    
     
-    private static final LatLng YIWEI_POS = new LatLng(40, -79);
-    private static final String ASBURY_CIRCLE_NAME = "Asbury Circle";
-    private static final LatLng ASBURY_CIRCLE = new LatLng(33.792731, -84.324075);
-    private static final float ASBURY_CIRCLE_RADIUS = 20.0f;
-    private static final int ASBURY_CIRCLE_LIFETIME = 100000;
-    private static final String HOUSE_TEXT = "Fraternity house";
-    private static final LatLng HOUSE = new LatLng(33.793766, -84.327198);
-    private static final float HOUSE_RADIUS = 15.0f;     // current minimum = 15 (9), reliable (unreliable)
-    private static final int HOUSE_LIFETIME = 100000;
-    private static final String TOUR_START_NAME = "Tour Start";
-    private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
-    // ORB
-    private static final String TEST_NAME = "Test";
-    private static final LatLng TEST = new LatLng(33.789933, -84.326457);
-    private static final float TEST_RADIUS = 15.0f;
-    private static final int TEST_LIFETIME = 100000;
     private GoogleMap mGoogleMap;
     private MapManager mapManager;
     private MapFragment mMapFragment;
@@ -141,23 +108,23 @@ public class MainActivity extends ActionBarActivity implements
         mapManager = new MapManager(getApplicationContext(), googleMap);
 
         googleMap.addCircle(new CircleOptions()
-                .center(HOUSE)
-                .radius(HOUSE_RADIUS)
+                .center(DebugResource.HOUSE)
+                .radius(DebugResource.HOUSE_RADIUS)
                 .visible(true));
 
         googleMap.addCircle(new CircleOptions()
-                .center(TEST_ONE_LATLNG)
-                .radius(TEST_ONE_RADIUS)
+                .center(DebugResource.TEST_ONE_LATLNG)
+                .radius(DebugResource.TEST_ONE_RADIUS)
                 .visible(true));
 
         googleMap.addCircle(new CircleOptions()
-                .center(TEST_TWO_LATLNG)
-                .radius(TEST_TWO_RADIUS)
+                .center(DebugResource.TEST_TWO_LATLNG)
+                .radius(DebugResource.TEST_TWO_RADIUS)
                 .visible(true));
 
         googleMap.addCircle(new CircleOptions()
-                .center(TEST_THREE_LATLNG)
-                .radius(TEST_THREE_RADIUS)
+                .center(DebugResource.TEST_THREE_LATLNG)
+                .radius(DebugResource.TEST_THREE_RADIUS)
                 .visible(true));
 
     }
@@ -252,43 +219,43 @@ public class MainActivity extends ActionBarActivity implements
     public void populateGeofenceList() {
         mGeofenceList = new ArrayList<Geofence>();
         mGeofenceList.add(new Geofence.Builder()
-                .setRequestId(HOUSE_TEXT)
+                .setRequestId(DebugResource.HOUSE_TEXT)
                 .setCircularRegion(
-                        HOUSE.latitude,
-                        HOUSE.longitude,
-                        HOUSE_RADIUS)
-                .setExpirationDuration(HOUSE_LIFETIME)
+                        DebugResource.HOUSE.latitude,
+                        DebugResource.HOUSE.longitude,
+                        DebugResource.HOUSE_RADIUS)
+                .setExpirationDuration(DebugResource.HOUSE_LIFETIME)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
                         Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build());
 
         mGeofenceList.add(new Geofence.Builder()
-                .setRequestId(TEST_ONE)
+                .setRequestId(DebugResource.TEST_ONE)
                 .setCircularRegion(
-                        TEST_ONE_LATLNG.latitude,
-                        TEST_ONE_LATLNG.longitude,
-                        TEST_ONE_RADIUS)
-                .setExpirationDuration(TEST_ONE_LIFETIME)
+                        DebugResource.TEST_ONE_LATLNG.latitude,
+                        DebugResource.TEST_ONE_LATLNG.longitude,
+                        DebugResource.TEST_ONE_RADIUS)
+                .setExpirationDuration(DebugResource.TEST_ONE_LIFETIME)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
                 .build());
 
         mGeofenceList.add(new Geofence.Builder()
-                .setRequestId(TEST_TWO)
+                .setRequestId(DebugResource.TEST_TWO)
                 .setCircularRegion(
-                        TEST_TWO_LATLNG.latitude,
-                        TEST_TWO_LATLNG.longitude,
-                        TEST_TWO_RADIUS)
-                .setExpirationDuration(TEST_TWO_LIFETIME)
+                        DebugResource.TEST_TWO_LATLNG.latitude,
+                        DebugResource.TEST_TWO_LATLNG.longitude,
+                        DebugResource.TEST_TWO_RADIUS)
+                .setExpirationDuration(DebugResource.TEST_TWO_LIFETIME)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
                 .build());
 
         mGeofenceList.add(new Geofence.Builder()
-                .setRequestId(TEST_THREE)
+                .setRequestId(DebugResource.TEST_THREE)
                 .setCircularRegion(
-                        TEST_THREE_LATLNG.latitude,
-                        TEST_THREE_LATLNG.longitude,
-                        TEST_THREE_RADIUS)
-                .setExpirationDuration(TEST_THREE_LIFETIME)
+                        DebugResource.TEST_THREE_LATLNG.latitude,
+                        DebugResource.TEST_THREE_LATLNG.longitude,
+                        DebugResource.TEST_THREE_RADIUS)
+                .setExpirationDuration(DebugResource.TEST_THREE_LIFETIME)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build());
 

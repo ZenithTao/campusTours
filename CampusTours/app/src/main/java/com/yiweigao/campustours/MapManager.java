@@ -40,7 +40,7 @@ public class MapManager {
     private Context mContext;
     private GoogleMap mGoogleMap;
 
-    List<LatLng> mRouteCoordinates = new ArrayList<>();
+    private List<LatLng> mRouteCoordinates = new ArrayList<>();
 
     public MapManager(Context context, GoogleMap googleMap) {
         mContext = context;

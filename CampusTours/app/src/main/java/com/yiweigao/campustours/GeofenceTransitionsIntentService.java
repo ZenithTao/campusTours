@@ -50,7 +50,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
         String geofenceRequestId = geofencingEvent.getTriggeringGeofences().get(0).getRequestId();
 
-        AudioPlayer.getInstance().reconfigure(geofenceRequestId, geofenceTransition);
+        AudioPlayer.getInstance().changeAudioSource(geofenceRequestId, geofenceTransition);
         
     }
 

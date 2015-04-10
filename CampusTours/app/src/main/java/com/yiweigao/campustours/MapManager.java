@@ -37,8 +37,8 @@ public class MapManager {
 
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
 
-    Context mContext;
-    GoogleMap mGoogleMap;
+    private Context mContext;
+    private GoogleMap mGoogleMap;
 
     List<LatLng> mRouteCoordinates = new ArrayList<>();
 

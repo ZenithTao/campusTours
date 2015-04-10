@@ -112,17 +112,17 @@ public class GeofenceTransitionsIntentService extends IntentService {
             triggeringGeofencesIdsList.add(geofenceRequestId);
             
             switch (geofenceRequestId) {
-                case MainActivity.TEST_ONE:
+                case DebugResource.TEST_ONE:
                     // play music
                     vibrator.vibrate(2000);
                     Toast.makeText(getApplicationContext(), "BJONES & MSC", Toast.LENGTH_LONG).show();
                     break;
-                case MainActivity.TEST_TWO:
+                case DebugResource.TEST_TWO:
                     // play different music
                     vibrator.vibrate(2000);
                     Toast.makeText(getApplicationContext(), "WHITE & ADMIN", Toast.LENGTH_LONG).show();
                     break;
-                case MainActivity.TEST_THREE:
+                case DebugResource.TEST_THREE:
                     // play more music
                     vibrator.vibrate(2000);
                     Toast.makeText(getApplicationContext(), "CARLOS", Toast.LENGTH_LONG).show();

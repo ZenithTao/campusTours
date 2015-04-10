@@ -24,8 +24,6 @@ public class ControlPanelFragment extends Fragment {
 
     private AudioPlayer mAudioPlayer = AudioPlayer.getInstance();
     
-    private static int POSITION_OFFSET = 10000;
-
     private static float BUTTON_ALPHA = 0.80f;
     private View mInflatedView;
     private ImageButton mRwndButton;

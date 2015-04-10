@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -35,19 +34,16 @@ public class MainActivity extends ActionBarActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         OnMapReadyCallback,
         LocationListener,
-        ResultCallback<Status> {    
-    
-    private GoogleMap mGoogleMap;
+        ResultCallback<Status> {
+
     private MapManager mapManager;
     private MapFragment mMapFragment;
-    private ControlPanelFragment mControlPanelFragment;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private List<Geofence> mGeofenceList;
     private boolean mGeofencesAdded;
     private PendingIntent mGeofencePendingIntent;
-    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +160,7 @@ public class MainActivity extends ActionBarActivity implements
 
     private void startLocationUpdates() {
         LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, (LocationListener) this);
+                mGoogleApiClient, mLocationRequest, this);
     }
 
     private void createLocationRequest() {
@@ -291,10 +287,6 @@ public class MainActivity extends ActionBarActivity implements
                             "Geofence removed",
                     Toast.LENGTH_SHORT
             ).show();
-        } else {
-            // Get the status code for the error and log it using a user-friendly message.
-        }
+        } 
     }
-
-
 }

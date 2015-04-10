@@ -23,7 +23,6 @@ public class AudioPlayer {
 
     public void create(Context context) {
         mMediaPlayer = MediaPlayer.create(context, R.raw.emory_university_overview);
-//        mMediaPlayer.start();
     }
 
     public void stop() {

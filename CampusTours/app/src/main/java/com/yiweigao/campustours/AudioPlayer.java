@@ -7,9 +7,10 @@ import android.media.MediaPlayer;
  * Created by yiweigao on 4/6/15.
  */
 
-public class AudioPlayer {
+// uses Singleton pattern
+public class AudioPlayer {  
 
-    private static AudioPlayer sAudioPlayer = null;
+    private static final AudioPlayer AUDIO_PLAYER = new AudioPlayer();
     private MediaPlayer mMediaPlayer;
 
     private AudioPlayer() {
@@ -17,10 +18,7 @@ public class AudioPlayer {
     }
 
     public static AudioPlayer getInstance() {
-        if (sAudioPlayer == null) {
-            sAudioPlayer = new AudioPlayer();
-        }
-        return sAudioPlayer;
+        return AUDIO_PLAYER;
     }
 
     public void create(Context context) {

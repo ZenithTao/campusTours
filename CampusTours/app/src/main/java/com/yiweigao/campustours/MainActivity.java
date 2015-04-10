@@ -268,7 +268,7 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
+        Toast.makeText(this, "Connection failed!", Toast.LENGTH_LONG).show();
     }
 
     /**

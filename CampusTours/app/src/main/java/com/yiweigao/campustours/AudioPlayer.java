@@ -10,7 +10,7 @@ import android.media.MediaPlayer;
 // uses Singleton pattern
 public class AudioPlayer {  
 
-    private static final AudioPlayer AUDIO_PLAYER = new AudioPlayer();
+    private static final AudioPlayer INSTANCE = new AudioPlayer();
     private MediaPlayer mMediaPlayer;
 
     private AudioPlayer() {
@@ -18,7 +18,7 @@ public class AudioPlayer {
     }
 
     public static AudioPlayer getInstance() {
-        return AUDIO_PLAYER;
+        return INSTANCE;
     }
 
     public void create(Context context) {

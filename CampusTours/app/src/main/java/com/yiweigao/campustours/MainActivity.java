@@ -10,8 +10,15 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -87,6 +94,7 @@ public class MainActivity extends ActionBarActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        populateDrawer();
 
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.control_panel_fragment);
@@ -113,6 +121,49 @@ public class MainActivity extends ActionBarActivity implements
 
         buildGoogleApiClient();
 
+    }
+
+    private void populateDrawer() {
+        List<String> list = new ArrayList<String>();
+        list.add("Tutorial");
+        ListView listView = (ListView) findViewById(R.id.left_drawer);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(adapterView.getItemAtPosition(i).toString().equals("Tutorial")){
+                    
+                    launchTutorial();
+                }
+            }
+        });
+    }
+
+    private void launchTutorial() {
+        ViewTarget viewTarget = new ViewTarget(R.id.control_panel_play_button,this);
+        ShowcaseView showcaseView = new ShowcaseView.Builder(this,true)
+                .setTarget(viewTarget)
+                .setContentTitle("Play button")
+                .setContentText("This button plays")
+                .setShowcaseEventListener(new OnShowcaseEventListener() {
+                    @Override
+                    public void onShowcaseViewHide(ShowcaseView showcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+                    }
+                })
+                .hideOnTouchOutside()
+                .build();
     }
 
     protected void buildGoogleApiClient() {

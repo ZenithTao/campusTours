@@ -80,7 +80,6 @@ public class HomeScreenActivity extends ActionBarActivity {
             @Override
             public void onItemSelected (AdapterView < ? > adapterView, View view,int i, long l){
                 mSelectedCampus = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getApplicationContext(),mSelectedCampus,Toast.LENGTH_LONG).show();
             }
 
             @Override

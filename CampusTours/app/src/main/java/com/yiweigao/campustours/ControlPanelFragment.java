@@ -104,16 +104,14 @@ public class ControlPanelFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                int newPosition = MEDIA_PLAYER.getCurrentPosition() + POSITION_OFFSET;
-
-                if (newPosition > duration) {
-                    trackNumber++;
-                    nextTrack(trackNumber);
-                }
-
-                // skips forwards
                 if (MEDIA_PLAYER.isPlaying()) {
-                    MEDIA_PLAYER.seekTo(MEDIA_PLAYER.getCurrentPosition() + POSITION_OFFSET);
+                    int newPosition = MEDIA_PLAYER.getCurrentPosition() + POSITION_OFFSET;
+                    if (newPosition > duration) {
+                        trackNumber++;
+                        nextTrack(trackNumber);
+                    }
+                    else
+                        MEDIA_PLAYER.seekTo(MEDIA_PLAYER.getCurrentPosition() + POSITION_OFFSET);
                 }
 
             }

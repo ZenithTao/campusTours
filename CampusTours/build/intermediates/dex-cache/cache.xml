@@ -2,32 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-0694621b43e6b646c7431eca5ba45b035ce7a298.jar" />
-    </item>
-    <item
-        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-03046c94cd435fd800c1fa351b7b746b62892238.jar" />
-    </item>
-    <item
-        jar="C:\Users\eugene\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-32d7a1ae0e66b0fbacda0d947faa7352f6a4d679.jar" />
-    </item>
-    <item
         jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
         <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-5b2ee5b658c5035c78f3cefd87019ae3c4b3b0d1.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-0694621b43e6b646c7431eca5ba45b035ce7a298.jar" />
     </item>
     <item
         jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
@@ -37,11 +23,25 @@
         <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-25d32456f856f2f87602f99909bab3901c5af86b.jar" />
     </item>
     <item
+        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-03046c94cd435fd800c1fa351b7b746b62892238.jar" />
+    </item>
+    <item
         jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.github.amlcurran.showcaseview\library\5.0.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="8b3d9a7b348d8bcfb4d740dfaf70bc374cdae9d6">
         <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-c03859fd00448279373e049cd770cb659be4377b.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-32d7a1ae0e66b0fbacda0d947faa7352f6a4d679.jar" />
     </item>
 
 </items>

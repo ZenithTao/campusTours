@@ -6,18 +6,25 @@ import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.PointTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -89,6 +96,7 @@ public class MainActivity extends ActionBarActivity implements
     private boolean mGeofencesAdded;
     private PendingIntent mGeofencePendingIntent;
     private SharedPreferences mSharedPreferences;
+    private boolean mTutorialClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,23 +141,113 @@ public class MainActivity extends ActionBarActivity implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(adapterView.getItemAtPosition(i).toString().equals("Tutorial")){
-                    
-                    launchTutorial();
+                    mTutorialClicked = true;
+                    DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    DrawerLayout.DrawerListener drawerListener = new DrawerLayout.DrawerListener() {
+                        @Override
+                        public void onDrawerSlide(View drawerView, float slideOffset) {
+
+                        }
+
+                        @Override
+                        public void onDrawerOpened(View drawerView) {
+
+                        }
+
+                        @Override
+                        public void onDrawerClosed(View drawerView) {
+                            if(mTutorialClicked)
+                                launchMapShowCaseView();
+                        }
+
+                        @Override
+                        public void onDrawerStateChanged(int newState) {
+
+                        }
+                    };
+                    drawerLayout.setDrawerListener(drawerListener);
+                    drawerLayout.closeDrawers();
                 }
             }
         });
     }
 
-    private void launchTutorial() {
-        ViewTarget viewTarget = new ViewTarget(R.id.control_panel_play_button,this);
-        ShowcaseView showcaseView = new ShowcaseView.Builder(this,true)
-                .setTarget(viewTarget)
-                .setContentTitle("Play button")
-                .setContentText("This button plays")
+    private void launchMapShowCaseView() {
+
+        mTutorialClicked = false;
+
+        Point screenSize = new Point();
+        getWindowManager().getDefaultDisplay().getSize(screenSize);
+        ShowcaseView showcaseView = new ShowcaseView.Builder(this, true)
+                .setTarget(new PointTarget(new Point(screenSize.x, 0)))
+                .setStyle(R.style.CustomShowcaseTheme)
+                .setContentTitle("Using the map")
+                .setContentText("Make sure that your GPS is turned on, and click on this button to show your current location on the map.\nTap anywhere to dismiss this message")
                 .setShowcaseEventListener(new OnShowcaseEventListener() {
                     @Override
                     public void onShowcaseViewHide(ShowcaseView showcaseView) {
 
+                    }
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        launchControlPanelShowCaseView();
+                    }
+
+                    @Override
+                    public void onShowcaseViewShow(ShowcaseView showcaseView) {
+                        showcaseView.hideButton();
+//                        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//                        if(drawerLayout.isDrawerOpen(Gravity.LEFT))
+//                            drawerLayout.closeDrawer(Gravity.LEFT);
+//                        drawerLayout.closeDrawers();
+                    }
+                })
+                .hideOnTouchOutside()
+                .build();
+    }
+
+    private void launchControlPanelShowCaseView() {
+
+        ViewTarget viewTarget = new ViewTarget(R.id.control_panel_play_button, this);
+        ShowcaseView showcaseView = new ShowcaseView.Builder(this, true)
+                .setTarget(viewTarget)
+                .setStyle(R.style.CustomShowcaseTheme)
+                .setContentTitle("Using the audio controls")
+                .setContentText("Audio clips will play automatically along the tour, but you can use these buttons to rewind, play/pause, and fast forward at your leisure.")
+                .setShowcaseEventListener(new OnShowcaseEventListener() {
+                    @Override
+                    public void onShowcaseViewHide(ShowcaseView showcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        launchTutorialShowCaseView();
+                    }
+
+                    @Override
+                    public void onShowcaseViewShow(ShowcaseView showcaseView) {
+                        showcaseView.hideButton();
+                    }
+                })
+                .hideOnTouchOutside()
+                .build();
+    }
+
+    private void launchTutorialShowCaseView(){
+//        Point screenSize = new Point();
+//        getWindowManager().getDefaultDisplay().getSize(screenSize);
+        ShowcaseView showcaseView = new ShowcaseView.Builder(this, true)
+                .setTarget(new PointTarget(new Point(0,0)))
+                .setStyle(R.style.CustomShowcaseTheme)
+                .setContentTitle("Accessing the tutorial")
+                .setContentText("You can view the tutorial again by swiping to the right and tapping on \"Tutorial\"")
+                .setShowcaseEventListener(new OnShowcaseEventListener() {
+                    @Override
+                    public void onShowcaseViewHide(ShowcaseView showcaseView) {
+                        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        drawerLayout.closeDrawers();
                     }
 
                     @Override
@@ -159,12 +257,16 @@ public class MainActivity extends ActionBarActivity implements
 
                     @Override
                     public void onShowcaseViewShow(ShowcaseView showcaseView) {
-
+                        showcaseView.hideButton();
+                        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        if(!drawerLayout.isDrawerOpen(Gravity.LEFT))
+                            drawerLayout.openDrawer(Gravity.LEFT);
                     }
                 })
                 .hideOnTouchOutside()
                 .build();
     }
+
 
     protected void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)

@@ -1,7 +1,6 @@
 package com.yiweigao.campustours;
 
 import android.app.Fragment;
-import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,92 +95,6 @@ public class ControlPanelFragment extends Fragment {
 
         return mInflatedView;
 
-    }
-    
-
-//    public static void playTrack(int trackNumber) {
-//        MEDIA_PLAYER.release();
-//        switch (trackNumber) {
-//            case 0:
-//                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
-//                break;
-//            case 1:
-//                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_02);
-//                break;
-//            case 2:
-//                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_04);
-//                break;
-//        }
-//    }
-
-    private void nextTrack(int nextTrackNumber) {
-        MEDIA_PLAYER.release();
-        if (nextTrackNumber > 4) {
-            nextTrackNumber = 0;
-            trackNumber = 0;
-        }
-        switch (nextTrackNumber) {
-            case 0:
-                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.emory_university_overview);
-                break;
-            case 1:
-                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_01);
-                break;
-            case 2:
-                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_02);
-                break;
-            case 3:
-                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_03);
-                break;
-            case 4:
-                MEDIA_PLAYER = MediaPlayer.create(getActivity(), R.raw.undergrad_04);
-                break;
-        }
-
-        MEDIA_PLAYER.seekTo(0);
-        MEDIA_PLAYER.start();
-
-    }
-
-    private void changeTrack(int newTrackNumber) {
-
-        if (newTrackNumber > 4) {
-            newTrackNumber = 0;
-            trackNumber = 0;
-        }
-
-        AssetFileDescriptor assetFileDescriptor = null;
-//                getActivity().getResources().openRawResourceFd(R.raw.emory_university_overview);
-
-        switch (newTrackNumber) {
-            case 0:
-                assetFileDescriptor = getActivity().getResources().openRawResourceFd(R.raw.emory_university_overview);
-                break;
-            case 1:
-                assetFileDescriptor = getActivity().getResources().openRawResourceFd(R.raw.undergrad_01);
-                break;
-            case 2:
-                assetFileDescriptor = getActivity().getResources().openRawResourceFd(R.raw.undergrad_02);
-                break;
-            case 3:
-                assetFileDescriptor = getActivity().getResources().openRawResourceFd(R.raw.undergrad_03);
-                break;
-            case 4:
-                assetFileDescriptor = getActivity().getResources().openRawResourceFd(R.raw.undergrad_04);
-                break;
-        }
-
-        try {
-            assert assetFileDescriptor != null;
-//            MEDIA_PLAYER.reset();
-            MEDIA_PLAYER.stop();
-            MEDIA_PLAYER.setDataSource(assetFileDescriptor.getFileDescriptor());
-            MEDIA_PLAYER.prepare();
-            MEDIA_PLAYER.start();
-            assetFileDescriptor.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /*

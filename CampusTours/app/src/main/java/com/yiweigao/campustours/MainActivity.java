@@ -101,27 +101,6 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mapManager = new MapManager(getApplicationContext(), googleMap);
-
-//        googleMap.addCircle(new CircleOptions()
-//                .center(DebugResource.HOUSE)
-//                .radius(DebugResource.HOUSE_RADIUS)
-//                .visible(true));
-//
-//        googleMap.addCircle(new CircleOptions()
-//                .center(DebugResource.TEST_ONE_LATLNG)
-//                .radius(DebugResource.TEST_ONE_RADIUS)
-//                .visible(true));
-//
-//        googleMap.addCircle(new CircleOptions()
-//                .center(DebugResource.TEST_TWO_LATLNG)
-//                .radius(DebugResource.TEST_TWO_RADIUS)
-//                .visible(true));
-//
-//        googleMap.addCircle(new CircleOptions()
-//                .center(DebugResource.TEST_THREE_LATLNG)
-//                .radius(DebugResource.TEST_THREE_RADIUS)
-//                .visible(true));
-
     }
 
     @Override

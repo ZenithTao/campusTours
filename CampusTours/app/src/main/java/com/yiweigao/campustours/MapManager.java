@@ -92,11 +92,11 @@ public class MapManager {
     
     private void drawGeofences() {
 
-        for (LatLng geofence : mGeofenceCoordinates) {
+        for (GeofenceObject geofenceObject : mGeofenceCoordinates) {
             mGoogleMap.addCircle(new CircleOptions()
-                    .center(geofence)
-                    .radius(30)
-                    .visible(true));
+                    .center(geofenceObject.getCoordinates())
+                    .radius(geofenceObject.getRadius())
+                    .strokeWidth(5.0f));      // width in pixels, default = 10
         }
     }
 

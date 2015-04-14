@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -36,6 +37,7 @@ import java.util.List;
 public class MapManager {
 
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
+    private static final String BASE_URL = "http://dutch.mathcs.emory.edu:8009/";
 
     private Context mContext;
     private GoogleMap mGoogleMap;
@@ -49,6 +51,7 @@ public class MapManager {
         mGoogleMap = googleMap;
         setInitialView();
         downloadRoute();
+        downloadGeofences();
     }
 
     private void setInitialView() {
@@ -70,7 +73,11 @@ public class MapManager {
 
     private void downloadRoute() {
         // executes a new AsyncTask to fetch coordinates from API
-        new DownloadRouteTask().execute("http://dutch.mathcs.emory.edu:8009/points");
+        new DownloadRouteTask().execute(BASE_URL + "points");
+    }
+    
+    private void downloadGeofences() {
+        new DownloadGeofencesTask().execute(BASE_URL + "geofences");
     }
 
     // draws route using stored coordinates
@@ -81,6 +88,16 @@ public class MapManager {
 //                .color(Color.argb(255, 210, 142, 0))    // emory "web dark gold", 100% opacity
                 .geodesic(true)
                 .addAll(mRouteCoordinates));
+    }
+    
+    private void drawGeofences() {
+
+        for (LatLng geofence : mGeofenceCoordinates) {
+            mGoogleMap.addCircle(new CircleOptions()
+                    .center(geofence)
+                    .radius(30)
+                    .visible(true));
+        }
     }
 
     public void updateCamera(Location newLocation) {
@@ -165,7 +182,7 @@ public class MapManager {
                 }
             }
 
-            loadingToast.cancel();
+//            loadingToast.cancel();
             drawRoute();
         }
     }
@@ -242,9 +259,8 @@ public class MapManager {
                 }
             }
 
-            if (loadingToast != null) {
-                loadingToast.cancel();
-            }
+            loadingToast.cancel();
+            drawGeofences();
         }
     }
 }

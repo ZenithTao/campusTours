@@ -24,7 +24,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CircleOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,25 +102,25 @@ public class MainActivity extends ActionBarActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mapManager = new MapManager(getApplicationContext(), googleMap);
 
-        googleMap.addCircle(new CircleOptions()
-                .center(DebugResource.HOUSE)
-                .radius(DebugResource.HOUSE_RADIUS)
-                .visible(true));
-
-        googleMap.addCircle(new CircleOptions()
-                .center(DebugResource.TEST_ONE_LATLNG)
-                .radius(DebugResource.TEST_ONE_RADIUS)
-                .visible(true));
-
-        googleMap.addCircle(new CircleOptions()
-                .center(DebugResource.TEST_TWO_LATLNG)
-                .radius(DebugResource.TEST_TWO_RADIUS)
-                .visible(true));
-
-        googleMap.addCircle(new CircleOptions()
-                .center(DebugResource.TEST_THREE_LATLNG)
-                .radius(DebugResource.TEST_THREE_RADIUS)
-                .visible(true));
+//        googleMap.addCircle(new CircleOptions()
+//                .center(DebugResource.HOUSE)
+//                .radius(DebugResource.HOUSE_RADIUS)
+//                .visible(true));
+//
+//        googleMap.addCircle(new CircleOptions()
+//                .center(DebugResource.TEST_ONE_LATLNG)
+//                .radius(DebugResource.TEST_ONE_RADIUS)
+//                .visible(true));
+//
+//        googleMap.addCircle(new CircleOptions()
+//                .center(DebugResource.TEST_TWO_LATLNG)
+//                .radius(DebugResource.TEST_TWO_RADIUS)
+//                .visible(true));
+//
+//        googleMap.addCircle(new CircleOptions()
+//                .center(DebugResource.TEST_THREE_LATLNG)
+//                .radius(DebugResource.TEST_THREE_RADIUS)
+//                .visible(true));
 
     }
 
@@ -277,16 +276,16 @@ public class MainActivity extends ActionBarActivity implements
      *               removeGeofences() get called.
      */
     public void onResult(Status status) {
-        if (status.isSuccess()) {
-            // Update state and save in shared preferences.
-            mGeofencesAdded = !mGeofencesAdded;
-
-            Toast.makeText(
-                    this,
-                    mGeofencesAdded ? "Geofence added" :
-                            "Geofence removed",
-                    Toast.LENGTH_SHORT
-            ).show();
-        } 
+//        if (status.isSuccess()) {
+//            // Update state and save in shared preferences.
+//            mGeofencesAdded = !mGeofencesAdded;
+//
+//            Toast.makeText(
+//                    this,
+//                    mGeofencesAdded ? "Geofence added" :
+//                            "Geofence removed",
+//                    Toast.LENGTH_SHORT
+//            ).show();
+//        }
     }
 }

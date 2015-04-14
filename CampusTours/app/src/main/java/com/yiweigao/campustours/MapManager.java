@@ -39,14 +39,16 @@ public class MapManager {
 
     private Context mContext;
     private GoogleMap mGoogleMap;
+    private Toast loadingToast;
 
     private List<LatLng> mRouteCoordinates = new ArrayList<>();
+    private List<LatLng> mGeofenceCoordinates = new ArrayList<>();
 
     public MapManager(Context context, GoogleMap googleMap) {
         mContext = context;
         mGoogleMap = googleMap;
-        this.setInitialView();
-        this.getRouteCoordinates();
+        setInitialView();
+        downloadRoute();
     }
 
     private void setInitialView() {
@@ -66,7 +68,7 @@ public class MapManager {
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-    private void getRouteCoordinates() {
+    private void downloadRoute() {
         // executes a new AsyncTask to fetch coordinates from API
         new DownloadRouteTask().execute("http://dutch.mathcs.emory.edu:8009/points");
     }
@@ -87,8 +89,6 @@ public class MapManager {
     }
 
     private class DownloadRouteTask extends AsyncTask<String, Void, JSONObject> {
-
-        Toast loadingToast;
 
         @Override
         protected void onPreExecute() {
@@ -167,6 +167,84 @@ public class MapManager {
 
             loadingToast.cancel();
             drawRoute();
+        }
+    }
+
+    private class DownloadGeofencesTask extends AsyncTask<String, Void, JSONObject> {
+
+        @Override
+        protected JSONObject doInBackground(String... urls) {
+            InputStream is = null;
+            String result = "";
+            JSONObject jsonObject = null;
+
+            // Download JSON data from URL
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet(urls[0]);
+                String user = "";
+                String pwd = "secret";
+                httpGet.addHeader("Authorization", "Basic " + Base64.encodeToString((user + ":" + pwd).getBytes(), Base64.NO_WRAP));
+
+                HttpResponse response = httpclient.execute(httpGet);
+                HttpEntity entity = response.getEntity();
+                is = entity.getContent();
+
+            } catch (Exception e) {
+                Log.e("log_tag", "Error in http connection " + e.toString());
+            }
+
+            // Convert response to string
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        is, "iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                is.close();
+                result = sb.toString();
+            } catch (Exception e) {
+                Log.e("log_tag", "Error converting result " + e.toString());
+            }
+
+            try {
+
+                jsonObject = new JSONObject(result);
+            } catch (JSONException e) {
+                Log.e("log_tag", "Error parsing data " + e.toString());
+            }
+
+            return jsonObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            JSONArray resources = null;
+            try {
+                resources = jsonObject.getJSONArray("resources");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            for (int i = 0; i < resources.length(); i++) {
+                try {
+                    JSONObject point = resources.getJSONObject(i);
+                    String lat = point.getString("lat");
+                    String lng = point.getString("lng");
+                    String radius = point.getString("rad");
+
+                    LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+                    mGeofenceCoordinates.add(latLng);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (loadingToast != null) {
+                loadingToast.cancel();
+            }
         }
     }
 }

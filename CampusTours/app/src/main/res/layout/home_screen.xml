@@ -72,6 +72,7 @@
         android:layout_alignEnd="@+id/CampusText"
         android:layout_alignLeft="@+id/CampusText"
         android:layout_alignStart="@+id/CampusText"
+        android:background="@drawable/abc_spinner_mtrl_am_alpha"
      />
 
 

@@ -44,7 +44,7 @@ public class MapManager {
     private Toast loadingToast;
 
     private List<LatLng> mRouteCoordinates = new ArrayList<>();
-    private List<LatLng> mGeofenceCoordinates = new ArrayList<>();
+    private List<GeofenceObject> mGeofenceCoordinates = new ArrayList<>();
 
     public MapManager(Context context, GoogleMap googleMap) {
         mContext = context;
@@ -250,10 +250,9 @@ public class MapManager {
                     JSONObject point = resources.getJSONObject(i);
                     String lat = point.getString("lat");
                     String lng = point.getString("lng");
-                    String radius = point.getString("rad");
-
-                    LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-                    mGeofenceCoordinates.add(latLng);
+                    String rad = point.getString("rad");
+                    
+                    mGeofenceCoordinates.add(new GeofenceObject(lat, lng, rad));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

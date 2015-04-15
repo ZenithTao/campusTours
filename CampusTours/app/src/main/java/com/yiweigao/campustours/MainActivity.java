@@ -62,9 +62,8 @@ public class MainActivity extends ActionBarActivity implements
         try {
             if (mMapFragment == null) {
                 mMapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-//                mMapFragment.getMapAsync(this);
                 mMapManager = new MapManager(this, mMapFragment);
-//                mMapManager.add(mMapFragment, this);
+                mMapManager.getMap();
             }
         } catch (Exception e) {
             e.printStackTrace();

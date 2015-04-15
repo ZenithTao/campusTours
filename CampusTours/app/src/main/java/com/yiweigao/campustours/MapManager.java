@@ -36,32 +36,36 @@ import java.util.List;
  * Created by yiweigao on 3/31/15.
  */
 
+// manages all map activity (location, gps connection, map drawings, etc)
 public class MapManager implements OnMapReadyCallback {
 
+    // some constants
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
     private static final String BASE_URL = "http://dutch.mathcs.emory.edu:8009/";
 
+    // context for making toasts
     private Context mContext;
+    
+    // 
     private MapFragment mMapFragment;
     private GoogleMap mGoogleMap;
+    
     private Toast loadingToast;
 
     private List<LatLng> mRouteCoordinates = new ArrayList<>();
-    private List<GeofenceObject> mGeofenceCoordinates = new ArrayList<>();
+//    private List<GeofenceObject> mGeofenceCoordinates = new ArrayList<>();
 
     public MapManager(Context context, MapFragment mapFragment) {
         this.mContext = context;
         this.mMapFragment = mapFragment;
-        getMap();
-        
     }
 
     public MapManager(Context context, GoogleMap googleMap) {
         mContext = context;
         mGoogleMap = googleMap;
         setInitialView();
-        downloadRoute();
-        downloadGeofences();
+        getRoute();
+        getGeofences();
     }
 
     private void setInitialView() {
@@ -81,12 +85,12 @@ public class MapManager implements OnMapReadyCallback {
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-    private void downloadRoute() {
+    private void getRoute() {
         // executes a new AsyncTask to fetch coordinates from API
         new DownloadRouteTask().execute(BASE_URL + "points");
     }
 
-    private void downloadGeofences() {
+    private void getGeofences() {
         new DownloadGeofencesTask().execute(BASE_URL + "geofences");
     }
 
@@ -100,9 +104,18 @@ public class MapManager implements OnMapReadyCallback {
                 .addAll(mRouteCoordinates));
     }
 
-    private void drawGeofences() {
+//    private void drawGeofences() {
+//
+//        for (GeofenceObject geofenceObject : mGeofenceCoordinates) {
+//            mGoogleMap.addCircle(new CircleOptions()
+//                    .center(geofenceObject.getCoordinates())
+//                    .radius(geofenceObject.getRadius())
+//                    .strokeWidth(5.0f));      // width in pixels, default = 10
+//        }
+//    }
 
-        for (GeofenceObject geofenceObject : mGeofenceCoordinates) {
+    private void drawGeofences(List<GeofenceObject> listOfGeofenceObjects) {
+        for (GeofenceObject geofenceObject : listOfGeofenceObjects) {
             mGoogleMap.addCircle(new CircleOptions()
                     .center(geofenceObject.getCoordinates())
                     .radius(geofenceObject.getRadius())
@@ -115,7 +128,7 @@ public class MapManager implements OnMapReadyCallback {
                 new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
     }
 
-    private void getMap() {
+    public void getMap() {
         mMapFragment.getMapAsync(this);
     }
 
@@ -123,8 +136,8 @@ public class MapManager implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
         setInitialView();
-        downloadRoute();
-        downloadGeofences();
+        getRoute();
+        getGeofences();
     }
 
     private class DownloadRouteTask extends AsyncTask<String, Void, JSONObject> {
@@ -209,6 +222,11 @@ public class MapManager implements OnMapReadyCallback {
         }
     }
 
+    /**
+     * AsyncTask that fetches latitudes, longitudes, and radii from our REST API,
+     * then converts them into GeofenceObjects, which contain LatLng and radius properties.
+     * These GeofenceObjects are then stored into a member variable to be used for drawing.
+     */
     private class DownloadGeofencesTask extends AsyncTask<String, Void, JSONObject> {
 
         @Override
@@ -267,6 +285,7 @@ public class MapManager implements OnMapReadyCallback {
                 e.printStackTrace();
             }
 
+            List<GeofenceObject> listOfGeofenceObjects = new ArrayList<>();
             for (int i = 0; i < resources.length(); i++) {
                 try {
                     JSONObject point = resources.getJSONObject(i);
@@ -274,14 +293,14 @@ public class MapManager implements OnMapReadyCallback {
                     String lng = point.getString("lng");
                     String rad = point.getString("rad");
 
-                    mGeofenceCoordinates.add(new GeofenceObject(lat, lng, rad));
+                    listOfGeofenceObjects.add(new GeofenceObject(lat, lng, rad));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
 
             loadingToast.cancel();
-            drawGeofences();
+            drawGeofences(listOfGeofenceObjects);
         }
     }
 }

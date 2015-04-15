@@ -2,11 +2,25 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jar="C:\Users\eugene\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-core\1.1\860340562250678d1a344907ac75754e259cdb14\hamcrest-core-1.1.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-5b2ee5b658c5035c78f3cefd87019ae3c4b3b0d1.jar" />
+        sha1="860340562250678d1a344907ac75754e259cdb14">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\hamcrest-core-1.1-49a2dabee524403ff2643a57313dbda34f107763.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support.test.espresso\espresso-idling-resource\2.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7cc4b00df8357dabd613998c9229ace9bba26ee2">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\classes-6b18e9b226deb3f24d23ea906b3d385465a7e6a5.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\.gradle\caches\modules-2\files-2.1\junit\junit-dep\4.10\64417b3bafdecd366afa514bd5beeae6c1f85ece\junit-dep-4.10.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="64417b3bafdecd366afa514bd5beeae6c1f85ece">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\junit-dep-4.10-0604b63b9dda36e6d82217d58baf1ad3e8ee5144.jar" />
     </item>
     <item
         jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
@@ -16,11 +30,11 @@
         <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-0694621b43e6b646c7431eca5ba45b035ce7a298.jar" />
     </item>
     <item
-        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support.test.espresso\espresso-core\2.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-25d32456f856f2f87602f99909bab3901c5af86b.jar" />
+        sha1="3e2095347aa9c33370eb72fea3969c0a7254e168">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\classes-5a7753ec02e771eb7603232ce9213a4e60eaaa93.jar" />
     </item>
     <item
         jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
@@ -30,11 +44,18 @@
         <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-03046c94cd435fd800c1fa351b7b746b62892238.jar" />
     </item>
     <item
-        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.github.amlcurran.showcaseview\library\5.0.0\classes.jar"
+        jar="C:\Users\eugene\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="8b3d9a7b348d8bcfb4d740dfaf70bc374cdae9d6">
-        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-c03859fd00448279373e049cd770cb659be4377b.jar" />
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\javax.inject-1-443b6ba2903940037733d06967dda9adc3005bbf.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\.gradle\caches\modules-2\files-2.1\javax.annotation\javax.annotation-api\1.2\479c1e06db31c432330183f5cae684163f186146\javax.annotation-api-1.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="479c1e06db31c432330183f5cae684163f186146">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\javax.annotation-api-1.2-9495c88a878aca4ac9541d0ba39e649b41dcdfca.jar" />
     </item>
     <item
         jar="C:\Users\eugene\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
@@ -42,6 +63,62 @@
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
         <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-32d7a1ae0e66b0fbacda0d947faa7352f6a4d679.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\.gradle\caches\modules-2\files-2.1\com.squareup\javawriter\2.1.1\67ff45d9ae02e583d0f9b3432a5ebbe05c30c966\javawriter-2.1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="67ff45d9ae02e583d0f9b3432a5ebbe05c30c966">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\javawriter-2.1.1-c61abcc2919f5d2a2213b1f0068cf93885d953a7.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\jsr305-2.0.1-b91197e7f713f9c936e786a0f929e7ea97e3f311.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-5b2ee5b658c5035c78f3cefd87019ae3c4b3b0d1.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.android.support.test\testing-support-lib\0.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2700b782e8c78b36636a15b0ed86126a96295de7">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\classes-bec433baaa093238bf9fb1e9db9b2e2c8e83ec40.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-25d32456f856f2f87602f99909bab3901c5af86b.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-integration\1.1\8d47177aa4da0f259fc823a39736bad2f09993d5\hamcrest-integration-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8d47177aa4da0f259fc823a39736bad2f09993d5">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\hamcrest-integration-1.1-fe22263e20c554733bf7cb2109b436b56f750f24.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\exploded-aar\com.github.amlcurran.showcaseview\library\5.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8b3d9a7b348d8bcfb4d740dfaf70bc374cdae9d6">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\debug\classes-c03859fd00448279373e049cd770cb659be4377b.jar" />
+    </item>
+    <item
+        jar="C:\Users\eugene\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-library\1.1\b988c01468e3398d46678a2eb48aeb5bde271e9f\hamcrest-library-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b988c01468e3398d46678a2eb48aeb5bde271e9f">
+        <dex dex="C:\Users\eugene\AndroidStudioProjects\campusTours\CampusTours\app\build\intermediates\pre-dexed\androidTest\debug\hamcrest-library-1.1-48236c9ebb09281810f689254a258c426a917bdb.jar" />
     </item>
 
 </items>

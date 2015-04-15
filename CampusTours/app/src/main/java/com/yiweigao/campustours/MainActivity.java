@@ -386,4 +386,5 @@ public class MainActivity extends ActionBarActivity implements
             // Get the status code for the error and log it using a user-friendly message.
         }
     }
+
 }

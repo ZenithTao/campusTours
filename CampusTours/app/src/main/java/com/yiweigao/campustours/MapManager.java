@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -34,17 +36,25 @@ import java.util.List;
  * Created by yiweigao on 3/31/15.
  */
 
-public class MapManager {
+public class MapManager implements OnMapReadyCallback {
 
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
     private static final String BASE_URL = "http://dutch.mathcs.emory.edu:8009/";
 
     private Context mContext;
+    private MapFragment mMapFragment;
     private GoogleMap mGoogleMap;
     private Toast loadingToast;
 
     private List<LatLng> mRouteCoordinates = new ArrayList<>();
     private List<GeofenceObject> mGeofenceCoordinates = new ArrayList<>();
+
+    public MapManager(Context context, MapFragment mapFragment) {
+        this.mContext = context;
+        this.mMapFragment = mapFragment;
+        getMap();
+        
+    }
 
     public MapManager(Context context, GoogleMap googleMap) {
         mContext = context;
@@ -75,7 +85,7 @@ public class MapManager {
         // executes a new AsyncTask to fetch coordinates from API
         new DownloadRouteTask().execute(BASE_URL + "points");
     }
-    
+
     private void downloadGeofences() {
         new DownloadGeofencesTask().execute(BASE_URL + "geofences");
     }
@@ -89,7 +99,7 @@ public class MapManager {
                 .geodesic(true)
                 .addAll(mRouteCoordinates));
     }
-    
+
     private void drawGeofences() {
 
         for (GeofenceObject geofenceObject : mGeofenceCoordinates) {
@@ -103,6 +113,18 @@ public class MapManager {
     public void updateCamera(Location newLocation) {
         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(
                 new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
+    }
+
+    private void getMap() {
+        mMapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mGoogleMap = googleMap;
+        setInitialView();
+        downloadRoute();
+        downloadGeofences();
     }
 
     private class DownloadRouteTask extends AsyncTask<String, Void, JSONObject> {
@@ -251,7 +273,7 @@ public class MapManager {
                     String lat = point.getString("lat");
                     String lng = point.getString("lng");
                     String rad = point.getString("rad");
-                    
+
                     mGeofenceCoordinates.add(new GeofenceObject(lat, lng, rad));
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -21,9 +21,7 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +29,11 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        OnMapReadyCallback,
+//        OnMapReadyCallback,
         LocationListener,
         ResultCallback<Status> {
 
-    private MapManager mapManager;
+    private MapManager mMapManager;
     private MapFragment mMapFragment;
 
     private GoogleApiClient mGoogleApiClient;
@@ -64,15 +62,17 @@ public class MainActivity extends ActionBarActivity implements
         try {
             if (mMapFragment == null) {
                 mMapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-                mMapFragment.getMapAsync(this);
+//                mMapFragment.getMapAsync(this);
+                mMapManager = new MapManager(this, mMapFragment);
+//                mMapManager.add(mMapFragment, this);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        populateGeofenceList();
-
         buildGoogleApiClient();
+
+        populateGeofenceList();
 
         createLocationRequest();
 
@@ -98,10 +98,10 @@ public class MainActivity extends ActionBarActivity implements
         mGoogleApiClient.disconnect();
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mapManager = new MapManager(getApplicationContext(), googleMap);
-    }
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMapManager = new MapManager(getApplicationContext(), googleMap);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,7 +150,7 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onLocationChanged(Location location) {
-        mapManager.updateCamera(location);
+        mMapManager.updateCamera(location);
     }
 
     /**

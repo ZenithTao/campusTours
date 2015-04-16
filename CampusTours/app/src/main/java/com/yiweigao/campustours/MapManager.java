@@ -86,23 +86,12 @@ public class MapManager implements
 //        mGoogleApiClient.connect();
     }
 
-//    public MapManager(Context context, GoogleMap googleMap) {
-//        mContext = context;
-//        mGoogleMap = googleMap;
-//        setInitialView();
-//        getRoute();
-//        getGeofences();
-//        buildGoogleApiClient();
-//        createLocationRequest();
-//    }
-
     protected void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(mContext)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-//        Log.d("build client", "---was just called---");
     }
 
     private void setInitialView() {
@@ -193,13 +182,11 @@ public class MapManager implements
         ).setResultCallback(this);
 
         startLocationUpdates();
-        Log.d("onConnected()", "--was just called--");
     }
 
     private void startLocationUpdates() {
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 mGoogleApiClient, mLocationRequest, this);
-        Log.d("start loc updates", "---was just called---");
     }
 
 
@@ -332,7 +319,6 @@ public class MapManager implements
                 }
             }
 
-//            loadingToast.cancel();
             drawRoute(listOfRouteCoordinates);
         }
     }

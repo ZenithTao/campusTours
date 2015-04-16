@@ -3,39 +3,20 @@ package com.yiweigao.campustours;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.PendingIntent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.Geofence;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.MapFragment;
 
-import java.util.List;
-
 public class MainActivity extends ActionBarActivity implements
-//        GoogleApiClient.ConnectionCallbacks,
-//        GoogleApiClient.OnConnectionFailedListener,
-//        OnMapReadyCallback,
-        LocationListener,
         ResultCallback<Status> {
 
     private MapManager mMapManager;
     private MapFragment mMapFragment;
-
-    private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
-    private List<Geofence> mGeofenceList;
-    private boolean mGeofencesAdded;
-    private PendingIntent mGeofencePendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +33,6 @@ public class MainActivity extends ActionBarActivity implements
         }
 
 
-        mGeofencePendingIntent = null;
-
         try {
             if (mMapFragment == null) {
                 mMapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -62,22 +41,7 @@ public class MainActivity extends ActionBarActivity implements
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        buildGoogleApiClient();
-
-//        populateGeofenceList();
-
-//        createLocationRequest();
-
     }
-
-//    protected void buildGoogleApiClient() {
-//        mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this)
-//                .addApi(LocationServices.API)
-//                .build();
-//    }
 
     @Override
     protected void onStart() {
@@ -90,11 +54,6 @@ public class MainActivity extends ActionBarActivity implements
         super.onStop();
 //        mGoogleApiClient.disconnect();
     }
-
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        mMapManager = new MapManager(getApplicationContext(), googleMap);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,126 +76,6 @@ public class MainActivity extends ActionBarActivity implements
 
         return super.onOptionsItemSelected(item);
     }
-
-//    @Override
-//    public void onConnected(Bundle bundle) {
-//        LocationServices.GeofencingApi.addGeofences(
-//                mGoogleApiClient,
-//                getGeofencingRequest(),
-//                getGeofencePendingIntent()
-//        ).setResultCallback(this);
-//
-//        startLocationUpdates();
-//    }
-
-    private void startLocationUpdates() {
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
-    }
-
-//    private void createLocationRequest() {
-//        mLocationRequest = new LocationRequest();
-//        mLocationRequest.setInterval(10000);
-//        mLocationRequest.setFastestInterval(5000);
-//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-//    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        mMapManager.updateCamera(location);
-    }
-
-    /**
-     * Builds and returns a GeofencingRequest. Specifies the list of geofences to be monitored.
-     * Also specifies how the geofence notifications are initially triggered.
-     */
-//    private GeofencingRequest getGeofencingRequest() {
-//        GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
-//
-//        // The INITIAL_TRIGGER_ENTER flag indicates that geofencing service should trigger a
-//        // GEOFENCE_TRANSITION_ENTER notification when the geofence is added and if the device
-//        // is already inside that geofence.
-//        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
-//
-//        // Add the geofences to be monitored by geofencing service.
-//        builder.addGeofences(mGeofenceList);
-//
-//        // Return a GeofencingRequest.
-//        return builder.build();
-//    }
-
-    /**
-     * Gets a PendingIntent to send with the request to add or remove Geofences. Location Services
-     * issues the Intent inside this PendingIntent whenever a geofence transition occurs for the
-     * current list of geofences.
-     *
-     * @return A PendingIntent for the IntentService that handles geofence transitions.
-     */
-//    private PendingIntent getGeofencePendingIntent() {
-//        // Reuse the PendingIntent if we already have it.
-//        if (mGeofencePendingIntent != null) {
-//            return mGeofencePendingIntent;
-//        }
-//        Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
-//        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
-//        // addGeofences() and removeGeofences().
-//        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//    }
-
-//    public void populateGeofenceList() {
-//        mGeofenceList = new ArrayList<Geofence>();
-//        mGeofenceList.add(new Geofence.Builder()
-//                .setRequestId(DebugResource.HOUSE_TEXT)
-//                .setCircularRegion(
-//                        DebugResource.HOUSE.latitude,
-//                        DebugResource.HOUSE.longitude,
-//                        DebugResource.HOUSE_RADIUS)
-//                .setExpirationDuration(DebugResource.HOUSE_LIFETIME)
-//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
-//                        Geofence.GEOFENCE_TRANSITION_EXIT)
-//                .build());
-//
-//        mGeofenceList.add(new Geofence.Builder()
-//                .setRequestId(DebugResource.TEST_ONE)
-//                .setCircularRegion(
-//                        DebugResource.TEST_ONE_LATLNG.latitude,
-//                        DebugResource.TEST_ONE_LATLNG.longitude,
-//                        DebugResource.TEST_ONE_RADIUS)
-//                .setExpirationDuration(DebugResource.TEST_ONE_LIFETIME)
-//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
-//                .build());
-//
-//        mGeofenceList.add(new Geofence.Builder()
-//                .setRequestId(DebugResource.TEST_TWO)
-//                .setCircularRegion(
-//                        DebugResource.TEST_TWO_LATLNG.latitude,
-//                        DebugResource.TEST_TWO_LATLNG.longitude,
-//                        DebugResource.TEST_TWO_RADIUS)
-//                .setExpirationDuration(DebugResource.TEST_TWO_LIFETIME)
-//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
-//                .build());
-//
-//        mGeofenceList.add(new Geofence.Builder()
-//                .setRequestId(DebugResource.TEST_THREE)
-//                .setCircularRegion(
-//                        DebugResource.TEST_THREE_LATLNG.latitude,
-//                        DebugResource.TEST_THREE_LATLNG.longitude,
-//                        DebugResource.TEST_THREE_RADIUS)
-//                .setExpirationDuration(DebugResource.TEST_THREE_LIFETIME)
-//                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT)
-//                .build());
-//
-//    }
-
-//    @Override
-//    public void onConnectionSuspended(int i) {
-//        mGoogleApiClient.connect();
-//    }
-
-//    @Override
-//    public void onConnectionFailed(ConnectionResult connectionResult) {
-//        Toast.makeText(this, "Connection failed!", Toast.LENGTH_LONG).show();
-//    }
 
     /**
      * Runs when the result of calling addGeofences() and removeGeofences() becomes available.

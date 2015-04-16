@@ -47,10 +47,11 @@ public class HomeScreenActivity extends ActionBarActivity {
     }
 
     private void activateButton() {
-        Button startTourButton = (Button) findViewById(R.id.StartButton);
+        final Button startTourButton = (Button) findViewById(R.id.StartButton);
         startTourButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startTourButton.setText("Please wait...");
                 if(mSelectedCampus != null){
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);

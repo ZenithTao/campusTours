@@ -15,8 +15,8 @@ import com.google.android.gms.maps.MapFragment;
 public class MainActivity extends ActionBarActivity implements
         ResultCallback<Status> {
 
-    private MapManager mMapManager;
     private MapFragment mMapFragment;
+    private MapManager mMapManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,6 @@ public class MainActivity extends ActionBarActivity implements
             fragmentTransaction.add(R.id.control_panel_fragment, new ControlPanelFragment());
             fragmentTransaction.commit();
         }
-
 
         try {
             if (mMapFragment == null) {

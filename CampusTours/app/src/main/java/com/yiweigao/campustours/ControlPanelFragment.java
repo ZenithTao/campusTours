@@ -13,15 +13,17 @@ import android.widget.ImageButton;
  */
 public class ControlPanelFragment extends Fragment {
 
+    // button alpha value
     private static float BUTTON_ALPHA = 0.80f;
     
+    // audioplayer object
     private AudioPlayer mAudioPlayer = AudioPlayer.getInstance();
     
+    // ui elements
     private View mInflatedView;
     private ImageButton mRwndButton;
     private ImageButton mPlayButton;
     private ImageButton mNextButton;
-
 
     @Nullable
     @Override
@@ -64,6 +66,5 @@ public class ControlPanelFragment extends Fragment {
         });
 
         return mInflatedView;
-
     }
 }

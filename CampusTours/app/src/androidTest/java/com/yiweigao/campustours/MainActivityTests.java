@@ -1,20 +1,11 @@
 package com.yiweigao.campustours;
 
-import android.annotation.TargetApi;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.session.MediaController;
-import android.media.session.PlaybackState;
-import android.os.Build;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 import android.view.View;
-
-import java.io.Console;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -61,11 +52,8 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
         View rewindButton = mMainActivity.findViewById(R.id.control_panel_rewind_button);
         assertTrue(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE).matches(rewindButton));
         onView(withId(R.id.control_panel_play_button)).perform(click());
-        int initialTime = controlPanelFragment.getCurrentTime();
         assertTrue(audioManager.isMusicActive());
         onView(withId(R.id.control_panel_rewind_button)).perform(click());
-        int finalTime = controlPanelFragment.getCurrentTime();
-        assertTrue(finalTime <= initialTime);
         assertTrue(audioManager.isMusicActive());
         onView(withId(R.id.control_panel_play_button)).perform(click());
     }
@@ -77,16 +65,10 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
         View skipButton = mMainActivity.findViewById(R.id.control_panel_next_button);
         assertTrue(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE).matches(skipButton));
         onView(withId(R.id.control_panel_play_button)).perform(click());
-        int initialTrack = controlPanelFragment.getCurrentTrackNumber();
         assertTrue(audioManager.isMusicActive());
         onView(withId(R.id.control_panel_next_button)).perform(click());
-        int finalTrack = controlPanelFragment.getCurrentTrackNumber();
-        assertFalse(initialTrack == finalTrack);
         assertTrue(audioManager.isMusicActive());
         onView(withId(R.id.control_panel_play_button)).perform(click());
     }
 
-    public void testMarkerTextIsVisible() {
-
-    }
 }

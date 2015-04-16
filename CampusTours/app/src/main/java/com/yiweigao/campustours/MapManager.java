@@ -55,7 +55,6 @@ public class MapManager implements
         ResultCallback<Status>,
         LocationListener {
 
-
     // some constants
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
     private static final String BASE_URL = "http://dutch.mathcs.emory.edu:8009/";

@@ -36,6 +36,9 @@ public class AudioPlayer {
         mMediaPlayer = MediaPlayer.create(mContext, R.raw.audio00);
     }
 
+    /**
+     * Toggles audio playback, and changes the image button to reflect current state
+     */
     public void togglePlayback() {
         if (mMediaPlayer.isPlaying()) {
             mMediaPlayer.pause();
@@ -46,6 +49,9 @@ public class AudioPlayer {
         }
     }
 
+    /**
+     * Loops through all of the audio source files
+     */
     public void next() {
         if (currentTrack > 11) {
             currentTrack = 0;
@@ -54,11 +60,21 @@ public class AudioPlayer {
         changeAudioSource(String.valueOf(++currentTrack), Geofence.GEOFENCE_TRANSITION_ENTER);
     }
 
-    // go back 10000ms = 10s
+    /**
+     * Seek back 10000 ms, or 10s.
+     * Good thing is the seekTo() method already checks bounds, so if the resulting position
+     * is < 0, it will just play from the beginning
+     */
     public void rewind() {
         mMediaPlayer.seekTo(mMediaPlayer.getCurrentPosition() - 10000);
     }
 
+    /**
+     * Changes the audio source file based on the triggering geofence and
+     * the type of geofence event. Audio will then automatically play
+     * @param geofenceRequestId The ID of the triggering geofence
+     * @param geofenceTransition The type of geofence transition
+     */
     public void changeAudioSource(String geofenceRequestId, int geofenceTransition) {
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
             mMediaPlayer.release();

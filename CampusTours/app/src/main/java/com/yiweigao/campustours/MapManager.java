@@ -78,8 +78,8 @@ public class MapManager implements
     private Toast loadingToast;
 
     public MapManager(Context context, MapFragment mapFragment) {
-        this.mContext = context;
-        this.mMapFragment = mapFragment;
+        mContext = context;
+        mMapFragment = mapFragment;
         getMap();
         buildGoogleApiClient();
     }

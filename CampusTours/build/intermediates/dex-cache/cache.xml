@@ -2,39 +2,172 @@
 <items version="2" >
 
     <item
-        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-95be28760c96d1eb48f881a12fd592644f330791.jar" />
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-15cc06cc53593a008bb436afb0a98f653b7c4930.jar" />
     </item>
     <item
-        jar="/Users/yiweigao/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-300034c18ac88b55986bd7779df744dfe7aeac9b.jar" />
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-49d0d87c3353b8ca5593376116ef65d079e8ec04.jar" />
     </item>
     <item
-        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-ae09bf49d211c8e55749f79a8e5c952f331dfb68.jar" />
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-0b70be85923e6e4a033c579bf4865c5e58ed7d39.jar" />
     </item>
     <item
-        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-e65b013ad653f7a46f3a64682daa161c105b0a00.jar" />
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-1c8cfc3fd83987c725c2c103cb68e98168227994.jar" />
     </item>
     <item
-        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-328aafd8b3b43c945500ca4107efd1456b6f213b.jar" />
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-aee9d898c289b6dc37370ea76b041ba0ab3e9746.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-5cf86c41d6c0ecab9b023bae923564823d895fb1.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-9b3644b22253857337f5b7f27e2746f063be8d16.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.github.amlcurran.showcaseview/library/5.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8b3d9a7b348d8bcfb4d740dfaf70bc374cdae9d6">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-99b192a4fc25e93685183c4156efc528e44e4dc0.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-eecd315549b0d3d7d1a9d8d34e87c1b9d9792b48.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-39d3ac8df7bc6da845f3f3527bc3c71cd02857f2.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-c76421d767f84618a8dd4cedaa16b78c01224eb6.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-da9ea9552da1d034ef7ed2a3fc42fce2b15d211f.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-f3c74792f158353c83fa4a74829f9c5067921064.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-1177335c27c4e7ef129b179a3953786ca9b30b9c.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-3c01577dc7472ab2bb0b39e917418595e5836699.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-14a5274bae046df31741332cb3a4da969773c6fe.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-10e3a0a53c2e01106bb327e5a13412dc6f4c6210.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-1f6c6955ffe5258b321d156499340351216693fb.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-e786becf4db04ebd8ee77370fd17e1530d68e5a2.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-e0ec0f6550077639b1967ce8f3be128a76df5e47.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-09e651cf54c045d4958e39f5c7e97d1327bdadc0.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-e2928f4359d6b7e2ed1b37abd31cb93591d3b612.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-8d94dc63f52c39611063f11cc99ace181142decb.jar" />
+    </item>
+    <item
+        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-0cd13d0cd02ab4eecab88a332096291e2331b3ec.jar" />
     </item>
 
 </items>

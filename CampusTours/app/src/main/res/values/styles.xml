@@ -6,4 +6,20 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CustomShowcaseTheme" parent="ShowcaseView.Light">
+        <item name="sv_backgroundColor">#ab37a1cf</item>
+        <item name="sv_buttonBackgroundColor">#ff67cfcc</item>
+        <item name="sv_buttonText">Close</item>
+        <item name="sv_titleTextAppearance">@style/CustomTitle</item>
+        <item name="sv_detailTextAppearance">@style/CustomDetailText</item>
+    </style>
+
+    <style name="CustomTitle" parent="TextAppearance.ShowcaseView.Title">
+        <item name="android:textColor">#ffdee3e3</item>
+    </style>
+
+    <style name="CustomDetailText" parent="TextAppearance.ShowcaseView.Detail">
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+
 </resources>

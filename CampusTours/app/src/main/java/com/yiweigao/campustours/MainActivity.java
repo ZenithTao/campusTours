@@ -3,11 +3,17 @@ package com.yiweigao.campustours;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.PointTarget;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.MapFragment;
@@ -18,10 +24,13 @@ public class MainActivity extends ActionBarActivity implements
     private MapFragment mMapFragment;
     private MapManager mMapManager;
 
+    private SharedPreferences mSharedPreferences;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mSharedPreferences = getSharedPreferences("com.yiweigao.CampusTours", MODE_PRIVATE);
 
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.control_panel_fragment);
@@ -39,6 +48,11 @@ public class MainActivity extends ActionBarActivity implements
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if(mSharedPreferences.getBoolean("first_run", true)){
+            mSharedPreferences.edit().putBoolean("first_run",false).apply();
+            launchMapShowCaseView();
         }
     }
 
@@ -75,6 +89,65 @@ public class MainActivity extends ActionBarActivity implements
 
         return super.onOptionsItemSelected(item);
     }
+    
+    
+    private void launchMapShowCaseView() {
+        Point screenSize = new Point();
+        getWindowManager().getDefaultDisplay().getSize(screenSize);
+        new ShowcaseView.Builder(this, true)
+                .setTarget(new PointTarget(new Point(screenSize.x, 0)))
+                .setStyle(R.style.CustomShowcaseTheme)
+                .setContentTitle("Using the map")
+                .setContentText("Make sure that your GPS is turned on, and click on this button to show your current location on the map.\n\nTap anywhere to dismiss this message")
+                .setShowcaseEventListener(new OnShowcaseEventListener() {
+                    @Override
+                    public void onShowcaseViewHide(ShowcaseView showcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+                        launchControlPanelShowCaseView();
+                    }
+
+                    @Override
+                    public void onShowcaseViewShow(ShowcaseView showcaseView) {
+                        showcaseView.hideButton();
+                    }
+                })
+                .hideOnTouchOutside()
+                .build();
+    }
+
+    private void launchControlPanelShowCaseView() {
+
+        ViewTarget viewTarget = new ViewTarget(R.id.control_panel_play_button, this);
+        new ShowcaseView.Builder(this, true)
+                .setTarget(viewTarget)
+                .setStyle(R.style.CustomShowcaseTheme)
+                .setContentTitle("Using the audio controls")
+                .setContentText("Audio clips will play automatically along the tour, but you can use these buttons to rewind, play/pause, and fast forward at your leisure." +
+                        "\n\nEnjoy your tour!")
+                .setShowcaseEventListener(new OnShowcaseEventListener() {
+                    @Override
+                    public void onShowcaseViewHide(ShowcaseView showcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+                    }
+
+                    @Override
+                    public void onShowcaseViewShow(ShowcaseView showcaseView) {
+                        showcaseView.hideButton();
+                    }
+                })
+                .hideOnTouchOutside()
+                .build();
+    }
+    
 
     /**
      * Runs when the result of calling addGeofences() and removeGeofences() becomes available.

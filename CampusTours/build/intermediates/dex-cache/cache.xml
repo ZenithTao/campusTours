@@ -2,25 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/yiweigao/.gradle/caches/modules-2/files-2.1/javax.annotation/javax.annotation-api/1.2/479c1e06db31c432330183f5cae684163f186146/javax.annotation-api-1.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="479c1e06db31c432330183f5cae684163f186146">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/javax.annotation-api-1.2-8099ed49e23cadd8f5ceb8ba31f87e33db5be85d.jar" />
-    </item>
-    <item
         jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
         <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-95be28760c96d1eb48f881a12fd592644f330791.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support.test.espresso/espresso-idling-resource/2.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7cc4b00df8357dabd613998c9229ace9bba26ee2">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/classes-344746a8c56ae455de5ecd22df26e555a7822bc8.jar" />
     </item>
     <item
         jar="/Users/yiweigao/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
@@ -30,60 +16,11 @@
         <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-300034c18ac88b55986bd7779df744dfe7aeac9b.jar" />
     </item>
     <item
-        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support.test/testing-support-lib/0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2700b782e8c78b36636a15b0ed86126a96295de7">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/classes-7d982fc9189d8005c1a01ad77dc1a662e73c67e2.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.1.1/67ff45d9ae02e583d0f9b3432a5ebbe05c30c966/javawriter-2.1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="67ff45d9ae02e583d0f9b3432a5ebbe05c30c966">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/javawriter-2.1.1-a5487c432d2fcd6127611241fecc483d34b42be1.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support.test.espresso/espresso-core/2.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3e2095347aa9c33370eb72fea3969c0a7254e168">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/classes-8d644c3c407f3d02ed336478154967ea99dda72e.jar" />
-    </item>
-    <item
         jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
         <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/classes-ae09bf49d211c8e55749f79a8e5c952f331dfb68.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/.gradle/caches/modules-2/files-2.1/junit/junit-dep/4.10/64417b3bafdecd366afa514bd5beeae6c1f85ece/junit-dep-4.10.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="64417b3bafdecd366afa514bd5beeae6c1f85ece">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/junit-dep-4.10-7a1df13aa4ff0c35e107676131a0b3c5bee2bf3b.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/javax.inject-1-15069572ad4271494967ce5df89cccc59bbf30fd.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/jsr305-2.0.1-1127d8a0769d27e3f6e8419ab26f10c54d63b91c.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-integration/1.1/8d47177aa4da0f259fc823a39736bad2f09993d5/hamcrest-integration-1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8d47177aa4da0f259fc823a39736bad2f09993d5">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/hamcrest-integration-1.1-427d3d7b2045e093ed7ef02b3c27f02aa8cf72b6.jar" />
     </item>
     <item
         jar="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
@@ -98,20 +35,6 @@
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
         <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-328aafd8b3b43c945500ca4107efd1456b6f213b.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.1/860340562250678d1a344907ac75754e259cdb14/hamcrest-core-1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="860340562250678d1a344907ac75754e259cdb14">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/hamcrest-core-1.1-6803fe51d7e6f27c4191ea8ee12d6dfdc473873f.jar" />
-    </item>
-    <item
-        jar="/Users/yiweigao/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-library/1.1/b988c01468e3398d46678a2eb48aeb5bde271e9f/hamcrest-library-1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b988c01468e3398d46678a2eb48aeb5bde271e9f">
-        <dex dex="/Users/yiweigao/AndroidStudioProjects/campusTours/CampusTours/app/build/intermediates/pre-dexed/androidTest/debug/hamcrest-library-1.1-76ad52e681c202a96cb04ca9af20f398eae95ace.jar" />
     </item>
 
 </items>

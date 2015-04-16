@@ -59,6 +59,8 @@ public class MapManager implements
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
     private static final String BASE_URL = "http://dutch.mathcs.emory.edu:8009/";
     private static final int GEOFENCE_LIFETIME = 100000;
+    private static final int LOCATION_REQUEST_INTERVAL = 10000;
+    private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 5000;
     
     // context for making toasts and generating intents
     private Context mContext;
@@ -88,6 +90,10 @@ public class MapManager implements
         mMapFragment.getMapAsync(this);
     }
 
+    /**
+     * When map is ready, set initial view, then load route and geofences 
+     * @param googleMap Reference to the map on screen
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
@@ -138,6 +144,12 @@ public class MapManager implements
         new DownloadGeofencesTask().execute(BASE_URL + "geofences");
     }
 
+    /**
+     * Once the GoogleAPIClient is connected, we add geofences, prepare the pending intent,
+     * and start updating our location
+     * @param bundle No clue what this is actually...not using it here, 
+     *               but I would like to know what this is
+     */
     @Override
     public void onConnected(Bundle bundle) {
         LocationServices.GeofencingApi.addGeofences(
@@ -191,10 +203,14 @@ public class MapManager implements
                 mGoogleApiClient, getLocationRequest(), this);
     }
 
+    /**
+     * Creates and returns a location request
+     * @return LocationRequest
+     */
     private LocationRequest getLocationRequest() {
         return new LocationRequest()
-                .setInterval(10000)
-                .setFastestInterval(5000)
+                .setInterval(LOCATION_REQUEST_INTERVAL)
+                .setFastestInterval(LOCATION_REQUEST_FASTEST_INTERVAL)
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -230,6 +246,9 @@ public class MapManager implements
      */
     private class DownloadRouteTask extends AsyncTask<String, Void, JSONObject> {
 
+        /**
+         * shows a "loading" toast immediately prior to fetching data
+         */
         @Override
         protected void onPreExecute() {
             loadingToast = Toast.makeText(mContext, "Loading", Toast.LENGTH_LONG);
@@ -283,6 +302,11 @@ public class MapManager implements
             return jsonObject;
         }
 
+        /**
+         * Converts jsonObject to LatLnt object, adds it to listOfRouteCoordinates,
+         * then draws the route
+         * @param jsonObject The jsonObject that is returned from the REST API
+         */
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             JSONArray resources = null;
@@ -363,6 +387,11 @@ public class MapManager implements
             return jsonObject;
         }
 
+        /**
+         * Converts jsonObject to Geofence, adds it to listOfGeofences, 
+         * cancels the "loading" toast, and then tells the Google API client to connect
+         * @param jsonObject The jsonObject that is returned from the REST API
+         */
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             JSONArray resources = null;

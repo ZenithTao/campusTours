@@ -24,6 +24,7 @@
     <string name="rewind_button_description">Rewind</string>
     <string name="play_button_description">Play/Pause</string>
     <string name="next_button_description">Next</string>
+    <string name="title_activity_home_screen">HomeScreenActivity</string>
 
     <string name="title_activity_home_screen">HomeScreenActivity</string>
 </resources>

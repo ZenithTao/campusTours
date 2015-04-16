@@ -29,35 +29,33 @@ public class ControlPanelFragment extends Fragment {
 
         mInflatedView = inflater.inflate(R.layout.control_panel_fragment, container, false);
 
+        // get ui elements
         mRwndButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_rewind_button);
         mPlayButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_play_button);
         mNextButton = (ImageButton) mInflatedView.findViewById(R.id.control_panel_next_button);
 
+        // set alpha values
         mRwndButton.setAlpha(BUTTON_ALPHA);
         mPlayButton.setAlpha(BUTTON_ALPHA);
         mNextButton.setAlpha(BUTTON_ALPHA);
 
+        // initialize audioplayer and give it reference to button
         mAudioPlayer.create(getActivity());
-
+        mAudioPlayer.setPlayButton(mPlayButton);
+        
+        // set onClickListeners
         mRwndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAudioPlayer.rewind();
             }
         });
-
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAudioPlayer.togglePlayback();
-                if (mAudioPlayer.isPlaying()) {
-                    mPlayButton.setImageResource(R.mipmap.pause_icon);
-                } else {
-                    mPlayButton.setImageResource(R.mipmap.play_icon);
-                }
             }
         });
-
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

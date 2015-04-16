@@ -17,15 +17,14 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -61,29 +60,41 @@ public class MapManager implements
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
     private static final String BASE_URL = "http://dutch.mathcs.emory.edu:8009/";
     private static final int GEOFENCE_LIFETIME = 100000;
-    List<GeofenceObject> listOfGeofenceObjects = new ArrayList<>();
-    List<Geofence> listOfGeofences = new ArrayList<>();
+    
     // context for making toasts and generating intents
     private Context mContext;
+
     // map related
     private MapFragment mMapFragment;
     private GoogleMap mGoogleMap;
+    
     // location related
     private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
     private PendingIntent mGeofencePendingIntent = null;
-    private Toast loadingToast;
+    
+    // list of geofences we are monitoring
+    List<Geofence> listOfGeofences = new ArrayList<>();
 
-//    private List<LatLng> mRouteCoordinates = new ArrayList<>();
-//    private List<GeofenceObject> mGeofenceCoordinates = new ArrayList<>();
+    // our toast shown while data is being retrieved
+    private Toast loadingToast;
 
     public MapManager(Context context, MapFragment mapFragment) {
         this.mContext = context;
         this.mMapFragment = mapFragment;
         getMap();
-        createLocationRequest();
         buildGoogleApiClient();
-//        mGoogleApiClient.connect();
+    }
+
+    public void getMap() {
+        mMapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mGoogleMap = googleMap;
+        setInitialView();
+        getRoute();
+        getGeofences();
     }
 
     protected void buildGoogleApiClient() {
@@ -128,30 +139,15 @@ public class MapManager implements
         new DownloadGeofencesTask().execute(BASE_URL + "geofences");
     }
 
-    private void drawGeofences(List<GeofenceObject> listOfGeofenceObjects) {
-        for (GeofenceObject geofenceObject : listOfGeofenceObjects) {
-            mGoogleMap.addCircle(new CircleOptions()
-                    .center(geofenceObject.getCoordinates())
-                    .radius(geofenceObject.getRadius())
-                    .strokeWidth(5.0f));      // width in pixels, default = 10
-        }
-    }
-
-    public void updateCamera(Location newLocation) {
-        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(
-                new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
-    }
-
-    public void getMap() {
-        mMapFragment.getMapAsync(this);
-    }
-
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mGoogleMap = googleMap;
-        getRoute();
-        getGeofences();
-        setInitialView();
+    public void onConnected(Bundle bundle) {
+        LocationServices.GeofencingApi.addGeofences(
+                mGoogleApiClient,
+                getGeofencingRequest(),
+                getGeofencePendingIntent()
+        ).setResultCallback(this);
+
+        startLocationUpdates();
     }
 
     /**
@@ -173,31 +169,6 @@ public class MapManager implements
         return builder.build();
     }
 
-    @Override
-    public void onConnected(Bundle bundle) {
-        LocationServices.GeofencingApi.addGeofences(
-                mGoogleApiClient,
-                getGeofencingRequest(),
-                getGeofencePendingIntent()
-        ).setResultCallback(this);
-
-        startLocationUpdates();
-    }
-
-    private void startLocationUpdates() {
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
-    }
-
-
-    private void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-
-
     /**
      * Gets a PendingIntent to send with the request to add or remove Geofences. Location Services
      * issues the Intent inside this PendingIntent whenever a geofence transition occurs for the
@@ -216,6 +187,28 @@ public class MapManager implements
         return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
+    private void startLocationUpdates() {
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, getLocationRequest(), this);
+    }
+
+    private LocationRequest getLocationRequest() {
+        return new LocationRequest()
+                .setInterval(10000)
+                .setFastestInterval(5000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        updateCamera(location);
+    }
+
+    public void updateCamera(Location newLocation) {
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(
+                new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
+    }
+
     @Override
     public void onConnectionSuspended(int i) {
 
@@ -231,13 +224,8 @@ public class MapManager implements
 
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        updateCamera(location);
-    }
-
     /**
-     * AsynTask that fetches latitude and longitude from our REST API,
+     * AsyncTask that fetches latitude and longitude from our REST API,
      * converts them into LatLng objects, stores them in a list, and
      * passes this list to drawRoute() for drawing.
      */
@@ -324,9 +312,8 @@ public class MapManager implements
     }
 
     /**
-     * AsyncTask that fetches latitudes, longitudes, and radii from our REST API,
-     * then converts them into GeofenceObjects, which contain LatLng and radius properties.
-     * These GeofenceObjects are then passed to drawGeofences() for drawing.
+     * AsyncTask that fetches latitudes, longitudes, and radii from our REST API.
+     * Then GoogleAPIClient.connect() is called
      */
     private class DownloadGeofencesTask extends AsyncTask<String, Void, JSONObject> {
 
@@ -386,7 +373,6 @@ public class MapManager implements
                 e.printStackTrace();
             }
 
-//            List<GeofenceObject> listOfGeofenceObjects = new ArrayList<>();
             for (int i = 0; i < resources.length(); i++) {
                 try {
                     JSONObject point = resources.getJSONObject(i);
@@ -394,8 +380,6 @@ public class MapManager implements
                     String lat = point.getString("lat");
                     String lng = point.getString("lng");
                     String rad = point.getString("rad");
-
-//                    listOfGeofenceObjects.add(new GeofenceObject(lat, lng, rad));
 
                     listOfGeofences.add(new Geofence.Builder()
                             .setRequestId(id)
@@ -414,9 +398,6 @@ public class MapManager implements
             }
 
             loadingToast.cancel();
-
-            // don't need to actually draw geofence, since they should be invisible
-//            drawGeofences(listOfGeofenceObjects);
             mGoogleApiClient.connect();
         }
     }

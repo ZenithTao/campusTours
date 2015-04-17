@@ -35,6 +35,10 @@ public class DownloadManager {
         }
     }
 
+    /**
+     * Retrieves and returns the JSON from the API
+     * @return JSONObject
+     */
     public JSONObject getJSONObject() {
         InputStream is = null;
         String result = "";
@@ -81,6 +85,9 @@ public class DownloadManager {
         return jsonObject;
     }
 
+    /**
+     * Type enum used to distinguish between API calls
+     */
     public enum Type {POINTS, GEOFENCES}
 
 

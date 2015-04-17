@@ -33,25 +33,29 @@ public class LocationManager implements
         GoogleApiClient.OnConnectionFailedListener,
         ResultCallback<Status>,
         LocationListener {
-    
+
+    // constants
     private static final int LOCATION_REQUEST_INTERVAL = 10000;
     private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 5000;
     private static final int GEOFENCE_LIFETIME = 100000;
 
+    // variables
     private MapManager mMapManager;
-    List<Geofence> listOfGeofences = new ArrayList<>();
-
     private Context mContext;
     private GoogleApiClient mGoogleApiClient;
     private PendingIntent mGeofencePendingIntent = null;
+    private List<Geofence> listOfGeofences = new ArrayList<>();
 
     public LocationManager(Context context, MapManager mapManager) {
         mContext = context;
         mMapManager = mapManager;
-        
+
         new DownloadGeofencesTask().execute();
     }
 
+    /**
+     * Initializes GoogleApiClient and attempts to connect
+     */
     protected void initializeGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(mContext)
                 .addConnectionCallbacks(this)
@@ -123,7 +127,6 @@ public class LocationManager implements
 
     /**
      * Creates and returns a location request
-     *
      * @return LocationRequest
      */
     private LocationRequest getLocationRequest() {
@@ -165,8 +168,9 @@ public class LocationManager implements
         }
 
         /**
-         * Converts jsonObject to Geofence, adds it to listOfGeofences, 
+         * Converts jsonObject to Geofence, adds it to listOfGeofences,
          * cancels the "loading" toast, and then tells the Google API client to connect
+         *
          * @param jsonObject The jsonObject that is returned from the REST API
          */
         @Override

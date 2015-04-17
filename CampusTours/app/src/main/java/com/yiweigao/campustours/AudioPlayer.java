@@ -72,7 +72,8 @@ public class AudioPlayer {
     /**
      * Changes the audio source file based on the triggering geofence and
      * the type of geofence event. Audio will then automatically play
-     * @param geofenceRequestId The ID of the triggering geofence
+     *
+     * @param geofenceRequestId  The ID of the triggering geofence
      * @param geofenceTransition The type of geofence transition
      */
     public void changeAudioSource(String geofenceRequestId, int geofenceTransition) {

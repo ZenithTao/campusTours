@@ -31,7 +31,7 @@ public class MapManager implements
 
     // some constants
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
-    
+
     // context for making toasts and generating intents
     private Context mContext;
 
@@ -48,7 +48,7 @@ public class MapManager implements
         getMap();
 
         new LocationManager(mContext, this);
-        
+
     }
 
     public void getMap() {
@@ -56,7 +56,8 @@ public class MapManager implements
     }
 
     /**
-     * When map is ready, set initial view, then load route and geofences 
+     * When map is ready, set initial view, then load route and geofences
+     *
      * @param googleMap Reference to the map on screen
      */
     @Override
@@ -109,7 +110,7 @@ public class MapManager implements
     private class DownloadRouteTask extends AsyncTask<String, Void, JSONObject> {
 
         private Toast loadingToast;
-        
+
         /**
          * shows a "loading" toast immediately prior to fetching data
          */
@@ -127,6 +128,7 @@ public class MapManager implements
         /**
          * Converts jsonObject to LatLnt object, adds it to listOfRouteCoordinates,
          * then draws the route
+         *
          * @param jsonObject The jsonObject that is returned from the REST API
          */
         @Override

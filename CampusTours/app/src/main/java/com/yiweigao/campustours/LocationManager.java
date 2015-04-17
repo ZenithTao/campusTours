@@ -138,7 +138,7 @@ public class LocationManager implements
 
     @Override
     public void onLocationChanged(Location newLocation) {
-        mMapManager.updateCamera(newLocation);
+        mMapManager.updateView(newLocation);
     }
 
     @Override

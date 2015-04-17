@@ -59,11 +59,11 @@ public class MapManager implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        setInitialView();
+        setInitialMapView();
         getRoute();
     }
 
-    private void setInitialView() {
+    private void setInitialMapView() {
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGoogleMap.setBuildingsEnabled(true);
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
@@ -93,7 +93,7 @@ public class MapManager implements
                 .addAll(listOfRouteCoordinates));
     }
 
-    public void updateCamera(Location newLocation) {
+    public void updateView(Location newLocation) {
         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(
                 new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
     }

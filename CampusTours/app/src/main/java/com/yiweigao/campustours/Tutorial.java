@@ -2,6 +2,7 @@ package com.yiweigao.campustours;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
@@ -20,6 +21,20 @@ public class Tutorial {
     public Tutorial(Context context) {
         mContext = context;
         launchMapShowCaseView();
+    }
+
+    /**
+     * Tests if this device needs the tutorial
+     * @param context The context of the current application
+     * @return True if tutorial needs to be shown, otherwise false
+     */
+    public static boolean isNeeded(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("com.yiweigao.CampusTours", Context.MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("first_run", true)) {
+            sharedPreferences.edit().putBoolean("first_run", false).apply();
+            return true;
+        }
+        return false;
     }
 
     private void launchMapShowCaseView() {

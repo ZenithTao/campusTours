@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -45,12 +43,9 @@ public class MainActivity extends ActionBarActivity implements
             e.printStackTrace();
         }
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("com.yiweigao.CampusTours", Context.MODE_PRIVATE);
-        if (sharedPreferences.getBoolean("first_run", true)) {
-            sharedPreferences.edit().putBoolean("first_run", false).apply();
+        if (Tutorial.isNeeded(this)) {
             new Tutorial(this);
         }
-
     }
 
     @Override

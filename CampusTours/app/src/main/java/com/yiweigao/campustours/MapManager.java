@@ -93,7 +93,7 @@ public class MapManager implements
                 .addAll(listOfRouteCoordinates));
     }
 
-    public void updateView(Location newLocation) {
+    public void updateMapView(Location newLocation) {
         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(
                 new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
     }

@@ -54,40 +54,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
         
     }
 
-    //    @Override
-//    protected void onHandleIntent(Intent intent) {
-//        GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
-//        if (geofencingEvent.hasError()) {
-//            return;
-//        }
-//
-//        // Get the transition type.
-//        int geofenceTransition = geofencingEvent.getGeofenceTransition();
-//
-//        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
-//                geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
-//
-//            // Get the geofences that were triggered. A single event can trigger multiple geofences.
-//            List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
-//
-//            // Get the transition details as a String.
-//            String geofenceTransitionDetails = getGeofenceTransitionDetails(
-//                    this,
-//                    geofenceTransition,
-//                    triggeringGeofences
-//            );
-//
-//            // Send notification and log the transition details.
-////            sendNotification(geofenceTransitionDetails);
-////            Log.i(TAG, geofenceTransitionDetails);
-//            alertMediaPlayer();
-//            
-//        } else {
-//            // Log the error.
-////            Log.e(TAG, getString(R.string.geofence_transition_invalid_type, geofenceTransition));
-//        }
-//    }
-
     /**
      * Gets transition details and returns them as a formatted string.
      *
@@ -133,11 +99,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
         String triggeringGeofencesIdsString = TextUtils.join(", ", triggeringGeofencesIdsList);
 
         return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
-    }
-
-    private void alertMediaPlayer() {
-
-
     }
 
     /**

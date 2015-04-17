@@ -34,7 +34,6 @@ public class LocationManager implements
         ResultCallback<Status>,
         LocationListener {
     
-
     private static final int LOCATION_REQUEST_INTERVAL = 10000;
     private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 5000;
     private static final int GEOFENCE_LIFETIME = 100000;

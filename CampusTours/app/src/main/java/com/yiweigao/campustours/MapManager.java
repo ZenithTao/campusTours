@@ -1,14 +1,11 @@
 package com.yiweigao.campustours;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.Geofence;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -30,19 +27,10 @@ import java.util.List;
 
 // manages all map activity (location, gps connection, map drawings, etc)
 public class MapManager implements
-        OnMapReadyCallback
-//        GoogleApiClient.ConnectionCallbacks,
-//        GoogleApiClient.OnConnectionFailedListener,
-//        ResultCallback<Status>,
-//        LocationListener 
-{
+        OnMapReadyCallback {
 
     // some constants
     private static final LatLng TOUR_START = new LatLng(33.789591, -84.326506);
-    private static final String BASE_URL = "http://dutch.mathcs.emory.edu:8009/";
-    private static final int GEOFENCE_LIFETIME = 100000;
-    private static final int LOCATION_REQUEST_INTERVAL = 10000;
-    private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 5000;
     
     // context for making toasts and generating intents
     private Context mContext;
@@ -50,23 +38,16 @@ public class MapManager implements
     // map related
     private MapFragment mMapFragment;
     private GoogleMap mGoogleMap;
-    
-    // location related
-    private GoogleApiClient mGoogleApiClient;
-    private PendingIntent mGeofencePendingIntent = null;
-    
-    // list of geofences we are monitoring
-    List<Geofence> listOfGeofences = new ArrayList<>();
 
     // our toast shown while data is being retrieved
-    private Toast loadingToast;
+//    private Toast loadingToast;
 
     public MapManager(Context context, MapFragment mapFragment) {
         mContext = context;
         mMapFragment = mapFragment;
         getMap();
 
-        LocationManager locationManager = new LocationManager(mContext, this);
+        new LocationManager(mContext, this);
         
     }
 
@@ -113,7 +94,6 @@ public class MapManager implements
 //                .color(Color.argb(255, 210, 142, 0))    // emory "web dark gold", 100% opacity
                 .geodesic(true)
                 .addAll(listOfRouteCoordinates));
-        loadingToast.cancel();
     }
 
     public void updateCamera(Location newLocation) {
@@ -128,6 +108,8 @@ public class MapManager implements
      */
     private class DownloadRouteTask extends AsyncTask<String, Void, JSONObject> {
 
+        private Toast loadingToast;
+        
         /**
          * shows a "loading" toast immediately prior to fetching data
          */
@@ -171,6 +153,7 @@ public class MapManager implements
             }
 
             drawRoute(listOfRouteCoordinates);
+            loadingToast.cancel();
         }
     }
 }

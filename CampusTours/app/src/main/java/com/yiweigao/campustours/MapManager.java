@@ -39,9 +39,6 @@ public class MapManager implements
     private MapFragment mMapFragment;
     private GoogleMap mGoogleMap;
 
-    // our toast shown while data is being retrieved
-//    private Toast loadingToast;
-
     public MapManager(Context context, MapFragment mapFragment) {
         mContext = context;
         mMapFragment = mapFragment;

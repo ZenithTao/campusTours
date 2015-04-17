@@ -32,6 +32,9 @@ public class DownloadManager {
             case GEOFENCES:
                 finalURL = BASE_URL + "geofences";
                 break;
+            case SCHOOLS:
+                finalURL = BASE_URL + "schools";
+                break;
         }
     }
 
@@ -88,7 +91,7 @@ public class DownloadManager {
     /**
      * Type enum used to distinguish between API calls
      */
-    public enum Type {POINTS, GEOFENCES}
+    public enum Type {POINTS, GEOFENCES, SCHOOLS}
 
 
 }

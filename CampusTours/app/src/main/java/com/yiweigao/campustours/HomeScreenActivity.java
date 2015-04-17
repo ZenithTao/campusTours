@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,18 +14,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
@@ -65,8 +55,7 @@ public class HomeScreenActivity extends ActionBarActivity {
     }
 
     private void populateCampuses() {
-        DataFetcher dataFetcher = new DataFetcher(this);
-        dataFetcher.execute("http://dutch.mathcs.emory.edu:8009/schools");
+        new DownloadSchoolsTask(this).execute();
     }
 
     private void createSpinner() {
@@ -109,12 +98,12 @@ public class HomeScreenActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private class DataFetcher extends AsyncTask<String, Void, JSONObject> {
+    private class DownloadSchoolsTask extends AsyncTask<String, Void, JSONObject> {
 
         Toast loadingToast;
         Context mContext;
 
-        public DataFetcher(Context context){
+        public DownloadSchoolsTask(Context context){
             mContext = context;
         }
 
@@ -126,49 +115,7 @@ public class HomeScreenActivity extends ActionBarActivity {
 
         @Override
         protected JSONObject doInBackground(String... urls) {
-            InputStream is = null;
-            String result = "";
-            JSONObject jsonObject = null;
-
-            // Download JSON data from URL
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(urls[0]);
-                String user = "";
-                String pwd = "secret";
-                httpGet.addHeader("Authorization", "Basic " + Base64.encodeToString((user + ":" + pwd).getBytes(), Base64.NO_WRAP));
-
-                HttpResponse response = httpclient.execute(httpGet);
-                HttpEntity entity = response.getEntity();
-                is = entity.getContent();
-
-            } catch (Exception e) {
-                Log.e("log_tag", "Error in http connection " + e.toString());
-            }
-
-            // Convert response to string
-            try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        is, "iso-8859-1"), 8);
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                is.close();
-                result = sb.toString();
-            } catch (Exception e) {
-                Log.e("log_tag", "Error converting result " + e.toString());
-            }
-
-            try {
-
-                jsonObject = new JSONObject(result);
-            } catch (JSONException e) {
-                Log.e("log_tag", "Error parsing data " + e.toString());
-            }
-
-            return jsonObject;
+            return new DownloadManager(DownloadManager.Type.SCHOOLS).getJSONObject();
         }
 
         @Override

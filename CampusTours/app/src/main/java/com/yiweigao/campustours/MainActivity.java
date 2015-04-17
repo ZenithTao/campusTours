@@ -10,12 +10,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.MapFragment;
 
-public class MainActivity extends ActionBarActivity implements
-        ResultCallback<Status> {
+public class MainActivity extends ActionBarActivity {
 
     private MapFragment mMapFragment;
     private MapManager mMapManager;
@@ -93,28 +90,5 @@ public class MainActivity extends ActionBarActivity implements
                 })
                 .setNegativeButton("No", null)
                 .show();
-    }
-
-    /**
-     * Runs when the result of calling addGeofences() and removeGeofences() becomes available.
-     * Either method can complete successfully or with an error.
-     * Since this activity implements the {@link ResultCallback} interface, we are required to
-     * define this method.
-     *
-     * @param status The Status returned through a PendingIntent when addGeofences() or
-     *               removeGeofences() get called.
-     */
-    public void onResult(Status status) {
-//        if (status.isSuccess()) {
-//            // Update state and save in shared preferences.
-//            mGeofencesAdded = !mGeofencesAdded;
-//
-//            Toast.makeText(
-//                    this,
-//                    mGeofencesAdded ? "Geofence added" :
-//                            "Geofence removed",
-//                    Toast.LENGTH_SHORT
-//            ).show();
-//        }
     }
 }

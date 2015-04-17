@@ -19,18 +19,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeScreenActivity extends ActionBarActivity {
 
-    ArrayList<String> mSchools;
-    String mSelectedCampus;
+    private List<String> listOfSchools;
+    private String mSelectedCampus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
-        mSchools = new ArrayList<>();
+        listOfSchools = new ArrayList<>();
         mSelectedCampus = null;
         populateCampuses();
         activateButton();
@@ -42,12 +43,11 @@ public class HomeScreenActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 startTourButton.setText("Please wait...");
-                if(mSelectedCampus != null){
+                if (mSelectedCampus != null) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Please select a campus", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -60,18 +60,18 @@ public class HomeScreenActivity extends ActionBarActivity {
 
     private void createSpinner() {
         Spinner campusDropdown = (Spinner) findViewById(R.id.school_dropdown);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mSchools);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listOfSchools);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         campusDropdown.setAdapter(arrayAdapter);
         campusDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
-            public void onItemSelected (AdapterView < ? > adapterView, View view,int i, long l){
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mSelectedCampus = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
-            public void onNothingSelected (AdapterView < ? > adapterView){
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
@@ -98,12 +98,16 @@ public class HomeScreenActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Download list of schools from REST API, and then populate spinner
+     */
     private class DownloadSchoolsTask extends AsyncTask<String, Void, JSONObject> {
 
         Toast loadingToast;
         Context mContext;
 
-        public DownloadSchoolsTask(Context context){
+        public DownloadSchoolsTask(Context context) {
             mContext = context;
         }
 
@@ -131,7 +135,7 @@ public class HomeScreenActivity extends ActionBarActivity {
                 try {
                     JSONObject schools = resources.getJSONObject(i);
                     String name = schools.getString("name");
-                    mSchools.add(name);
+                    listOfSchools.add(name);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

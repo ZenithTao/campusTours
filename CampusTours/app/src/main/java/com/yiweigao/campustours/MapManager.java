@@ -48,7 +48,6 @@ public class MapManager implements
         getMap();
 
         new LocationManager(mContext, this);
-
     }
 
     public void getMap() {
@@ -63,8 +62,8 @@ public class MapManager implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        getRoute();
         setInitialView();
+        getRoute();
     }
 
     private void setInitialView() {

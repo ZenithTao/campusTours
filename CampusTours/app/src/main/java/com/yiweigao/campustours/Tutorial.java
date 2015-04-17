@@ -2,7 +2,6 @@ package com.yiweigao.campustours;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
@@ -20,11 +19,7 @@ public class Tutorial {
 
     public Tutorial(Context context) {
         mContext = context;
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences("com.yiweigao.CampusTours", Context.MODE_PRIVATE);
-        if (sharedPreferences.getBoolean("first_run", true)) {
-            sharedPreferences.edit().putBoolean("first_run", false).apply();
-            launchMapShowCaseView();
-        }
+        launchMapShowCaseView();
     }
 
     private void launchMapShowCaseView() {
@@ -56,7 +51,6 @@ public class Tutorial {
     }
 
     private void launchControlPanelShowCaseView() {
-
         ViewTarget viewTarget = new ViewTarget(R.id.control_panel_play_button, (Activity) mContext);
         new ShowcaseView.Builder((Activity) mContext, true)
                 .setTarget(viewTarget)

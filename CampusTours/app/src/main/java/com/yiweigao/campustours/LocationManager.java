@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -15,6 +16,10 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +37,7 @@ public class LocationManager implements
 
     private static final int LOCATION_REQUEST_INTERVAL = 10000;
     private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 5000;
+    private static final int GEOFENCE_LIFETIME = 100000;
 
     private MapManager mMapManager;
     List<Geofence> listOfGeofences = new ArrayList<>();
@@ -43,16 +49,17 @@ public class LocationManager implements
     public LocationManager(Context context, MapManager mapManager) {
         mContext = context;
         mMapManager = mapManager;
-        buildGoogleApiClient();
         
+        new DownloadGeofencesTask().execute();
     }
 
-    protected void buildGoogleApiClient() {
+    protected void initializeGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(mContext)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+        mGoogleApiClient.connect();
     }
 
     /**
@@ -145,5 +152,58 @@ public class LocationManager implements
     @Override
     public void onResult(Status status) {
 
+    }
+
+    /**
+     * AsyncTask that fetches latitudes, longitudes, and radii from our REST API.
+     * Then GoogleAPIClient.connect() is called
+     */
+    private class DownloadGeofencesTask extends AsyncTask<String, Void, JSONObject> {
+
+        @Override
+        protected JSONObject doInBackground(String... urls) {
+            return new DownloadManager(DownloadManager.Type.GEOFENCES).getJSONObject();
+        }
+
+        /**
+         * Converts jsonObject to Geofence, adds it to listOfGeofences, 
+         * cancels the "loading" toast, and then tells the Google API client to connect
+         * @param jsonObject The jsonObject that is returned from the REST API
+         */
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            JSONArray resources = null;
+            try {
+                resources = jsonObject.getJSONArray("resources");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            for (int i = 0; i < resources.length(); i++) {
+                try {
+                    JSONObject point = resources.getJSONObject(i);
+                    String id = point.getString("id");
+                    String lat = point.getString("lat");
+                    String lng = point.getString("lng");
+                    String rad = point.getString("rad");
+
+                    listOfGeofences.add(new Geofence.Builder()
+                            .setRequestId(id)
+                            .setCircularRegion(
+                                    Double.parseDouble(lat),
+                                    Double.parseDouble(lng),
+                                    Float.parseFloat(rad))
+                            .setExpirationDuration(GEOFENCE_LIFETIME)
+                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                            .build());
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            initializeGoogleApiClient();
+        }
     }
 }

@@ -5,8 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.util.Base64;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -19,18 +17,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +65,6 @@ public class MapManager implements
         mContext = context;
         mMapFragment = mapFragment;
         getMap();
-//        buildGoogleApiClient();
 
         LocationManager locationManager = new LocationManager(mContext, this);
         
@@ -92,18 +81,9 @@ public class MapManager implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        setInitialView();
         getRoute();
-        getGeofences();
+        setInitialView();
     }
-
-//    protected void buildGoogleApiClient() {
-//        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this)
-//                .addApi(LocationServices.API)
-//                .build();
-//    }
 
     private void setInitialView() {
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -123,7 +103,7 @@ public class MapManager implements
     }
 
     private void getRoute() {
-        new DownloadRouteTask().execute(BASE_URL + "points");
+        new DownloadRouteTask().execute();
     }
 
     private void drawRoute(List<LatLng> listOfRouteCoordinates) {
@@ -133,106 +113,13 @@ public class MapManager implements
 //                .color(Color.argb(255, 210, 142, 0))    // emory "web dark gold", 100% opacity
                 .geodesic(true)
                 .addAll(listOfRouteCoordinates));
+        loadingToast.cancel();
     }
-
-    private void getGeofences() {
-        new DownloadGeofencesTask().execute(BASE_URL + "geofences");
-    }
-
-    /**
-     * Once the GoogleAPIClient is connected, we add geofences, prepare the pending intent,
-     * and start updating our location
-     * @param bundle No clue what this is actually...not using it here, 
-     *               but I would like to know what this is
-     */
-//    @Override
-//    public void onConnected(Bundle bundle) {
-//        LocationServices.GeofencingApi.addGeofences(
-//                mGoogleApiClient,
-//                getGeofencingRequest(),
-//                getGeofencePendingIntent()
-//        ).setResultCallback(this);
-//
-//        startLocationUpdates();
-//    }
-
-    /**
-     * Builds and returns a GeofencingRequest. Specifies the list of geofences to be monitored.
-     * Also specifies how the geofence notifications are initially triggered.
-     */
-//    private GeofencingRequest getGeofencingRequest() {
-//        GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
-//
-//        // The INITIAL_TRIGGER_ENTER flag indicates that geofencing service should trigger a
-//        // GEOFENCE_TRANSITION_ENTER notification when the geofence is added and if the device
-//        // is already inside that geofence.
-//        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
-//
-//        // Add the geofences to be monitored by geofencing service.
-//        builder.addGeofences(listOfGeofences);
-//
-//        // Return a GeofencingRequest.
-//        return builder.build();
-//    }
-
-    /**
-     * Gets a PendingIntent to send with the request to add or remove Geofences. Location Services
-     * issues the Intent inside this PendingIntent whenever a geofence transition occurs for the
-     * current list of geofences.
-     *
-     * @return A PendingIntent for the IntentService that handles geofence transitions.
-     */
-//    private PendingIntent getGeofencePendingIntent() {
-//        // Reuse the PendingIntent if we already have it.
-//        if (mGeofencePendingIntent != null) {
-//            return mGeofencePendingIntent;
-//        }
-//        Intent intent = new Intent(mContext, GeofenceTransitionsIntentService.class);
-//        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
-//        // addGeofences() and removeGeofences().
-//        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//    }
-//
-//    private void startLocationUpdates() {
-//        LocationServices.FusedLocationApi.requestLocationUpdates(
-//                mGoogleApiClient, getLocationRequest(), this);
-//    }
-
-    /**
-     * Creates and returns a location request
-     * @return LocationRequest
-     */
-//    private LocationRequest getLocationRequest() {
-//        return new LocationRequest()
-//                .setInterval(LOCATION_REQUEST_INTERVAL)
-//                .setFastestInterval(LOCATION_REQUEST_FASTEST_INTERVAL)
-//                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-//    }
-
-//    @Override
-//    public void onLocationChanged(Location location) {
-//        updateCamera(location);
-//    }
 
     public void updateCamera(Location newLocation) {
         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(
                 new LatLng(newLocation.getLatitude(), newLocation.getLongitude())));
     }
-
-//    @Override
-//    public void onConnectionSuspended(int i) {
-//
-//    }
-//
-//    @Override
-//    public void onConnectionFailed(ConnectionResult connectionResult) {
-//
-//    }
-//
-//    @Override
-//    public void onResult(Status status) {
-//
-//    }
 
     /**
      * AsyncTask that fetches latitude and longitude from our REST API,
@@ -252,49 +139,7 @@ public class MapManager implements
 
         @Override
         protected JSONObject doInBackground(String... urls) {
-            InputStream is = null;
-            String result = "";
-            JSONObject jsonObject = null;
-
-            // Download JSON data from URL
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(urls[0]);
-                String user = "";
-                String pwd = "secret";
-                httpGet.addHeader("Authorization", "Basic " + Base64.encodeToString((user + ":" + pwd).getBytes(), Base64.NO_WRAP));
-
-                HttpResponse response = httpclient.execute(httpGet);
-                HttpEntity entity = response.getEntity();
-                is = entity.getContent();
-
-            } catch (Exception e) {
-                Log.e("log_tag", "Error in http connection " + e.toString());
-            }
-
-            // Convert response to string
-            try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        is, "iso-8859-1"), 8);
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                is.close();
-                result = sb.toString();
-            } catch (Exception e) {
-                Log.e("log_tag", "Error converting result " + e.toString());
-            }
-
-            try {
-
-                jsonObject = new JSONObject(result);
-            } catch (JSONException e) {
-                Log.e("log_tag", "Error parsing data " + e.toString());
-            }
-
-            return jsonObject;
+            return new DownloadManager(DownloadManager.Type.POINTS).getJSONObject();
         }
 
         /**
@@ -326,102 +171,6 @@ public class MapManager implements
             }
 
             drawRoute(listOfRouteCoordinates);
-        }
-    }
-
-    /**
-     * AsyncTask that fetches latitudes, longitudes, and radii from our REST API.
-     * Then GoogleAPIClient.connect() is called
-     */
-    private class DownloadGeofencesTask extends AsyncTask<String, Void, JSONObject> {
-
-        @Override
-        protected JSONObject doInBackground(String... urls) {
-            InputStream is = null;
-            String result = "";
-            JSONObject jsonObject = null;
-
-            // Download JSON data from URL
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(urls[0]);
-                String user = "";
-                String pwd = "secret";
-                httpGet.addHeader("Authorization", "Basic " + Base64.encodeToString((user + ":" + pwd).getBytes(), Base64.NO_WRAP));
-
-                HttpResponse response = httpclient.execute(httpGet);
-                HttpEntity entity = response.getEntity();
-                is = entity.getContent();
-
-            } catch (Exception e) {
-                Log.e("log_tag", "Error in http connection " + e.toString());
-            }
-
-            // Convert response to string
-            try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        is, "iso-8859-1"), 8);
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                is.close();
-                result = sb.toString();
-            } catch (Exception e) {
-                Log.e("log_tag", "Error converting result " + e.toString());
-            }
-
-            try {
-
-                jsonObject = new JSONObject(result);
-            } catch (JSONException e) {
-                Log.e("log_tag", "Error parsing data " + e.toString());
-            }
-
-            return jsonObject;
-        }
-
-        /**
-         * Converts jsonObject to Geofence, adds it to listOfGeofences, 
-         * cancels the "loading" toast, and then tells the Google API client to connect
-         * @param jsonObject The jsonObject that is returned from the REST API
-         */
-        @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            JSONArray resources = null;
-            try {
-                resources = jsonObject.getJSONArray("resources");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0; i < resources.length(); i++) {
-                try {
-                    JSONObject point = resources.getJSONObject(i);
-                    String id = point.getString("id");
-                    String lat = point.getString("lat");
-                    String lng = point.getString("lng");
-                    String rad = point.getString("rad");
-
-                    listOfGeofences.add(new Geofence.Builder()
-                            .setRequestId(id)
-                            .setCircularRegion(
-                                    Double.parseDouble(lat),
-                                    Double.parseDouble(lng),
-                                    Float.parseFloat(rad))
-                            .setExpirationDuration(GEOFENCE_LIFETIME)
-                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
-                            .build());
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            loadingToast.cancel();
-            mGoogleApiClient.connect();
         }
     }
 }

@@ -44,7 +44,9 @@ public class Tutorial {
                 .setTarget(new PointTarget(new Point(screenSize.x, 0)))
                 .setStyle(R.style.CustomShowcaseTheme)
                 .setContentTitle("Using the map")
-                .setContentText("Make sure that your GPS is turned on, and click on this button to show your current location on the map.\n\nTap anywhere to dismiss this message")
+                .setContentText("Make sure that your GPS is turned on, and " +
+                        "click on this button to show your current " +
+                        "location on the map.\n\nTap anywhere to continue.")
                 .setShowcaseEventListener(new OnShowcaseEventListener() {
                     @Override
                     public void onShowcaseViewHide(ShowcaseView showcaseView) {
@@ -71,8 +73,11 @@ public class Tutorial {
                 .setTarget(viewTarget)
                 .setStyle(R.style.CustomShowcaseTheme)
                 .setContentTitle("Using the audio controls")
-                .setContentText("Audio clips will play automatically along the tour, but you can use these buttons to rewind, play/pause, and fast forward at your leisure." +
-                        "\n\nEnjoy your tour!")
+                .setContentText("Audio clips will play automatically along the " +
+                        "tour, but you can use these buttons to " +
+                        "rewind, play/pause, and fast forward." +
+                        "\n\nEnjoy your tour!" +
+                        "\n\nTap anywhere to dismiss this message.")
                 .setShowcaseEventListener(new OnShowcaseEventListener() {
                     @Override
                     public void onShowcaseViewHide(ShowcaseView showcaseView) {

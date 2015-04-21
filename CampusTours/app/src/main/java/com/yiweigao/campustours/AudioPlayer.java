@@ -52,8 +52,10 @@ public class AudioPlayer {
      * Only pauses the player and updates the button
      */
     public void pausePlayback() {
-        mMediaPlayer.pause();
-        mPlayButton.setImageResource(R.mipmap.play_icon);
+        if (mMediaPlayer.isPlaying()) {
+            mMediaPlayer.pause();
+            mPlayButton.setImageResource(R.mipmap.play_icon);
+        }
     }
 
     /**

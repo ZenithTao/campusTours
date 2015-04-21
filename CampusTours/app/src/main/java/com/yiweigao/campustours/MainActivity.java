@@ -45,16 +45,31 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+
     @Override
-    protected void onStart() {
-        super.onStart();
-//        mGoogleApiClient.connect();
+    protected void onPause() {
+        super.onPause();
+        AudioPlayer.getInstance().pausePlayback();
+    }
+
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AudioPlayer.getInstance().releaseMediaPlayer();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-//        mGoogleApiClient.disconnect();
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        MainActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     @Override
@@ -77,18 +92,5 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        MainActivity.this.finish();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
     }
 }

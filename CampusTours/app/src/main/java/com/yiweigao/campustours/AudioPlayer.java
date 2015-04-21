@@ -41,12 +41,19 @@ public class AudioPlayer {
      */
     public void togglePlayback() {
         if (mMediaPlayer.isPlaying()) {
-            mMediaPlayer.pause();
-            mPlayButton.setImageResource(R.mipmap.play_icon);
+            pausePlayback();
         } else {
             mMediaPlayer.start();
             mPlayButton.setImageResource(R.mipmap.pause_icon);
         }
+    }
+
+    /**
+     * Only pauses the player and updates the button
+     */
+    public void pausePlayback() {
+        mMediaPlayer.pause();
+        mPlayButton.setImageResource(R.mipmap.play_icon);
     }
 
     /**
@@ -116,5 +123,12 @@ public class AudioPlayer {
             }
         }
         togglePlayback();
+    }
+
+    /**
+     * Releases the media player and nullifies the INSTANCE of the Singleton
+     */
+    public void releaseMediaPlayer() {
+        mMediaPlayer.release();
     }
 }

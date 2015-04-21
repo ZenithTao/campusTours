@@ -66,7 +66,6 @@ public class MapManager implements
     private void setInitialMapView() {
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGoogleMap.setBuildingsEnabled(true);
-        mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.setMyLocationEnabled(true);
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(TOUR_START, 18.0f));
 

@@ -122,6 +122,9 @@ public class AudioPlayer {
                 case "11":
                     mMediaPlayer = MediaPlayer.create(mContext, R.raw.audio11);
                     break;
+                case "Fraternity house":
+                    mMediaPlayer = MediaPlayer.create(mContext, R.raw.audio02);
+                    break;
             }
         }
         togglePlayback();

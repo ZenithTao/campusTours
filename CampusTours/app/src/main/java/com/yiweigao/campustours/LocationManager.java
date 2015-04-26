@@ -206,6 +206,17 @@ public class LocationManager implements
                 }
             }
 
+            listOfGeofences.add(new Geofence.Builder()
+                            .setRequestId(DebugResource.HOUSE_TEXT)
+                            .setCircularRegion(
+                                    DebugResource.HOUSE.latitude,
+                                    DebugResource.HOUSE.longitude,
+                                    DebugResource.HOUSE_RADIUS)
+                            .setExpirationDuration(DebugResource.HOUSE_LIFETIME)
+                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL)
+                            .build()
+            );
+            
             initializeGoogleApiClient();
         }
     }

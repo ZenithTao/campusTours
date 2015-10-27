@@ -12,6 +12,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
@@ -38,6 +39,8 @@ public class MapManager implements
     // map related
     private MapFragment mMapFragment;
     private GoogleMap mGoogleMap;
+    // add the building info
+    //private List<Building> mBuildingList;
 
     public MapManager(Context context, MapFragment mapFragment) {
         mContext = context;
@@ -60,7 +63,22 @@ public class MapManager implements
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
         setInitialMapView();
-        getRoute();
+        //getRoute();
+
+    }
+
+    /*
+     * function to add the info to each building
+     */
+    private void addBuildingInfo(List<LatLng> listOfBuildingCoordinates, List<String> listOfBuildingDetails) {
+        for (int i = 0; i < listOfBuildingCoordinates.size(); i++) {
+            LatLng current = listOfBuildingCoordinates.get(i);
+            String info = listOfBuildingDetails.get(i);
+
+            mGoogleMap.addMarker(new MarkerOptions()
+                    .position(current))
+                    .setSnippet(info);
+        }
     }
 
     private void setInitialMapView() {
@@ -128,28 +146,60 @@ public class MapManager implements
          */
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
-            JSONArray resources = null;
-            try {
-                resources = jsonObject.getJSONArray("resources");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            JSONArray resources = null;
+//            try {
+//                resources = jsonObject.getJSONArray("resources");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            List<LatLng> listOfRouteCoordinates = new ArrayList<>();
+//            for (int i = 0; i < resources.length(); i++) {
+//                try {
+//                    JSONObject point = resources.getJSONObject(i);
+//                    String lat = point.getString("lat");
+//                    String lng = point.getString("lng");
+//
+//                    LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+//                    listOfRouteCoordinates.add(latLng);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
-            List<LatLng> listOfRouteCoordinates = new ArrayList<>();
-            for (int i = 0; i < resources.length(); i++) {
-                try {
-                    JSONObject point = resources.getJSONObject(i);
-                    String lat = point.getString("lat");
-                    String lng = point.getString("lng");
+            //drawRoute(listOfRouteCoordinates);
 
-                    LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-                    listOfRouteCoordinates.add(latLng);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+            // add the buildings' info
+//            JSONArray buildings_coordinates = null;
+//            JSONArray buildings_details = null;
+//            try {
+//                buildings_coordinates = jsonObject.getJSONArray("buildings_coordinates");
+//                buildings_details = jsonObject.getJSONArray("buildings_details");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            List<LatLng> listOfBuildingCoordinates = new ArrayList<>();
+//            List<String> listOfBuildingDetails = new ArrayList<>();
+//            for (int i = 0; i < buildings_coordinates.length(); i++) {
+//                try {
+//                    JSONObject point = buildings_coordinates.getJSONObject(i);
+//                    String lat = point.getString("lat");
+//                    String lng = point.getString("lng");
+//                    LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+//                    listOfBuildingCoordinates.add(latLng);
+//
+//                    JSONObject detail = buildings_details.getJSONObject(i);
+//                    String detail_info = detail.getString("info");
+//                    listOfBuildingDetails.add(detail_info);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            addBuildingInfo(listOfBuildingCoordinates, listOfBuildingDetails);
 
-            drawRoute(listOfRouteCoordinates);
+
+
             loadingToast.cancel();
         }
     }

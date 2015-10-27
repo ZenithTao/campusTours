@@ -175,47 +175,73 @@ public class LocationManager implements
          */
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
-            JSONArray resources = null;
-            try {
-                resources = jsonObject.getJSONArray("resources");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0; i < resources.length(); i++) {
-                try {
-                    JSONObject point = resources.getJSONObject(i);
-                    String id = point.getString("id");
-                    String lat = point.getString("lat");
-                    String lng = point.getString("lng");
-                    String rad = point.getString("rad");
-
+            String id1 = "1";
+            String lat1 = "23.232323";
+            String lng1 = "-23.23232";
+            String rad1 = "23.32323";
+            String id2 = "2";
+            String lat2 = "24.232323";
+            String lng2 = "-24.23232";
+            String rad2 = "24.32323";
                     listOfGeofences.add(new Geofence.Builder()
-                            .setRequestId(id)
+                            .setRequestId(id1)
                             .setCircularRegion(
-                                    Double.parseDouble(lat),
-                                    Double.parseDouble(lng),
-                                    Float.parseFloat(rad))
+                                    Double.parseDouble(lat1),
+                                    Double.parseDouble(lng1),
+                                    Float.parseFloat(rad1))
                             .setExpirationDuration(GEOFENCE_LIFETIME)
                             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
                             .build());
+                    listOfGeofences.add(new Geofence.Builder()
+                    .setRequestId(id2)
+                    .setCircularRegion(
+                            Double.parseDouble(lat2),
+                            Double.parseDouble(lng2),
+                            Float.parseFloat(rad2))
+                    .setExpirationDuration(GEOFENCE_LIFETIME)
+                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                    .build());
+//            JSONArray resources = null;
+//            try {
+//                resources = jsonObject.getJSONArray("resources");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            for (int i = 0; i < resources.length(); i++) {
+//                try {
+//                    JSONObject point = resources.getJSONObject(i);
+//                    String id = point.getString("id");
+//                    String lat = point.getString("lat");
+//                    String lng = point.getString("lng");
+//                    String rad = point.getString("rad");
+//
+//                    listOfGeofences.add(new Geofence.Builder()
+//                            .setRequestId(id)
+//                            .setCircularRegion(
+//                                    Double.parseDouble(lat),
+//                                    Double.parseDouble(lng),
+//                                    Float.parseFloat(rad))
+//                            .setExpirationDuration(GEOFENCE_LIFETIME)
+//                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+//                            .build());
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            listOfGeofences.add(new Geofence.Builder()
-                            .setRequestId(DebugResource.HOUSE_TEXT)
-                            .setCircularRegion(
-                                    DebugResource.HOUSE.latitude,
-                                    DebugResource.HOUSE.longitude,
-                                    DebugResource.HOUSE_RADIUS)
-                            .setExpirationDuration(DebugResource.HOUSE_LIFETIME)
-                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL)
-                            .build()
-            );
+//            listOfGeofences.add(new Geofence.Builder()
+//                            .setRequestId(DebugResource.HOUSE_TEXT)
+//                            .setCircularRegion(
+//                                    DebugResource.HOUSE.latitude,
+//                                    DebugResource.HOUSE.longitude,
+//                                    DebugResource.HOUSE_RADIUS)
+//                            .setExpirationDuration(DebugResource.HOUSE_LIFETIME)
+//                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL)
+//                            .build()
+//            );
             
             initializeGoogleApiClient();
         }

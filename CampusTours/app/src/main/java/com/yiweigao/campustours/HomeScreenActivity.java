@@ -124,24 +124,31 @@ public class HomeScreenActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
-            JSONArray resources = null;
-            try {
-                resources = jsonObject.getJSONArray("resources");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0; i < resources.length(); i++) {
-                try {
-                    JSONObject schools = resources.getJSONObject(i);
-                    String name = schools.getString("name");
-                    listOfSchools.add(name);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            // test
+            String[] schools = {"EMORY", "GA-TECH", "UGA", "GSU"};
+            for (int i = 0; i < schools.length; i++) {
+                listOfSchools.add(schools[i]);
             }
             loadingToast.cancel();
             createSpinner();
+//            JSONArray resources = null;
+//            try {
+//                resources = jsonObject.getJSONArray("resources");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            for (int i = 0; i < resources.length(); i++) {
+//                try {
+//                    JSONObject schools = resources.getJSONObject(i);
+//                    String name = schools.getString("name");
+//                    listOfSchools.add(name);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            loadingToast.cancel();
+//            createSpinner();
         }
     }
 }
